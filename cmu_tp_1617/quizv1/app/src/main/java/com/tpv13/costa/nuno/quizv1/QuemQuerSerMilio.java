@@ -9,5 +9,7 @@ public class QuemQuerSerMilio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quem_quer_ser_milio);
+
+        //teste
     }
 }
