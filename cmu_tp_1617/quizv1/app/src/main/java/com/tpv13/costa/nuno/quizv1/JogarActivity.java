@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
@@ -26,6 +27,9 @@ public class JogarActivity extends Activity implements View.OnClickListener{
     private static int animacaoCorretaTime=500;
     private static int animacaoErradaTime=600;
 
+    private static int rspCertaColor=Color.GREEN;
+    private static int rspErradaColor=Color.RED;
+    private static int rspEscolhidaColor=Color.YELLOW;
 
     private PerguntaFragment mPerguntaFragment;
     private Random randomGenerator=new Random();
@@ -377,16 +381,16 @@ public class JogarActivity extends Activity implements View.OnClickListener{
 
             switch (_rspSelecionada) {
                 case 0: //error
-                    btnA.setBackgroundColor(Color.YELLOW);
+                    btnA.setBackgroundColor(rspEscolhidaColor);
                     break;
                 case 1: //error
-                    btnB.setBackgroundColor(Color.YELLOW);
+                    btnB.setBackgroundColor(rspEscolhidaColor);
                     break;
                 case 2: //error
-                    btnC.setBackgroundColor(Color.YELLOW);
+                    btnC.setBackgroundColor(rspEscolhidaColor);
                     break;
                 case 3: //error
-                    btnD.setBackgroundColor(Color.YELLOW);
+                    btnD.setBackgroundColor(rspEscolhidaColor);
                     break;
                 default:
                     break;
@@ -453,19 +457,19 @@ public class JogarActivity extends Activity implements View.OnClickListener{
 
         switch (_rspDada) {
             case 0: //error
-                btnA.setBackgroundColor(Color.GREEN);
+                btnA.setBackgroundColor(rspCertaColor);
                 btnA.startAnimation(myAnim);
                 break;
             case 1: //error
-                btnB.setBackgroundColor(Color.GREEN);
+                btnB.setBackgroundColor(rspCertaColor);
                 btnB.startAnimation(myAnim);
                 break;
             case 2: //error
-                btnC.setBackgroundColor(Color.GREEN);
+                btnC.setBackgroundColor(rspCertaColor);
                 btnC.startAnimation(myAnim);
                 break;
             case 3: //error
-                btnD.setBackgroundColor(Color.GREEN);
+                btnD.setBackgroundColor(rspCertaColor);
                 btnD.startAnimation(myAnim);
                 break;
             default:
@@ -478,16 +482,16 @@ public class JogarActivity extends Activity implements View.OnClickListener{
 
         switch (_rspDada) {
             case 0: //error
-                btnA.setBackgroundColor(Color.RED);
+                btnA.setBackgroundColor(rspErradaColor);
                 break;
             case 1: //error
-                btnB.setBackgroundColor(Color.RED);
+                btnB.setBackgroundColor(rspErradaColor);
                 break;
             case 2: //error
-                btnC.setBackgroundColor(Color.RED);
+                btnC.setBackgroundColor(rspErradaColor);
                 break;
             case 3: //error
-                btnD.setBackgroundColor(Color.RED);
+                btnD.setBackgroundColor(rspErradaColor);
                 break;
             default:
                 break;
@@ -497,19 +501,19 @@ public class JogarActivity extends Activity implements View.OnClickListener{
             if (this.apresPergunta.getRespostaByIndex(i).isCorreta()){
                 switch (i) {
                     case 0: //error
-                        btnA.setBackgroundColor(Color.GREEN);
+                        btnA.setBackgroundColor(rspCertaColor);
                         btnA.startAnimation(myAnim);
                         break;
                     case 1: //error
-                        btnB.setBackgroundColor(Color.GREEN);
+                        btnB.setBackgroundColor(rspCertaColor);
                         btnB.startAnimation(myAnim);
                         break;
                     case 2: //error
-                        btnC.setBackgroundColor(Color.GREEN);
+                        btnC.setBackgroundColor(rspCertaColor);
                         btnC.startAnimation(myAnim);
                         break;
                     case 3: //error
-                        btnD.setBackgroundColor(Color.GREEN);
+                        btnD.setBackgroundColor(rspCertaColor);
                         btnD.startAnimation(myAnim);
                         break;
                     default:
@@ -544,8 +548,10 @@ public class JogarActivity extends Activity implements View.OnClickListener{
 
     private Animation allAnimStuff(final long duration) {
 
-        Animation milkshake =AnimationUtils.loadAnimation(this, R.anim.milkshake);
-                //new TranslateAnimation(image.getX(), image.getX(), (-image.getHeight()), pxHeight - image.getHeight() / 2); //creates animation
+        Animation milkshake =AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
+                            //AnimationUtils.loadAnimation(this, R.anim.milkshake);
+                            //new AlphaAnimation(4,0);
+
         milkshake.setDuration(duration);
         milkshake.setFillAfter(false);
 
