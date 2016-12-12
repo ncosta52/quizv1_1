@@ -28,16 +28,20 @@
         </activity>
         <!-- <activity android:name=".MainActivity"></activity> -->
         <activity android:name=".NovoJogoOpcoes" />
-        <activity android:name=".JogarActivity"
-                    android:screenOrientation="portrait"/>
-        <activity android:name=".ResultadoActivity"></activity>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <activity
+            android:name=".JogarActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ResultadoActivity" />
+        <!--
+     ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <!--<activity android:name=".PerguntaFragment"></activity>-->
+        <!-- <activity android:name=".PerguntaFragment"></activity> -->
 
+        <activity android:name=".QuemQuerSerMilio"></activity>
     </application>
 
 </manifest>

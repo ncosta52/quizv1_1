@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button bt_novoJogo, bt_estatisticas;
+    Button bt_quemQuerSerMilionario, bt_novoJogo, bt_estatisticas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +21,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt_estatisticas = (Button) findViewById(R.id.bt_estatisticas);
         bt_estatisticas.setOnClickListener(this);
 
+        bt_quemQuerSerMilionario=(Button) findViewById(R.id.bt_quemQuerSerMilionario);
+        bt_quemQuerSerMilionario.setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View view) {
 
         switch (view.getId()) {
+            case R.id.bt_quemQuerSerMilionario: //error
+                startActivity(new Intent(this, QuemQuerSerMilio.class));
+                break;
             case R.id.bt_novoJogo: //error
                 startActivity(new Intent(this, NovoJogoOpcoes.class));
                 break;
