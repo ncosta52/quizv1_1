@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:background="@drawable/common_ic_googleplayservices">
+    >
 
 
     <Button
