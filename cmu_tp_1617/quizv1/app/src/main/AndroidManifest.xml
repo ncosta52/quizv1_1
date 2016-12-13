@@ -41,7 +41,11 @@
             android:value="@integer/google_play_services_version" />
         <!-- <activity android:name=".PerguntaFragment"></activity> -->
 
-        <activity android:name=".QuemQuerSerMilio"></activity>
+        <activity android:name=".QuemQuerSerMilio_Fragment" />
+        <activity android:name=".QQSM_Activity" />
+        <activity android:name=".PerguntaDetailFragment" />
+        <activity android:name=".QQSM_Niveis_Fragment" />
+        <activity android:name=".NiveisFragment"></activity>
     </application>
 
 </manifest>

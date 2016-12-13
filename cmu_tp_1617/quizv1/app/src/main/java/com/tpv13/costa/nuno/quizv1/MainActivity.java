@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch (view.getId()) {
             case R.id.bt_quemQuerSerMilionario: //error
-                startActivity(new Intent(this, QuemQuerSerMilio.class));
+                startActivity(new Intent(this, QQSM_Activity.class));
                 break;
             case R.id.bt_novoJogo: //error
                 startActivity(new Intent(this, NovoJogoOpcoes.class));

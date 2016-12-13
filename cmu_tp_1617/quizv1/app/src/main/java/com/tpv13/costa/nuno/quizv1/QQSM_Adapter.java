@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ import java.util.ArrayList;
  */
 
 public class QQSM_Adapter extends ArrayAdapter<String> {
+
     private  Context mContext;
     private ArrayList <String> mList;
 
@@ -29,17 +31,28 @@ public class QQSM_Adapter extends ArrayAdapter<String> {
 
     public View getView(int position, View convertView, ViewGroup parent)
     {
-        View v = convertView;
 
-        if(v == null) {
-            LayoutInflater vi = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = vi.inflate(R.layout.row_qqsm, null);
+        try{
+            View v = convertView;
+
+            if(v == null) {
+                LayoutInflater vi = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                v = vi.inflate(R.layout.row_qqsm, null);
+            }
+            TextView mNivel=(TextView) v.findViewById(R.id.nivel_patamar);//
+            mNivel.setText(mList.get(position));
+
+
+            return v;
         }
-        TextView mNivel=(TextView) v.findViewById(R.id.nivel_patamar);//
-        mNivel.setText(mList.get(position).toString());
+        catch (Exception e)
+        {
+            Toast.makeText(mContext, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
 
 
-        return v;
+       return null;
 
     }
+
 }
