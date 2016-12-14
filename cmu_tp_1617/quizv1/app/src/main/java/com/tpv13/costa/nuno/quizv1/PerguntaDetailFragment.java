@@ -19,13 +19,13 @@ import java.util.Random;
 
 public class PerguntaDetailFragment extends Fragment  {
 
-    private int perguntaID;
+
     private TextView tvPergunta;
     private Button btnA, btnB, btnC, btnD;//, btn_valSeg;
     private Pergunta apresPergunta;
 
-    private MyDbHelper_game dbHelper=new MyDbHelper_game(this.getContext());;
-    private Random randomGenerator=new Random();
+//    private MyDbHelper_game dbHelper=new MyDbHelper_game(this.getContext());;
+//    private Random randomGenerator=new Random();
 
 
 
@@ -51,66 +51,66 @@ public class PerguntaDetailFragment extends Fragment  {
         updateLevel();
     }
 
-    public void setPergunta(int _perguntaID) {
-        this.perguntaID = _perguntaID;
+    public void setPergunta(Pergunta _pergunta) {
+        this.apresPergunta = _pergunta;
 //       dbHelper = new MyDbHelper_game(this.getContext());
         updateLevel();
     }
 
     public void updateLevel() {
-        int index_rsp;
-        Pergunta res=null;
+//        int index_rsp;
+//        Pergunta res=null;
+//
+//        ArrayList<Resposta> rspLstPesq, rspLst = new ArrayList<>();
+//        rspLstPesq = selecionarRespostas(this.perguntaID);
+//
+//        String[] columnsPerguntasSelect = {"Id", "Pergunta", "Pontuacao", "Niveis_Id", "Categorias_Id"};
+//        String WHERE = "Id='" + this.perguntaID + "'";
+//
+//        SQLiteDatabase db = dbHelper.getReadableDatabase();
+//        //Cursor c = db.rawQuery("SELECT * FROM tblPessoas", null);
+//        Cursor c = db.query(true, "Perguntas", columnsPerguntasSelect, WHERE, null, null, null, null, null);
+//
+//        try {
+//            if (c.getCount() > 0) {
+//                c.moveToFirst();
+//
+//                do {
+//
+//                    while (rspLstPesq.size() > 0) {
+//                        index_rsp = randomGenerator.nextInt(rspLstPesq.size());
+//                        rspLst.add(rspLstPesq.get(index_rsp));
+//                        rspLstPesq.remove(index_rsp);
+//                    }
+//
+//                    apresPergunta = new Pergunta(c.getInt(0), c.getInt(3), c.getString(1), c.getInt(2), c.getInt(4), rspLst);
+//                    res = apresPergunta;
+//
+//                } while (c.moveToNext());
+//            }
+//
+//            c.close();
+//            db.close();
+//
+//        } catch (Exception e) {
+//            Log.e("Error", "Error", e);
+////            Toast.makeText(this, "Erro sortearPergunta: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+//            throw e;
+//        }
 
-        ArrayList<Resposta> rspLstPesq, rspLst = new ArrayList<>();
-        rspLstPesq = selecionarRespostas(this.perguntaID);
+        if (apresPergunta != null && tvPergunta!= null && btnA != null && btnB != null && btnC != null && btnD != null) {
+            tvPergunta.setText(apresPergunta.getPergunta());
+            btnA.setText(apresPergunta.getRespostaByIndex(0).getDescricao());
+            btnA.setTag("" + apresPergunta.getRespostaByIndex(0).isCorreta());
 
-        String[] columnsPerguntasSelect = {"Id", "Pergunta", "Pontuacao", "Niveis_Id", "Categorias_Id"};
-        String WHERE = "Id='" + this.perguntaID + "'";
+            btnB.setText(apresPergunta.getRespostaByIndex(1).getDescricao());
+            btnB.setTag("" + apresPergunta.getRespostaByIndex(1).isCorreta());
 
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        //Cursor c = db.rawQuery("SELECT * FROM tblPessoas", null);
-        Cursor c = db.query(true, "Perguntas", columnsPerguntasSelect, WHERE, null, null, null, null, null);
+            btnC.setText(apresPergunta.getRespostaByIndex(2).getDescricao());
+            btnC.setTag("" + apresPergunta.getRespostaByIndex(2).isCorreta());
 
-        try {
-            if (c.getCount() > 0) {
-                c.moveToFirst();
-
-                do {
-
-                    while (rspLstPesq.size() > 0) {
-                        index_rsp = randomGenerator.nextInt(rspLstPesq.size());
-                        rspLst.add(rspLstPesq.get(index_rsp));
-                        rspLstPesq.remove(index_rsp);
-                    }
-
-                    apresPergunta = new Pergunta(c.getInt(0), c.getInt(3), c.getString(1), c.getInt(2), c.getInt(4), rspLst);
-                    res = apresPergunta;
-
-                } while (c.moveToNext());
-            }
-
-            c.close();
-            db.close();
-
-        } catch (Exception e) {
-            Log.e("Error", "Error", e);
-//            Toast.makeText(this, "Erro sortearPergunta: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-            throw e;
-        }
-
-        if (res != null) {
-            tvPergunta.setText(res.getPergunta());
-            btnA.setText(res.getRespostaByIndex(0).getDescricao());
-            btnA.setTag("" + res.getRespostaByIndex(0).isCorreta());
-
-            btnB.setText(res.getRespostaByIndex(1).getDescricao());
-            btnB.setTag("" + res.getRespostaByIndex(1).isCorreta());
-
-            btnC.setText(res.getRespostaByIndex(2).getDescricao());
-            btnC.setTag("" + res.getRespostaByIndex(2).isCorreta());
-
-            btnD.setText(res.getRespostaByIndex(3).getDescricao());
-            btnD.setTag("" + res.getRespostaByIndex(3).isCorreta());
+            btnD.setText(apresPergunta.getRespostaByIndex(3).getDescricao());
+            btnD.setTag("" + apresPergunta.getRespostaByIndex(3).isCorreta());
 
 
             btnA.setBackgroundResource(android.R.drawable.btn_default);
@@ -128,35 +128,7 @@ public class PerguntaDetailFragment extends Fragment  {
 
     }
 
-    private ArrayList<Resposta> selecionarRespostas ( int idPergunta ){
-        ArrayList<Resposta> rspList = new ArrayList<>();
-        boolean correta;
 
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        String[] columnsRespostasSelect={"Id","Perguntas_Id","Descricao","Correta"};
-        String WHERE_RSP =  "Perguntas_Id='" + idPergunta + "'" ;
-
-        Cursor c2= db.query(true,"Respostas",columnsRespostasSelect,WHERE_RSP,null,null,null,null,null);
-
-        if (c2.getCount()>0 ) {
-            c2.moveToFirst();
-
-            do {
-                if (c2.getString(3).equals("S")) {
-                    correta = true;
-                } else {
-                    correta = false;
-                }
-                rspList.add(new Resposta(c2.getInt(0), c2.getInt(1), c2.getString(2), correta));
-            } while (c2.moveToNext());
-        }
-
-        c2.close();
-        db.close();
-
-        return rspList;
-    }
 }
 
 

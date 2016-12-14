@@ -20,7 +20,7 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
     private ArrayList<Integer> pergsNivel_2=new ArrayList<>();
     private ArrayList<Integer> pergsNivel_3=new ArrayList<>();
 
-//    private MyDbHelper_game dbHelper;
+    private MyDbHelper_game dbHelper;
     private Random randomGenerator=new Random();
 
 
@@ -29,7 +29,7 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qqsm_);
 
-
+        dbHelper = new MyDbHelper_game(this);
 
         pergsNivel_1 = carregarPerguntas(1);
         pergsNivel_2 = carregarPerguntas(2);
@@ -72,6 +72,8 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
       }
 
 
+
+
 //FAZER a gestão smartPhone vs Tablet
         //smartPhone - trocar fragment
         //Tables Actualizar detalhes
@@ -79,10 +81,10 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
         perguntaFragment = (PerguntaDetailFragment) getSupportFragmentManager().findFragmentById(R.id.b_fragment);
 
         if(perguntaFragment != null) {
-            perguntaFragment.setPergunta(pergId);  //tablet
+            perguntaFragment.setPergunta(carregarPerguntaSelecionada(pergId));  //tablet
         } else {
             perguntaFragment = new PerguntaDetailFragment(); //tlm
-            perguntaFragment.setPergunta(pergId);
+            perguntaFragment.setPergunta(carregarPerguntaSelecionada(pergId));
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, perguntaFragment);
@@ -91,10 +93,84 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
         }
     }
 
+    private Pergunta carregarPerguntaSelecionada(int pergId)
+    {
+        int index_rsp;
+        Pergunta res=null;
+
+        ArrayList<Resposta> rspLstPesq, rspLst = new ArrayList<>();
+        rspLstPesq = selecionarRespostas(pergId);
+
+        String[] columnsPerguntasSelect = {"Id", "Pergunta", "Pontuacao", "Niveis_Id", "Categorias_Id"};
+        String WHERE = "Id='" + pergId + "'";
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        //Cursor c = db.rawQuery("SELECT * FROM tblPessoas", null);
+        Cursor c = db.query(true, "Perguntas", columnsPerguntasSelect, WHERE, null, null, null, null, null);
+
+        try {
+            if (c.getCount() > 0) {
+                c.moveToFirst();
+
+                do {
+
+                    while (rspLstPesq.size() > 0) {
+                        index_rsp = randomGenerator.nextInt(rspLstPesq.size());
+                        rspLst.add(rspLstPesq.get(index_rsp));
+                        rspLstPesq.remove(index_rsp);
+                    }
+
+                    res = new Pergunta(c.getInt(0), c.getInt(3), c.getString(1), c.getInt(2), c.getInt(4), rspLst);
+
+
+                } while (c.moveToNext());
+            }
+
+            c.close();
+            db.close();
+
+        } catch (Exception e) {
+            Log.e("Error", "Error", e);
+//            Toast.makeText(this, "Erro sortearPergunta: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            throw e;
+        }
+
+        return res;
+    }
+
+    private ArrayList<Resposta> selecionarRespostas ( int idPergunta ){
+        ArrayList<Resposta> rspList = new ArrayList<>();
+        boolean correta;
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String[] columnsRespostasSelect={"Id","Perguntas_Id","Descricao","Correta"};
+        String WHERE_RSP =  "Perguntas_Id='" + idPergunta + "'" ;
+
+        Cursor c2= db.query(true,"Respostas",columnsRespostasSelect,WHERE_RSP,null,null,null,null,null);
+
+        if (c2.getCount()>0 ) {
+            c2.moveToFirst();
+
+            do {
+                if (c2.getString(3).equals("S")) {
+                    correta = true;
+                } else {
+                    correta = false;
+                }
+                rspList.add(new Resposta(c2.getInt(0), c2.getInt(1), c2.getString(2), correta));
+            } while (c2.moveToNext());
+        }
+
+        c2.close();
+        db.close();
+
+        return rspList;
+    }
 
     private ArrayList<Integer> carregarPerguntas(int _nivel){
 
-        MyDbHelper_game dbHelper = new MyDbHelper_game(this);
+
 
         ArrayList<Integer> lis=new ArrayList<>();
 
