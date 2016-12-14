@@ -22,15 +22,15 @@ public class NiveisFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
 
-//        inserirPatamar();
+        inserirPatamar();
 
-        String[] patamarArray=getResources().getStringArray(R.array.niveis_array);
+//        String[] patamarArray=getResources().getStringArray(R.array.niveis_array);
+//
+//        for (int i=0;i<patamarArray.length;i++){
+//            mList.add(new String(patamarArray[i]) );
+//        }
 
-        for (int i=0;i<patamarArray.length;i++){
-            mList.add(patamarArray[i]);
-        }
-
-        mAdapter = new QQSM_Adapter(this.mContext, mList);
+        mAdapter = new QQSM_Adapter(mContext, mList);
         setListAdapter(mAdapter);
 
 
@@ -52,7 +52,7 @@ public class NiveisFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        mListener.onLevelSelected(mList.get(position));
+        mListener.onLevelSelected(getResources().getStringArray(R.array.niveis_array).length - position);
     }
 
 

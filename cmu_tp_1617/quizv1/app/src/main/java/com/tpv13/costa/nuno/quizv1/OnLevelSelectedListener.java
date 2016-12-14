@@ -5,5 +5,5 @@ package com.tpv13.costa.nuno.quizv1;
  */
 
 public interface OnLevelSelectedListener {
-    public void onLevelSelected(String nivel);
+    public void onLevelSelected(int nivel);
 }

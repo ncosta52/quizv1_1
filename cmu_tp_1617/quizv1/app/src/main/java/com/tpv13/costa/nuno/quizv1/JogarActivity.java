@@ -150,7 +150,6 @@ public class JogarActivity extends Activity implements View.OnClickListener{
                 }
 
                 c.close();
-
                 db.close();
 
             } catch (Exception e) {
@@ -213,6 +212,9 @@ public class JogarActivity extends Activity implements View.OnClickListener{
                 rspList.add(new Resposta(c2.getInt(0), c2.getInt(1), c2.getString(2), correta));
             } while (c2.moveToNext());
         }
+
+        c2.close();
+        db.close();
 
         return rspList;
     }

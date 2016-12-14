@@ -23,8 +23,8 @@ public class QQSM_Adapter extends ArrayAdapter<String> {
     public QQSM_Adapter(Context context, ArrayList<String> list) {
         super(context, R.layout.row_qqsm,list);
 
-        mList=list;
-        mContext = context;
+        this.mList=list;
+        this.mContext = context;
 
 
     }
