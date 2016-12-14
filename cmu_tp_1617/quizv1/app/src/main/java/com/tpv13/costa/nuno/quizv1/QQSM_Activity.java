@@ -1,5 +1,6 @@
 package com.tpv13.costa.nuno.quizv1;
 
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedListener{
+public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedListener,OnRspSelecionada{
 
     private NiveisFragment levelFragment;
     private PerguntaDetailFragment perguntaFragment;
@@ -22,6 +23,8 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
 
     private MyDbHelper_game dbHelper;
     private Random randomGenerator=new Random();
+
+    private int nivelSel=1;
 
 
     @Override
@@ -42,6 +45,7 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
 
             FragmentTransaction transaction_i = getSupportFragmentManager().beginTransaction();
             transaction_i.add(R.id.fragment_container, levelFragment);
+            transaction_i.addToBackStack(null);
             transaction_i.commit();
         }
     }
@@ -88,7 +92,7 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
 
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, perguntaFragment);
-            transaction.addToBackStack(null);
+           // transaction.addToBackStack("perguntaFragment");
             transaction.commit();
         }
     }
@@ -207,6 +211,36 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
     }
 
 
+    @Override
+    public void onRsp(Boolean rsp) {
+        if (rsp) {
+            Toast.makeText(this, "Certa\nPassar para nivel Seguinte", Toast.LENGTH_SHORT).show();
 
+
+            nivelSel++;
+        }
+        else{
+            Toast.makeText(this, "ERRADA\nMostrar Dinheiro Ganho", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+            if (findViewById(R.id.fragment_container) != null) {
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                //transaction.remove(perguntaFragment);
+                transaction.replace(R.id.fragment_container, levelFragment);
+                //transaction.addToBackStack(null);
+                transaction.commit();
+            }
+
+        if (rsp) {
+            levelFragment.selectNivel(nivelSel);
+
+
+
+
+        }
+
+    }
 }
 

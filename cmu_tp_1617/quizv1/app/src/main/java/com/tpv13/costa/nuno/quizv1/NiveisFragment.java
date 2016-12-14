@@ -14,8 +14,10 @@ import java.util.ArrayList;
 public class NiveisFragment extends ListFragment {
     private Context mContext;
     private QQSM_Adapter mAdapter ;
-    private ArrayList<String> mList= new ArrayList<>();
+    public ArrayList<String> mList= new ArrayList<>();
     private OnLevelSelectedListener mListener;
+    private int nivelSel=1;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,11 +50,24 @@ public class NiveisFragment extends ListFragment {
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+
+    }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         mListener.onLevelSelected(getResources().getStringArray(R.array.niveis_array).length - position);
+    }
+
+    public void selectNivel(int n){
+
+        mAdapter.coloRow((n-1),null);
+        ////mList.performItemClick(mList.getAdapter().getView(3, null, null), 3, mList.getItemIdAtPosition(3));
+
+        mListener.onLevelSelected(getResources().getStringArray(R.array.niveis_array).length - n);
     }
 
 

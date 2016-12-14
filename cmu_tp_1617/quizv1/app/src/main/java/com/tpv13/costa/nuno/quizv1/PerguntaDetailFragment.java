@@ -1,9 +1,12 @@
 package com.tpv13.costa.nuno.quizv1;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,8 +20,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class PerguntaDetailFragment extends Fragment  {
-
+public class PerguntaDetailFragment extends Fragment implements View.OnClickListener  {
+    private OnRspSelecionada mListenerRsp;
 
     private TextView tvPergunta;
     private Button btnA, btnB, btnC, btnD;//, btn_valSeg;
@@ -40,7 +43,10 @@ public class PerguntaDetailFragment extends Fragment  {
         btnC= (Button) mContentView.findViewById(R.id.bt_respostaC);
         btnD= (Button) mContentView.findViewById(R.id.bt_respostaD);
 
-
+        btnA.setOnClickListener(this);
+        btnB.setOnClickListener(this);
+        btnC.setOnClickListener(this);
+        btnD.setOnClickListener(this);
 
         return mContentView;
     }
@@ -48,55 +54,27 @@ public class PerguntaDetailFragment extends Fragment  {
     @Override
     public void onResume() {
         super.onResume();
-        updateLevel();
+        updatePergunta();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            mListenerRsp = (OnRspSelecionada) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement OnNewsSelectedListener");
+        }
     }
 
     public void setPergunta(Pergunta _pergunta) {
         this.apresPergunta = _pergunta;
 //       dbHelper = new MyDbHelper_game(this.getContext());
-        updateLevel();
+        updatePergunta();
     }
 
-    public void updateLevel() {
-//        int index_rsp;
-//        Pergunta res=null;
-//
-//        ArrayList<Resposta> rspLstPesq, rspLst = new ArrayList<>();
-//        rspLstPesq = selecionarRespostas(this.perguntaID);
-//
-//        String[] columnsPerguntasSelect = {"Id", "Pergunta", "Pontuacao", "Niveis_Id", "Categorias_Id"};
-//        String WHERE = "Id='" + this.perguntaID + "'";
-//
-//        SQLiteDatabase db = dbHelper.getReadableDatabase();
-//        //Cursor c = db.rawQuery("SELECT * FROM tblPessoas", null);
-//        Cursor c = db.query(true, "Perguntas", columnsPerguntasSelect, WHERE, null, null, null, null, null);
-//
-//        try {
-//            if (c.getCount() > 0) {
-//                c.moveToFirst();
-//
-//                do {
-//
-//                    while (rspLstPesq.size() > 0) {
-//                        index_rsp = randomGenerator.nextInt(rspLstPesq.size());
-//                        rspLst.add(rspLstPesq.get(index_rsp));
-//                        rspLstPesq.remove(index_rsp);
-//                    }
-//
-//                    apresPergunta = new Pergunta(c.getInt(0), c.getInt(3), c.getString(1), c.getInt(2), c.getInt(4), rspLst);
-//                    res = apresPergunta;
-//
-//                } while (c.moveToNext());
-//            }
-//
-//            c.close();
-//            db.close();
-//
-//        } catch (Exception e) {
-//            Log.e("Error", "Error", e);
-////            Toast.makeText(this, "Erro sortearPergunta: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//            throw e;
-//        }
+    public void updatePergunta() {
 
         if (apresPergunta != null && tvPergunta!= null && btnA != null && btnB != null && btnC != null && btnD != null) {
             tvPergunta.setText(apresPergunta.getPergunta());
@@ -125,6 +103,62 @@ public class PerguntaDetailFragment extends Fragment  {
 
         }
 
+
+    }
+
+
+    @Override
+    public void onClick(View view) {
+
+        try{
+            if (view.getTag().equals("")==false) {
+                switch (view.getId()) {
+                    case R.id.bt_respostaA: //error
+                        setRspSelecionada_frag(0);
+                        break;
+                    case R.id.bt_respostaB: //error
+                        setRspSelecionada_frag(1);
+                        break;
+                    case R.id.bt_respostaC: //error
+                        setRspSelecionada_frag(2);
+                        break;
+                    case R.id.bt_respostaD: //error
+                        setRspSelecionada_frag(3);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        }catch (Exception e )
+        {
+            throw e;
+        }
+    }
+
+    public void setRspSelecionada_frag(final int _rspSelecionada) {
+
+        if (_rspSelecionada>-1 && _rspSelecionada<6) {
+
+            switch (_rspSelecionada) {
+                case 0: //error
+                    btnA.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+                    break;
+                case 1: //error
+                    btnB.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+                    break;
+                case 2: //error
+                    btnC.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+                    break;
+                case 3: //error
+                    btnD.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+                    break;
+                default:
+                    break;
+            }
+
+            mListenerRsp.onRsp( this.apresPergunta.getRespostaByIndex(_rspSelecionada).isCorreta());
+        }
 
     }
 

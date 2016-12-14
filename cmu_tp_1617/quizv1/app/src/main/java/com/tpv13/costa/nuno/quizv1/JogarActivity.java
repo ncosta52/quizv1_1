@@ -27,11 +27,9 @@ public class JogarActivity extends Activity implements View.OnClickListener{
     private static int animacaoCorretaTime=500;
     private static int animacaoErradaTime=600;
 
-    private static int rspCertaColor=Color.GREEN;
-    private static int rspErradaColor=Color.RED;
-    private static int rspEscolhidaColor=Color.YELLOW;
 
-    private PerguntaFragment mPerguntaFragment;
+
+    //private PerguntaFragment mPerguntaFragment;
     private Random randomGenerator=new Random();
     private MyDbHelper_game dbHelper;
     private Pergunta apresPergunta;
@@ -310,89 +308,21 @@ public class JogarActivity extends Activity implements View.OnClickListener{
     }
 
     public void setRspSelecionada(final int _rspSelecionada) {
-//        if (_rspSelecionada!=-1){
-//            switch (_rspSelecionada) {
-//                case 0: //error
-//                    btnA.setBackgroundColor(Color.YELLOW);
-//                    btnB.setBackgroundResource(android.R.drawable.btn_default);
-//                    btnC.setBackgroundResource(android.R.drawable.btn_default);
-//                    btnD.setBackgroundResource(android.R.drawable.btn_default);
-//
-//                    btnA.setClickable(false);
-//                    btnB.setClickable(true);
-//                    btnC.setClickable(true);
-//                    btnD.setClickable(true);
-//                    break;
-//                case 1: //error
-//                    btnB.setBackgroundColor(Color.YELLOW);
-//                    btnA.setBackgroundResource(android.R.drawable.btn_default);
-//                    btnC.setBackgroundResource(android.R.drawable.btn_default);
-//                    btnD.setBackgroundResource(android.R.drawable.btn_default);
-//
-//                    btnA.setClickable(true);
-//                    btnB.setClickable(false);
-//                    btnC.setClickable(true);
-//                    btnD.setClickable(true);
-//                    break;
-//                case 2: //error
-//                    btnC.setBackgroundColor(Color.YELLOW);
-//                    btnA.setBackgroundResource(android.R.drawable.btn_default);
-//                    btnB.setBackgroundResource(android.R.drawable.btn_default);
-//                    btnD.setBackgroundResource(android.R.drawable.btn_default);
-//
-//                    btnA.setClickable(true);
-//                    btnB.setClickable(true);
-//                    btnC.setClickable(false);
-//                    btnD.setClickable(true);
-//                    break;
-//                case 3: //error
-//                    btnD.setBackgroundColor(Color.YELLOW);
-//                    btnA.setBackgroundResource(android.R.drawable.btn_default);
-//                    btnB.setBackgroundResource(android.R.drawable.btn_default);
-//                    btnC.setBackgroundResource(android.R.drawable.btn_default);
-//
-//                    btnA.setClickable(true);
-//                    btnB.setClickable(true);
-//                    btnC.setClickable(true);
-//                    btnD.setClickable(false);
-//                    break;
-//                default:
-//                    break;
-//            }
-//            btn_valSeg.setClickable(true);
-//            //btn_valSeg.setText(getResources().getString(R.string.responder_Str));
-//        }
-//        else{
-//
-//            btn_valSeg.setClickable(false);
-//            if (_rspSelecionada!=6) {
-//                btnA.setBackgroundResource(android.R.drawable.btn_default);
-//                btnB.setBackgroundResource(android.R.drawable.btn_default);
-//                btnC.setBackgroundResource(android.R.drawable.btn_default);
-//                btnD.setBackgroundResource(android.R.drawable.btn_default);
-//
-//                btn_valSeg.setText(getResources().getString(R.string.responder_Str));
-//
-//                btnA.setClickable(true);
-//                btnB.setClickable(true);
-//                btnC.setClickable(true);
-//                btnD.setClickable(true);
-//            }
-//        }
+
         if (_rspSelecionada>-1 && _rspSelecionada<6) {
 
             switch (_rspSelecionada) {
                 case 0: //error
-                    btnA.setBackgroundColor(rspEscolhidaColor);
+                    btnA.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
                     break;
                 case 1: //error
-                    btnB.setBackgroundColor(rspEscolhidaColor);
+                    btnB.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
                     break;
                 case 2: //error
-                    btnC.setBackgroundColor(rspEscolhidaColor);
+                    btnC.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
                     break;
                 case 3: //error
-                    btnD.setBackgroundColor(rspEscolhidaColor);
+                    btnD.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
                     break;
                 default:
                     break;
@@ -459,19 +389,19 @@ public class JogarActivity extends Activity implements View.OnClickListener{
 
         switch (_rspDada) {
             case 0: //error
-                btnA.setBackgroundColor(rspCertaColor);
+                btnA.setBackgroundColor(getResources().getColor(R.color.rspCertaColor));
                 btnA.startAnimation(myAnim);
                 break;
             case 1: //error
-                btnB.setBackgroundColor(rspCertaColor);
+                btnB.setBackgroundColor(getResources().getColor(R.color.rspCertaColor));
                 btnB.startAnimation(myAnim);
                 break;
             case 2: //error
-                btnC.setBackgroundColor(rspCertaColor);
+                btnC.setBackgroundColor(getResources().getColor(R.color.rspCertaColor));
                 btnC.startAnimation(myAnim);
                 break;
             case 3: //error
-                btnD.setBackgroundColor(rspCertaColor);
+                btnD.setBackgroundColor(getResources().getColor(R.color.rspCertaColor));
                 btnD.startAnimation(myAnim);
                 break;
             default:
@@ -484,16 +414,16 @@ public class JogarActivity extends Activity implements View.OnClickListener{
 
         switch (_rspDada) {
             case 0: //error
-                btnA.setBackgroundColor(rspErradaColor);
+                btnA.setBackgroundColor(getResources().getColor(R.color.rspErradaColor));
                 break;
             case 1: //error
-                btnB.setBackgroundColor(rspErradaColor);
+                btnB.setBackgroundColor(getResources().getColor(R.color.rspErradaColor));
                 break;
             case 2: //error
-                btnC.setBackgroundColor(rspErradaColor);
+                btnC.setBackgroundColor(getResources().getColor(R.color.rspErradaColor));
                 break;
             case 3: //error
-                btnD.setBackgroundColor(rspErradaColor);
+                btnD.setBackgroundColor(getResources().getColor(R.color.rspErradaColor));
                 break;
             default:
                 break;
@@ -503,19 +433,19 @@ public class JogarActivity extends Activity implements View.OnClickListener{
             if (this.apresPergunta.getRespostaByIndex(i).isCorreta()){
                 switch (i) {
                     case 0: //error
-                        btnA.setBackgroundColor(rspCertaColor);
+                        btnA.setBackgroundColor(getResources().getColor(R.color.rspCertaColor));
                         btnA.startAnimation(myAnim);
                         break;
                     case 1: //error
-                        btnB.setBackgroundColor(rspCertaColor);
+                        btnB.setBackgroundColor(getResources().getColor(R.color.rspCertaColor));
                         btnB.startAnimation(myAnim);
                         break;
                     case 2: //error
-                        btnC.setBackgroundColor(rspCertaColor);
+                        btnC.setBackgroundColor(getResources().getColor(R.color.rspCertaColor));
                         btnC.startAnimation(myAnim);
                         break;
                     case 3: //error
-                        btnD.setBackgroundColor(rspCertaColor);
+                        btnD.setBackgroundColor(getResources().getColor(R.color.rspCertaColor));
                         btnD.startAnimation(myAnim);
                         break;
                     default:
