@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
 
         <TextView
             android:layout_width="match_parent"
@@ -18,7 +19,15 @@
             android:layout_marginTop="2dp"
             android:textSize="25dp"
             android:textAlignment="center"
-            android:id="@+id/nivel_patamar"/>
+            android:id="@+id/tv_nivel_patamar"/>
+
+        <!--<RadioButton-->
+            <!--android:layout_width="5dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:textSize="25dp"-->
+            <!--android:textAlignment="center"-->
+            <!--android:id="@+id/rb_nivel_patamar"/>-->
         <!--android:background="@drawable/niveis_background_selector"-->
 
     </LinearLayout>

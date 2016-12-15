@@ -53,18 +53,23 @@ public class NiveisFragment extends ListFragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        mAdapter.notifyDataSetChanged();
 
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        mListener.onLevelSelected(getResources().getStringArray(R.array.niveis_array).length - position);
+        super.onListItemClick(l, v, position, id);
+        mAdapter.setSelectedIndex(position);
+//        mAdapter.notifyDataSetChanged();
+
+            mListener.onLevelSelected(getResources().getStringArray(R.array.niveis_array).length - position);
     }
 
     public void selectNivel(int n){
 
-        mAdapter.coloRow((n-1),null);
+        mAdapter.setSelectedIndex(getResources().getStringArray(R.array.niveis_array).length -n);
+        mAdapter.coloRow(null);
         ////mList.performItemClick(mList.getAdapter().getView(3, null, null), 3, mList.getItemIdAtPosition(3));
 
         mListener.onLevelSelected(getResources().getStringArray(R.array.niveis_array).length - n);

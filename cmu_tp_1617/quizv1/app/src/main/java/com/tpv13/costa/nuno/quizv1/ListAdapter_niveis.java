@@ -46,7 +46,6 @@ public class ListAdapter_niveis extends ArrayAdapter<Nivel> implements Checkable
             rNivel.setChecked(false);
         }
 
-//
         rNivel.setText(niveisList.get(position).getNome());
 
 

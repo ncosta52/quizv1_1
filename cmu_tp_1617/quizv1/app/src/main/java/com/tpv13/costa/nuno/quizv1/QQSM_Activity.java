@@ -5,9 +5,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.FragmentContainer;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,6 +28,9 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
     private MyDbHelper_game dbHelper;
     private Random randomGenerator=new Random();
 
+    private View tmp;
+    private Animation myAnim ;
+
     private int nivelSel=1;
 
 
@@ -33,6 +40,9 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
         setContentView(R.layout.activity_qqsm_);
 
         dbHelper = new MyDbHelper_game(this);
+
+        tmp = (View) findViewById(R.id.fragment_container);
+
 
         pergsNivel_1 = carregarPerguntas(1);
         pergsNivel_2 = carregarPerguntas(2);
@@ -48,52 +58,46 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
             transaction_i.addToBackStack(null);
             transaction_i.commit();
         }
+
+
     }
 
     @Override
     public void  onLevelSelected(int level) {
         int index=0;
         int pergId=0;
+        if ( level<=getResources().getStringArray(R.array.niveis_array).length) {
+            if (level <= 5) {
+                //nivel 1
+                index = randomGenerator.nextInt(pergsNivel_1.size());
+                pergId = pergsNivel_1.get(index);
+                pergsNivel_1.remove(index);
+            } else {
+                if (level <= 10) {
+                    //nivel 2
+                    index = randomGenerator.nextInt(pergsNivel_2.size());
+                    pergId = pergsNivel_2.get(index);
+                    pergsNivel_2.remove(index);
+                } else {
+                    //nivel 3
 
-        if (level<=5){
-          //nivel 1
-            index = randomGenerator.nextInt(pergsNivel_1.size());
-            pergId=pergsNivel_1.get(index);
-            pergsNivel_1.remove(index);
-      }
-        else {
-          if (level >=10){
-              //nivel 2
-              index = randomGenerator.nextInt(pergsNivel_2.size());
-              pergId=pergsNivel_2.get(index);
-              pergsNivel_2.remove(index);
-          } else {
-              //nivel 3
-              index = randomGenerator.nextInt(pergsNivel_3.size());
-              pergId = pergsNivel_3.get(index);
-              pergsNivel_3.remove(index);
-          }
-      }
-
-
+                    index = randomGenerator.nextInt(pergsNivel_3.size());
+                    pergId = pergsNivel_3.get(index);
+                    pergsNivel_3.remove(index);
+                }
+            }
 
 
 //FAZER a gestão smartPhone vs Tablet
-        //smartPhone - trocar fragment
-        //Tables Actualizar detalhes
+            //smartPhone - trocar fragment
+            //Tables Actualizar detalhes
+            myAnim =allAnimStuff(200,pergId);
+            tmp.startAnimation(myAnim);
 
-        perguntaFragment = (PerguntaDetailFragment) getSupportFragmentManager().findFragmentById(R.id.b_fragment);
 
-        if(perguntaFragment != null) {
-            perguntaFragment.setPergunta(carregarPerguntaSelecionada(pergId));  //tablet
-        } else {
-            perguntaFragment = new PerguntaDetailFragment(); //tlm
-            perguntaFragment.setPergunta(carregarPerguntaSelecionada(pergId));
-
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.fragment_container, perguntaFragment);
-           // transaction.addToBackStack("perguntaFragment");
-            transaction.commit();
+        }
+        else {
+            Toast.makeText(this, "Vencedor", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -215,13 +219,12 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
     public void onRsp(Boolean rsp) {
         if (rsp) {
             Toast.makeText(this, "Certa\nPassar para nivel Seguinte", Toast.LENGTH_SHORT).show();
-
-
             nivelSel++;
         }
         else{
             Toast.makeText(this, "ERRADA\nMostrar Dinheiro Ganho", Toast.LENGTH_SHORT).show();
         }
+
 
 
 
@@ -235,12 +238,50 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
 
         if (rsp) {
             levelFragment.selectNivel(nivelSel);
-
-
-
-
         }
 
+    }
+
+    private Animation allAnimStuff(final long duration, final int _pergId) {
+
+        Animation milkshake = AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
+        //AnimationUtils.loadAnimation(this, R.anim.milkshake);
+        //new AlphaAnimation(4,0);
+
+        milkshake.setDuration(duration);
+        milkshake.setFillAfter(false);
+
+
+        milkshake.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                //some code to make it wait here?
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                perguntaFragment = (PerguntaDetailFragment) getSupportFragmentManager().findFragmentById(R.id.b_fragment);
+
+                if (perguntaFragment != null) {
+                    perguntaFragment.setPergunta(carregarPerguntaSelecionada(_pergId));  //tablet
+                } else {
+                    perguntaFragment = new PerguntaDetailFragment(); //tlm
+                    perguntaFragment.setPergunta(carregarPerguntaSelecionada(_pergId));
+
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container, perguntaFragment);
+                    // transaction.addToBackStack("perguntaFragment");
+                    transaction.commit();
+                }
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
+
+
+        return milkshake;
     }
 }
 
