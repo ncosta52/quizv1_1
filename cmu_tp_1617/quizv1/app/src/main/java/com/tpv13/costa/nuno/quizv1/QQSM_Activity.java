@@ -222,7 +222,12 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
             nivelSel++;
         }
         else{
-            Toast.makeText(this, "ERRADA\nMostrar Dinheiro Ganho", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "ERRADA\nMostrar Dinheiro Ganho", Toast.LENGTH_SHORT).show();
+            String[] tmp=getResources().getStringArray(R.array.niveis_array);
+
+            Toast.makeText(this, "ERRADA\n" +
+                    "Ganhou: " + tmp[getResources().getStringArray(R.array.niveis_array).length - nivelSel+1],
+                    Toast.LENGTH_SHORT).show();
         }
 
 
