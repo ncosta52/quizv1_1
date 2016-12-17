@@ -35,6 +35,10 @@ public class NiveisFragment extends ListFragment {
         mAdapter = new QQSM_Adapter(mContext, mList);
         setListAdapter(mAdapter);
 
+        mAdapter.setSelectedIndex(14);
+
+        mAdapter.coloRow(null);
+        mListener.onLevelSelected(1);
 
     }
 
@@ -55,6 +59,7 @@ public class NiveisFragment extends ListFragment {
         super.onResume();
         mAdapter.notifyDataSetChanged();
 
+
     }
 
     @Override
@@ -62,8 +67,7 @@ public class NiveisFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
         mAdapter.setSelectedIndex(position);
 //        mAdapter.notifyDataSetChanged();
-
-            mListener.onLevelSelected(getResources().getStringArray(R.array.niveis_array).length - position);
+        mListener.onLevelSelected(getResources().getStringArray(R.array.niveis_array).length - position);
     }
 
     public void selectNivel(int n){
@@ -72,7 +76,7 @@ public class NiveisFragment extends ListFragment {
         mAdapter.coloRow(null);
         ////mList.performItemClick(mList.getAdapter().getView(3, null, null), 3, mList.getItemIdAtPosition(3));
 
-        mListener.onLevelSelected(getResources().getStringArray(R.array.niveis_array).length - n);
+        mListener.onLevelSelected( n);
     }
 
 

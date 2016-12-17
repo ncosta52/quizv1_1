@@ -236,7 +236,7 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
     }
 
     private void pintarCorreta(int _rspDada){
-        myAnim =allAnimStuff(animacaoCorretaTime);
+        myAnim =allAnimStuff(animacaoCorretaTime, true);
 
         switch (_rspDada) {
             case 0: //error
@@ -261,7 +261,7 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
     }
 
     private void pintarErrada(int _rspDada){
-        myAnim =allAnimStuff(this.animacaoErradaTime);
+        myAnim =allAnimStuff(this.animacaoErradaTime, false);
 
         switch (_rspDada) {
             case 0: //error
@@ -328,7 +328,7 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
         }
     }
 
-    private Animation allAnimStuff(final long duration, final int _pergId) {
+    private Animation allAnimStuff(final long duration, final boolean _isCorrecta) {
 
         Animation milkshake = AnimationUtils.loadAnimation(this.getContext(), R.anim.anim_alpha);
         //AnimationUtils.loadAnimation(this, R.anim.milkshake);
@@ -346,7 +346,7 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                mListenerRsp.onRsp(this.apresPergunta.getRespostaByIndex(_rspSelecionada).isCorreta());
+                mListenerRsp.onRsp(_isCorrecta);
             }
 
             @Override

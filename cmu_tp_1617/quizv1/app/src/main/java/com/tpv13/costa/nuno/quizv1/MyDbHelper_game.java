@@ -107,45 +107,45 @@ public class MyDbHelper_game extends SQLiteOpenHelper
     private void dadosIniciais_Perguntas(SQLiteDatabase db)
     {
         //Perguntas acerca da ESTG
-        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,4,'Em que cidade se situa a ESTG?',1 );");
+        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,4,'Em que cidade se situa a ESTG?',1 );");          //1
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,4,'Como é que conhecido o edíficio onde a escola funciona?',1 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (3,4,'Qual a data do primeiro dia de aulas da ESTG',3 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,4,'Em que ano se inaugurou a ESTG?',2 );");
-        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,4,'Qual o primeiro curso a ser leccionada na ESTG',2 );");
+        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,4,'Qual o primeiro curso a ser leccionada na ESTG',2 );");          //5
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,4,'Qual o primeiro ano da Licenciatura Bietápica em Engenharia Informática',2 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,4,'Antes de ter como sigla ESTG, que sigla tinha escola?',1 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,4,'Quantos cursos(licenciaturas) existem na ESTG em 2016/2017?',1 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,4,'Quem é o coordenador de curso LEI em 2016/2017?',1 );");
-        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,4,'Quantas escolas tem o IPP em 2016/2017?',2 );");
+        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,4,'Quantas escolas tem o IPP em 2016/2017?',2 );");         //10
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,4,'Em que ano foi criada a tuna ESTG(F)?',2 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (3,4,'Na licenciatura como é calculado o ano em que frequenta?',3 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (3,4,'Quantas disciplinas se pode inscrever o aluno em época especial?',3 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (3,4,'O que significa SNMC nas pautas?',3 );");
-        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (3,4,'Que documentos são necessarios para requerer estatuto trabalhador-estudante?',3 );");
+        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (3,4,'Que documentos são necessarios para requerer estatuto trabalhador-estudante?',3 );");      //15
 
         //Perguntas acerca de desporto
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,1,'Quais as cores do BENFICA?',1 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,1,'Quantos atletas existem numa partida de tennis?',1 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,1,'No ciclismo, que acessorio é indispensavel?',1 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,1,'A que clube pertence o estadio da luz?',1 );");
-        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,1,'No tennis de mesa, quantos guarda redes tem cada equipa?',1 );");
+        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,1,'No tennis de mesa, quantos guarda redes tem cada equipa?',1 );");   //20
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,1,'Quem foi campeao europeu de futebol em 2016?',2 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,1,'Que desporto necessita de mecanico?',2 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,1,'Qual destes clubes é americano?',2 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,1,'Quem foi considerado o melhor jogador de futsal em 2015?',2 );");
-        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,1,'Qual o equipamento essencial na natação?',2 );");
+        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,1,'Qual o equipamento essencial na natação?',2 );");  //25
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (3,1,'Em que ano foi fundada a Associacao Desportiva de Fafe?',3 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (3,1,'Quantos jogadores alinham de num jogo de andebol?',3 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (3,1,'Quais são os pilotos pontuados no final de uma corrida de formula 1?',3 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (3,1,'Onde situa o estadio parc dos principes?',3 );");
-        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (3,1,'Qual o nome do jogador casado com a cantora Shakira?',3 );");
+        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (3,1,'Qual o nome do jogador casado com a cantora Shakira?',3 );");  //30
 
         //Perguntas de ciencia
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,2,'Que tipo de rocha é o petroleo?',1 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,2,'Que quimico é essencial para fazer foguetes?',1 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,2,'Como se chama a passagem de um elemento do estado liquido para gazoso?',1 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,2,'Que tecnologia transporta a internet para elementos sem fios?',1 );");
-        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,2,'Que elemento rochoso é efervescente?',1 );");
+        db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,2,'Que elemento rochoso é efervescente?',1 );");    //35
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,2,'Em que ano o homem pisou pela primeira vez a lua?',2 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,2,'O que pesa mais, um kilo de penas ou 1 kilo de chumbo?',2 );");
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (2,2,'A linguagem java é uma linguagem?',2 );");

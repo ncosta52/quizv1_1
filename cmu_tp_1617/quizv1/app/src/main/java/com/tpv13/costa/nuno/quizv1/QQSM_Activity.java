@@ -91,7 +91,7 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
 //FAZER a gestão smartPhone vs Tablet
             //smartPhone - trocar fragment
             //Tables Actualizar detalhes
-            myAnim =allAnimStuff(200,pergId);
+            myAnim =allAnimStuff(400,pergId);
             tmp.startAnimation(myAnim);
 
 
@@ -218,16 +218,34 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
     @Override
     public void onRsp(Boolean rsp) {
         if (rsp) {
-            Toast.makeText(this, "Certa\nPassar para nivel Seguinte", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Certa\nPassar para nivel Seguinte", Toast.LENGTH_SHORT).show();
             nivelSel++;
         }
         else{
 //            Toast.makeText(this, "ERRADA\nMostrar Dinheiro Ganho", Toast.LENGTH_SHORT).show();
             String[] tmp=getResources().getStringArray(R.array.niveis_array);
 
-            Toast.makeText(this, "ERRADA\n" +
-                    "Ganhou: " + tmp[getResources().getStringArray(R.array.niveis_array).length - nivelSel+1],
-                    Toast.LENGTH_SHORT).show();
+            if ((tmp.length - nivelSel)>=10){
+                //não ganhou nada
+                Toast.makeText(this, "ERRADA\n" + "Não ganhou nada!", Toast.LENGTH_SHORT).show();
+            }
+            else{
+                if ((tmp.length - nivelSel)>=5){
+                    //ganhou 1000€ ou valor na 10ª posicao
+                    Toast.makeText(this, "ERRADA\n" +"Ganhou: " + tmp[10],Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    if ((tmp.length - nivelSel)>=0 ){
+                        //ganhou 32000€ ou valor na 5ª
+                        Toast.makeText(this, "ERRADA\n" +"Ganhou: " + tmp[5],Toast.LENGTH_SHORT).show();
+                    }else{
+                        //ganhou 1Milhão ou valor na posição 0
+                        Toast.makeText(this, "ERRADA\n" +"Ganhou: " + tmp[0],Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+
+
         }
 
 
@@ -249,7 +267,7 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
 
     private Animation allAnimStuff(final long duration, final int _pergId) {
 
-        Animation milkshake = AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
+        Animation milkshake = AnimationUtils.loadAnimation(this, R.anim.anim_alpha_qqsm);
         //AnimationUtils.loadAnimation(this, R.anim.milkshake);
         //new AlphaAnimation(4,0);
 

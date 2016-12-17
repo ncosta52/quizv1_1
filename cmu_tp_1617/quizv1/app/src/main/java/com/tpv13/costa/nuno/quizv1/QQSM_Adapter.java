@@ -88,7 +88,7 @@ public class QQSM_Adapter extends ArrayAdapter<String>{//implements Checkable {
 
     public void coloRow(View convertView){ //int in,  View convertView
         View v = convertView;
-        myAnim =allAnimStuff(500);
+        myAnim =allAnimStuff(1000);
 //
         if(v == null) {
             LayoutInflater vi = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
