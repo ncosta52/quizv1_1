@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="animacao_qqsm_patamar">400</integer>
+    <integer name="animacaoCorretaTime">500</integer>
+    <integer name="animacaoErradaTime">600</integer>
+
+</resources>

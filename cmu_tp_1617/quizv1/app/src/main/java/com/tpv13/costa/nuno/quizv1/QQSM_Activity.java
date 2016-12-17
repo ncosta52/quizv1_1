@@ -91,7 +91,7 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
 //FAZER a gestão smartPhone vs Tablet
             //smartPhone - trocar fragment
             //Tables Actualizar detalhes
-            myAnim =allAnimStuff(400,pergId);
+            myAnim =allAnimStuff(getResources().getInteger(R.integer.animacao_qqsm_patamar),pergId);
             tmp.startAnimation(myAnim);
 
 

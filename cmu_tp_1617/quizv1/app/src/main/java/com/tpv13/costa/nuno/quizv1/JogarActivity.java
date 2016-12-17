@@ -24,10 +24,6 @@ import java.util.Random;
 
 public class JogarActivity extends Activity implements View.OnClickListener{
 
-    private static int animacaoCorretaTime=500;
-    private static int animacaoErradaTime=600;
-
-
 
     //private PerguntaFragment mPerguntaFragment;
     private Random randomGenerator=new Random();
@@ -385,7 +381,7 @@ public class JogarActivity extends Activity implements View.OnClickListener{
     }
 
     private void pintarCorreta(int _rspDada){
-        myAnim =allAnimStuff(this.animacaoCorretaTime);
+        myAnim =allAnimStuff(getResources().getInteger(R.integer.animacaoCorretaTime));
 
         switch (_rspDada) {
             case 0: //error
@@ -410,7 +406,7 @@ public class JogarActivity extends Activity implements View.OnClickListener{
     }
 
     private void pintarErrada(int _rspDada){
-        myAnim =allAnimStuff(this.animacaoErradaTime);
+        myAnim =allAnimStuff(getResources().getInteger(R.integer.animacaoErradaTime));
 
         switch (_rspDada) {
             case 0: //error
@@ -496,7 +492,7 @@ public class JogarActivity extends Activity implements View.OnClickListener{
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                if (duration==animacaoCorretaTime) {
+                if (duration==getResources().getInteger(R.integer.animacaoCorretaTime)) {
 
                     btnA.setClickable(true);
                     btnB.setClickable(true);
