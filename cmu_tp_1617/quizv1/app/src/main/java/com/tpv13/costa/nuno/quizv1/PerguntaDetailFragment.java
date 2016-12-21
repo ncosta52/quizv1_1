@@ -15,6 +15,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class PerguntaDetailFragment extends Fragment implements View.OnClickListener  {
     private OnRspSelecionada mListenerRsp;
     private OnAjudasSelectListener mListanerAjudas;
@@ -158,6 +161,7 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
                     case R.id.btn_ajuda50: //error
                         mListanerAjudas.onAjuda_50(true);
                         this.btn_ajuda_50.setEnabled(false);
+                        sortear_2_erradas();
                         Toast.makeText(this.getContext(), "btn_ajuda50", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.btn_ajudaPublic: //error
@@ -184,6 +188,53 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
         }
     }
 
+    public void sortear_2_erradas()
+    {
+        ArrayList<Integer> ajudasD=new ArrayList<>();
+        Integer rspRem=0, rspTmp;
+        Random randomGenerator=new Random();
+
+
+        ajudasD.add(0);
+        ajudasD.add(1);
+        ajudasD.add(2);
+        ajudasD.add(3);
+
+        do{
+            rspTmp= randomGenerator.nextInt(ajudasD.size());
+
+            switch (ajudasD.get(rspTmp)) {
+                case 0: //error
+                    if(this.btnA.getTag().equals("false")){
+                        this.btnA.setEnabled(false);
+                        rspRem++;
+                    }
+                    break;
+                case 1: //error
+                    if(this.btnB.getTag().equals("false")){
+                        this.btnB.setEnabled(false);
+                        rspRem++;
+                    }
+                    break;
+                case 2: //error
+                    if(this.btnC.getTag().equals("false")){
+                        this.btnC.setEnabled(false);
+                        rspRem++;
+                    }
+                    break;
+                case 3: //error
+                    if(this.btnD.getTag().equals("false")){
+                        this.btnD.setEnabled(false);
+                        rspRem++;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            ajudasD.remove(rspTmp);
+
+        } while (rspRem<2);
+    }
 //    public void setRspSelecionada(final int _rspSelecionada) {
 //
 //        if (_rspSelecionada>-1 && _rspSelecionada<6) {

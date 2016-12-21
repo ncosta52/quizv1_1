@@ -185,9 +185,6 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
     }
 
     private ArrayList<Integer> carregarPerguntas(int _nivel){
-
-
-
         ArrayList<Integer> lis=new ArrayList<>();
 
         String[] columnsPerguntasSelect={"Id"};
