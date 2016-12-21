@@ -56,13 +56,16 @@ public class QQSM_Adapter extends ArrayAdapter<String>{//implements Checkable {
             tPatamar.setText(mList.get(position));
 
             if (position== this.selectedIndex) {
-
                 coloRow(v);
             }
             else {
-                if (position>getSelectedIndex() && getSelectedIndex()!=-1){
+                if (position > getSelectedIndex() && getSelectedIndex() != -1) {
                     tPatamar.setBackgroundColor(Color.GRAY);
                 }
+            }
+
+            if (position==0 || position==5 || position == 10){
+                tPatamar.setTextColor(Color.BLUE);
             }
 
 //            RadioButton rPatamar = (RadioButton) v.findViewById(R.id.rb_nivel_patamar);

@@ -17,13 +17,17 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedListener,OnRspSelecionada{
+public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedListener,OnRspSelecionada,OnAjudasSelectListener{
 
     private NiveisFragment levelFragment;
     private PerguntaDetailFragment perguntaFragment;
     private ArrayList<Integer> pergsNivel_1=new ArrayList<>();
     private ArrayList<Integer> pergsNivel_2=new ArrayList<>();
     private ArrayList<Integer> pergsNivel_3=new ArrayList<>();
+
+    private boolean ajuda_50;
+    private boolean ajuda_Publico;
+    private boolean ajuda_Tlf;
 
     private MyDbHelper_game dbHelper;
     private Random randomGenerator=new Random();
@@ -47,6 +51,10 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
         pergsNivel_1 = carregarPerguntas(1);
         pergsNivel_2 = carregarPerguntas(2);
         pergsNivel_3 = carregarPerguntas(3);
+
+        ajuda_50=false;
+        ajuda_Publico=false;
+        ajuda_Tlf=false;
 
         if (findViewById(R.id.fragment_container) != null) {
             if (savedInstanceState != null)
@@ -251,13 +259,13 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
 
 
 
-            if (findViewById(R.id.fragment_container) != null) {
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                //transaction.remove(perguntaFragment);
-                transaction.replace(R.id.fragment_container, levelFragment);
-                //transaction.addToBackStack(null);
-                transaction.commit();
-            }
+        if (findViewById(R.id.fragment_container) != null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            //transaction.remove(perguntaFragment);
+            transaction.replace(R.id.fragment_container, levelFragment);
+            //transaction.addToBackStack(null);
+            transaction.commit();
+        }
 
         if (rsp) {
             levelFragment.selectNivel(nivelSel);
@@ -286,9 +294,11 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
                 perguntaFragment = (PerguntaDetailFragment) getSupportFragmentManager().findFragmentById(R.id.b_fragment);
 
                 if (perguntaFragment != null) {
+                    perguntaFragment.setAjudasEstado(isAjuda_50(),isAjuda_Tlf(),isAjuda_Publico());
                     perguntaFragment.setPergunta(carregarPerguntaSelecionada(_pergId));  //tablet
                 } else {
                     perguntaFragment = new PerguntaDetailFragment(); //tlm
+                    perguntaFragment.setAjudasEstado(isAjuda_50(),isAjuda_Tlf(),isAjuda_Publico());
                     perguntaFragment.setPergunta(carregarPerguntaSelecionada(_pergId));
 
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
@@ -305,6 +315,45 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
 
 
         return milkshake;
+    }
+
+    @Override
+    public void onAjuda_50(Boolean _ajuda) {
+        this.setAjuda_50(_ajuda);
+    }
+
+    @Override
+    public void onAjuda_Tlf(Boolean _ajuda) {
+        this.setAjuda_Tlf(_ajuda);
+    }
+
+    @Override
+    public void onAjuda_Publico(Boolean _ajuda) {
+        this.setAjuda_Publico(_ajuda);
+    }
+
+    public boolean isAjuda_50() {
+        return ajuda_50;
+    }
+
+    public void setAjuda_50(boolean ajuda_50) {
+        this.ajuda_50 = ajuda_50;
+    }
+
+    public boolean isAjuda_Publico() {
+        return ajuda_Publico;
+    }
+
+    public void setAjuda_Publico(boolean ajuda_Publico) {
+        this.ajuda_Publico = ajuda_Publico;
+    }
+
+    public boolean isAjuda_Tlf() {
+        return ajuda_Tlf;
+    }
+
+    public void setAjuda_Tlf(boolean ajuda_Tlf) {
+        this.ajuda_Tlf = ajuda_Tlf;
     }
 }
 
