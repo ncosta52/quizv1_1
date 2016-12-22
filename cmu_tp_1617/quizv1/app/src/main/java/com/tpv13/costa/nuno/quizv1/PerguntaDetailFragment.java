@@ -32,6 +32,7 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
 
     private ImageButton btn_ajuda_50, btn_ajudaTlf, btn_ajudaPublico;
 
+    private AjudaPublico_Dialog ajudaPublico_dial;
 
     private Animation myAnim;
 
@@ -162,12 +163,16 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
                         mListanerAjudas.onAjuda_50(true);
                         this.btn_ajuda_50.setEnabled(false);
                         sortear_2_erradas();
-                        Toast.makeText(this.getContext(), "btn_ajuda50", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(this.getContext(), "btn_ajuda50", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.btn_ajudaPublic: //error
                         mListanerAjudas.onAjuda_Publico(true);
                         this.btn_ajudaPublico.setEnabled(false);
-                        Toast.makeText(this.getContext(), "btn_ajudaPublic", Toast.LENGTH_SHORT).show();
+
+                        ajudaPublico_dial=new AjudaPublico_Dialog(this.getActivity());
+                        ajudaPublico_dial.show();
+
+//                        Toast.makeText(this.getContext(), "btn_ajudaPublic", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.btn_ajudaTlf: //error
                         mListanerAjudas.onAjuda_Tlf(true);
