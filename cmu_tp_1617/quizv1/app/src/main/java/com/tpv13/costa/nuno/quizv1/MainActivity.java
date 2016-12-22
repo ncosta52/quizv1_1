@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sound_menu= MediaPlayer.create(MainActivity.this, R.raw.soundmenu);
-        sound_menu.start();
+
+
 
         bt_novoJogo = (Button) findViewById(R.id.bt_novoJogo);
         bt_novoJogo.setOnClickListener(this);
@@ -41,6 +41,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         //rrclient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    //http://stackoverflow.com/questions/15658687/how-to-use-onresume
+    @Override
+    public void onResume(){
+        super.onResume();
+        // put your code here...
+        sound_menu= MediaPlayer.create(MainActivity.this, R.raw.sound_menu);
+        sound_menu.start();
     }
 
     @Override
