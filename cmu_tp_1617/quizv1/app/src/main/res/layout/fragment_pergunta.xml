@@ -16,20 +16,23 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:id="@+id/btn_ajuda50"
-            android:src="@drawable/common_google_signin_btn_icon_dark"/>
+            android:background="@drawable/my_selector_cinquenta_cinquenta"
+        />
+
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/btn_ajudaPublic"
             android:layout_weight="0.3"
-            android:src="@drawable/common_google_signin_btn_icon_dark"/>
+            android:background="@drawable/my_selector_publico"/>
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:id="@+id/btn_ajudaTlf"
-            android:src="@drawable/common_google_signin_btn_icon_dark"/>
+            android:background="@drawable/my_selector_telefone"/>
     </LinearLayout>
+    <!---->
 
 
     <TextView

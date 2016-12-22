@@ -4,6 +4,9 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v4.app.FragmentContainer;
 import android.support.v4.app.FragmentTransaction;
@@ -36,6 +39,8 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
     private Animation myAnim ;
 
     private int nivelSel=1;
+
+
 
 
     @Override
@@ -225,6 +230,7 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
         if (rsp) {
             //Toast.makeText(this, "Certa\nPassar para nivel Seguinte", Toast.LENGTH_SHORT).show();
             nivelSel++;
+
         }
         else{
 //            Toast.makeText(this, "ERRADA\nMostrar Dinheiro Ganho", Toast.LENGTH_SHORT).show();

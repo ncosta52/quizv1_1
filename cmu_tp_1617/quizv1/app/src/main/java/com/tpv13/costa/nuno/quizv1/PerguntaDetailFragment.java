@@ -2,6 +2,9 @@ package com.tpv13.costa.nuno.quizv1;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
@@ -36,6 +39,10 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
 
     private Animation myAnim;
 
+    MediaPlayer soundResponse;
+
+
+
 //    private MyDbHelper_game dbHelper=new MyDbHelper_game(this.getContext());;
 //    private Random randomGenerator=new Random();
 
@@ -64,6 +71,9 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
         btn_ajuda_50.setOnClickListener(this);
         btn_ajudaTlf.setOnClickListener(this);
         btn_ajudaPublico.setOnClickListener(this);
+
+
+
 
         return mContentView;
     }
@@ -299,10 +309,12 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
             builder.setPositiveButton(R.string.rsp_Sim, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
 
+
                     try {
 
                         if (tmp_apresPergunta.isCorreta()){
                             pintarCorreta(_rspSelecionada);
+
                         }
                         else{
                             pintarErrada(_rspSelecionada);
@@ -343,7 +355,8 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
 
     private void pintarCorreta(int _rspDada){
         myAnim =allAnimStuff(getResources().getInteger(R.integer.animacaoCorretaTime), true);
-
+        soundResponse= MediaPlayer.create(this.getActivity(), R.raw.feedback_positivo);
+        soundResponse.start();
         switch (_rspDada) {
             case 0: //error
                 btnA.setBackgroundColor(getResources().getColor(R.color.rspCertaColor));
@@ -368,6 +381,9 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
 
     private void pintarErrada(int _rspDada){
         myAnim =allAnimStuff(getResources().getInteger(R.integer.animacaoErradaTime), false);
+
+        soundResponse= MediaPlayer.create(this.getActivity(), R.raw.feedback_negativo);
+        soundResponse.start();
 
         switch (_rspDada) {
             case 0: //error
@@ -452,6 +468,7 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
 
             @Override
             public void onAnimationEnd(Animation animation) {
+                soundResponse.stop();
                 mListenerRsp.onRsp(_isCorrecta);
             }
 
