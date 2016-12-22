@@ -6,11 +6,31 @@
     android:orientation="vertical"
     >
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.1"
+        android:orientation="horizontal">
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:id="@+id/btn_ajuda50"
+            android:src="@drawable/common_google_signin_btn_icon_dark"/>
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/btn_ajudaPublic"
+            android:layout_weight="0.3"
+            android:src="@drawable/common_google_signin_btn_icon_dark"/>
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.3"
+            android:id="@+id/btn_ajudaTlf"
+            android:src="@drawable/common_google_signin_btn_icon_dark"/>
+    </LinearLayout>
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="0.3">-->
 
     <TextView
         android:layout_width="fill_parent"
@@ -19,20 +39,9 @@
         android:textAllCaps="true"
         android:gravity="center"
         android:textSize="22dp"
-        android:layout_weight="0.6"
+        android:layout_weight="0.7"
         android:id="@+id/tv_pergunta" />
-    <!--</LinearLayout>-->
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="vertical">-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="0.5"-->
-    <!--android:orientation="horizontal">-->
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -47,13 +56,6 @@
         android:layout_weight="0.1"
         />
 
-    <!--</LinearLayout>-->
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="0.5"-->
-    <!--android:orientation="horizontal">-->
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -68,15 +70,6 @@
         android:gravity="center"
         android:layout_weight="0.1"
         />
-    <!--<Button-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:id="@+id/bt_validarSeguinte"-->
-    <!--android:gravity="center"-->
-    <!--android:layout_weight="0.05"-->
-    <!--/>-->
 
-    <!--</LinearLayout>-->
-    <!--</LinearLayout>-->
 
 </LinearLayout>

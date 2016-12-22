@@ -11,17 +11,28 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class PerguntaDetailFragment extends Fragment implements View.OnClickListener  {
     private OnRspSelecionada mListenerRsp;
+    private OnAjudasSelectListener mListanerAjudas;
 
-    private static int animacaoCorretaTime=500;
-    private static int animacaoErradaTime=600;
+//    private static int animacaoCorretaTime=500;
+//    private static int animacaoErradaTime=600;
 
     private TextView tvPergunta;
     private Button btnA, btnB, btnC, btnD;//, btn_valSeg;
     private Pergunta apresPergunta;
+    private boolean ajuda_50, ajuda_Tlf, ajuda_Pub;
+
+    private ImageButton btn_ajuda_50, btn_ajudaTlf, btn_ajudaPublico;
+
+    private AjudaPublico_Dialog ajudaPublico_dial;
 
     private Animation myAnim;
 
@@ -41,10 +52,18 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
         btnC= (Button) mContentView.findViewById(R.id.bt_respostaC);
         btnD= (Button) mContentView.findViewById(R.id.bt_respostaD);
 
+        btn_ajuda_50= (ImageButton) mContentView.findViewById(R.id.btn_ajuda50);
+        btn_ajudaTlf= (ImageButton) mContentView.findViewById(R.id.btn_ajudaTlf);
+        btn_ajudaPublico= (ImageButton) mContentView.findViewById(R.id.btn_ajudaPublic);
+
         btnA.setOnClickListener(this);
         btnB.setOnClickListener(this);
         btnC.setOnClickListener(this);
         btnD.setOnClickListener(this);
+
+        btn_ajuda_50.setOnClickListener(this);
+        btn_ajudaTlf.setOnClickListener(this);
+        btn_ajudaPublico.setOnClickListener(this);
 
         return mContentView;
     }
@@ -61,6 +80,7 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
 
         try {
             mListenerRsp = (OnRspSelecionada) activity;
+            mListanerAjudas=(OnAjudasSelectListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement OnNewsSelectedListener");
         }
@@ -101,6 +121,14 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
 
         }
 
+        if (btn_ajuda_50 != null && btn_ajudaPublico != null && btn_ajudaTlf != null){
+            this.btn_ajuda_50.setEnabled(!this.ajuda_50);
+            this.btn_ajudaPublico.setEnabled(!this.ajuda_Pub);
+            this.btn_ajudaTlf.setEnabled(!this.ajuda_Tlf);
+        }
+
+
+
 
     }
 
@@ -109,23 +137,54 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
 
         try{
-            if (view.getTag().equals("")==false) {
+            if (view.getTag() !=null) {
+                if (view.getTag().equals("") == false) {
+                    switch (view.getId()) {
+                        case R.id.bt_respostaA: //error
+                            setRspSelecionada_frag(0);
+                            break;
+                        case R.id.bt_respostaB: //error
+                            setRspSelecionada_frag(1);
+                            break;
+                        case R.id.bt_respostaC: //error
+                            setRspSelecionada_frag(2);
+                            break;
+                        case R.id.bt_respostaD: //error
+                            setRspSelecionada_frag(3);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            else {
                 switch (view.getId()) {
-                    case R.id.bt_respostaA: //error
-                        setRspSelecionada_frag(0);
+                    case R.id.btn_ajuda50: //error
+                        mListanerAjudas.onAjuda_50(true);
+                        this.btn_ajuda_50.setEnabled(false);
+                        sortear_2_erradas();
+//                        Toast.makeText(this.getContext(), "btn_ajuda50", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.bt_respostaB: //error
-                        setRspSelecionada_frag(1);
+                    case R.id.btn_ajudaPublic: //error
+                        mListanerAjudas.onAjuda_Publico(true);
+                        this.btn_ajudaPublico.setEnabled(false);
+
+                        ajudaPublico_dial=new AjudaPublico_Dialog(this.getActivity());
+                        ajudaPublico_dial.show();
+
+//                        Toast.makeText(this.getContext(), "btn_ajudaPublic", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.bt_respostaC: //error
-                        setRspSelecionada_frag(2);
-                        break;
-                    case R.id.bt_respostaD: //error
-                        setRspSelecionada_frag(3);
+                    case R.id.btn_ajudaTlf: //error
+                        mListanerAjudas.onAjuda_Tlf(true);
+                        this.btn_ajudaTlf.setEnabled(false);
+                        Toast.makeText(this.getContext(), "btn_ajudaTlf", Toast.LENGTH_SHORT).show();
                         break;
                     default:
                         break;
                 }
+
+
+
             }
 
         }catch (Exception e )
@@ -134,31 +193,78 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
         }
     }
 
-    public void setRspSelecionada(final int _rspSelecionada) {
+    public void sortear_2_erradas()
+    {
+        ArrayList<Integer> ajudasD=new ArrayList<>();
+        Integer rspRem=0, rspTmp;
+        Random randomGenerator=new Random();
 
-        if (_rspSelecionada>-1 && _rspSelecionada<6) {
 
-            switch (_rspSelecionada) {
+        ajudasD.add(0);
+        ajudasD.add(1);
+        ajudasD.add(2);
+        ajudasD.add(3);
+
+        do{
+            rspTmp= randomGenerator.nextInt(ajudasD.size());
+
+            switch (ajudasD.get(rspTmp)) {
                 case 0: //error
-                    btnA.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+                    if(this.btnA.getTag().equals("false")){
+                        this.btnA.setEnabled(false);
+                        rspRem++;
+                    }
                     break;
                 case 1: //error
-                    btnB.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+                    if(this.btnB.getTag().equals("false")){
+                        this.btnB.setEnabled(false);
+                        rspRem++;
+                    }
                     break;
                 case 2: //error
-                    btnC.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+                    if(this.btnC.getTag().equals("false")){
+                        this.btnC.setEnabled(false);
+                        rspRem++;
+                    }
                     break;
                 case 3: //error
-                    btnD.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+                    if(this.btnD.getTag().equals("false")){
+                        this.btnD.setEnabled(false);
+                        rspRem++;
+                    }
                     break;
                 default:
                     break;
             }
+            ajudasD.remove(rspTmp);
 
-            mListenerRsp.onRsp( this.getApresPergunta().getRespostaByIndex(_rspSelecionada).isCorreta());
-        }
-
+        } while (rspRem<2);
     }
+//    public void setRspSelecionada(final int _rspSelecionada) {
+//
+//        if (_rspSelecionada>-1 && _rspSelecionada<6) {
+//
+//            switch (_rspSelecionada) {
+//                case 0: //error
+//                    btnA.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+//                    break;
+//                case 1: //error
+//                    btnB.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+//                    break;
+//                case 2: //error
+//                    btnC.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+//                    break;
+//                case 3: //error
+//                    btnD.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+//                    break;
+//                default:
+//                    break;
+//            }
+//
+//            mListenerRsp.onRsp( this.getApresPergunta().getRespostaByIndex(_rspSelecionada).isCorreta());
+//        }
+//
+//    }
 
     public void setRspSelecionada_frag(final int _rspSelecionada) {
 
@@ -213,30 +319,30 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
             });
 
             builder.setNegativeButton(R.string.rsp_Nao, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-                    btnA.setBackgroundResource(android.R.drawable.btn_default);
-                    btnB.setBackgroundResource(android.R.drawable.btn_default);
-                    btnC.setBackgroundResource(android.R.drawable.btn_default);
-                    btnD.setBackgroundResource(android.R.drawable.btn_default);
-                    //_rspSelecionada = -1;
+                        public void onClick(DialogInterface dialog, int id) {
+                            btnA.setBackgroundResource(android.R.drawable.btn_default);
+                            btnB.setBackgroundResource(android.R.drawable.btn_default);
+                            btnC.setBackgroundResource(android.R.drawable.btn_default);
+                            btnD.setBackgroundResource(android.R.drawable.btn_default);
+                            //_rspSelecionada = -1;
 
 
-                }
-            }
+                        }
+                    }
 
             );
 
             AlertDialog mDialog = builder.create();
             mDialog.show();
 
-       }
+        }
 
 
 
     }
 
     private void pintarCorreta(int _rspDada){
-        myAnim =allAnimStuff(animacaoCorretaTime, true);
+        myAnim =allAnimStuff(getResources().getInteger(R.integer.animacaoCorretaTime), true);
 
         switch (_rspDada) {
             case 0: //error
@@ -261,7 +367,7 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
     }
 
     private void pintarErrada(int _rspDada){
-        myAnim =allAnimStuff(this.animacaoErradaTime, false);
+        myAnim =allAnimStuff(getResources().getInteger(R.integer.animacaoErradaTime), false);
 
         switch (_rspDada) {
             case 0: //error
@@ -364,6 +470,13 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
 
     public void setApresPergunta(Pergunta apresPergunta) {
         this.apresPergunta = apresPergunta;
+    }
+
+    public void setAjudasEstado(boolean _ajuda_50, boolean _ajuda_Tlf, boolean _ajuda_Pub)
+    {
+        this.ajuda_50=_ajuda_50;
+        this.ajuda_Tlf=_ajuda_Tlf;
+        this.ajuda_Pub=_ajuda_Pub;
     }
 }
 
