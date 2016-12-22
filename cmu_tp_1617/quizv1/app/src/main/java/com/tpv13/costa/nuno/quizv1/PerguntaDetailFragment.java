@@ -179,7 +179,11 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
                         mListanerAjudas.onAjuda_Publico(true);
                         this.btn_ajudaPublico.setEnabled(false);
 
-                        ajudaPublico_dial=new AjudaPublico_Dialog(this.getActivity());
+                        ajudaPublico_dial=new AjudaPublico_Dialog(this.getActivity(),
+                                                                    this.btnA.isEnabled(),
+                                                                    this.btnB.isEnabled(),
+                                                                    this.btnC.isEnabled(),
+                                                                    this.btnD.isEnabled());
                         ajudaPublico_dial.show();
 
 //                        Toast.makeText(this.getContext(), "btn_ajudaPublic", Toast.LENGTH_SHORT).show();
@@ -208,7 +212,6 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
         ArrayList<Integer> ajudasD=new ArrayList<>();
         Integer rspRem=0, rspTmp;
         Random randomGenerator=new Random();
-
 
         ajudasD.add(0);
         ajudasD.add(1);

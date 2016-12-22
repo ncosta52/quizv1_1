@@ -24,11 +24,17 @@ public class AjudaPublico_Dialog extends Dialog implements View.OnClickListener 
     private ProgressBar rspA, rspB, rspC, rspD;
     private TextView tv_A, tv_B, tv_C, tv_D;
 
+    private boolean isA_enable, isB_enable, isC_enable, isD_enable;
 
-    public AjudaPublico_Dialog(Activity a) {
+
+    public AjudaPublico_Dialog(Activity a, boolean _isA_enable, boolean _isB_enable, boolean _isC_enable, boolean _isD_enable) {
         super(a);
         // TODO Auto-generated constructor stub
         this.c = a;
+        this.isA_enable=_isA_enable;
+        this.isB_enable = _isB_enable;
+        this.isC_enable=_isC_enable;
+        this.isD_enable=_isD_enable;
     }
 
     @Override
@@ -63,16 +69,28 @@ public class AjudaPublico_Dialog extends Dialog implements View.OnClickListener 
         Integer ajudaDisp=100, ajuA=0, ajuB=0, ajuC=0, ajuD=0;
         Random randomGenerator=new Random();
 
-        ajuA= randomGenerator.nextInt(ajudaDisp);
-        ajudaDisp=ajudaDisp-ajuA;
+        if (isA_enable) {
+            ajuA = randomGenerator.nextInt(ajudaDisp);
+            ajudaDisp = ajudaDisp - ajuA;
+        }
+        else {ajuA=0;}
 
-        ajuB= randomGenerator.nextInt(ajudaDisp);
-        ajudaDisp=ajudaDisp-ajuB;
+        if (isB_enable){
+            ajuB= randomGenerator.nextInt(ajudaDisp);
+            ajudaDisp=ajudaDisp-ajuB;
+        }
+        else {ajuB=0;}
 
-        ajuC= randomGenerator.nextInt(ajudaDisp);
-        ajudaDisp=ajudaDisp-ajuC;
+        if (isC_enable){
+            ajuC= randomGenerator.nextInt(ajudaDisp);
+            ajudaDisp=ajudaDisp-ajuC;
+        }
+        else {ajuC=0;}
 
-        ajuD=ajudaDisp;
+        if (isD_enable){
+            ajuD=ajudaDisp;
+        }
+        else {ajuD=0;}
 
         rspA.setProgress(ajuA);
         tv_A.setText(ajuA + "%");
