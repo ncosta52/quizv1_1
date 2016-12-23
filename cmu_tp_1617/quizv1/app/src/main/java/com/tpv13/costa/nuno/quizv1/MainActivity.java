@@ -53,6 +53,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    public void onPause(){
+        super.onPause();
+
+        if (sound_menu!=null){
+            sound_menu.pause();
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         sound_menu.stop();
         switch (view.getId()) {

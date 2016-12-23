@@ -66,31 +66,67 @@ public class AjudaPublico_Dialog extends Dialog implements View.OnClickListener 
     }
 
     private void  inicializarBarras(){
-        Integer ajudaDisp=100, ajuA=0, ajuB=0, ajuC=0, ajuD=0;
+        Integer ajudaDisp=100, ajuA=0, ajuB=0, ajuC=0, ajuD=0, tmp=0;
+
         Random randomGenerator=new Random();
 
-        if (isA_enable) {
-            ajuA = randomGenerator.nextInt(ajudaDisp);
-            ajudaDisp = ajudaDisp - ajuA;
-        }
-        else {ajuA=0;}
+        do{
+            if (isA_enable) {
 
-        if (isB_enable){
-            ajuB= randomGenerator.nextInt(ajudaDisp);
-            ajudaDisp=ajudaDisp-ajuB;
-        }
-        else {ajuB=0;}
+                tmp=randomGenerator.nextInt(ajudaDisp);
+                ajuA = ajuA + tmp;
+                ajudaDisp = ajudaDisp - tmp;
 
-        if (isC_enable){
-            ajuC= randomGenerator.nextInt(ajudaDisp);
-            ajudaDisp=ajudaDisp-ajuC;
-        }
-        else {ajuC=0;}
+                if (ajudaDisp <5)
+                {
+                    ajuA = ajuA + ajudaDisp;
+                    break;
+                }
+            }
+            else {ajuA=0;}
 
-        if (isD_enable){
-            ajuD=ajudaDisp;
-        }
-        else {ajuD=0;}
+            if (isB_enable){
+                tmp=randomGenerator.nextInt(ajudaDisp);
+                ajuB= ajuB+tmp;
+                ajudaDisp=ajudaDisp-tmp;
+
+                if (ajudaDisp <5)
+                {
+                    ajuB = ajuB + ajudaDisp;
+                    break;
+                }
+            }
+            else {ajuB=0;}
+
+            if (isC_enable){
+                tmp=randomGenerator.nextInt(ajudaDisp);
+                ajuC= ajuC+tmp;
+                ajudaDisp=ajudaDisp-tmp;
+
+                if (ajudaDisp <5)
+                {
+                    ajuC = ajuC + ajudaDisp;
+                    break;
+                }
+            }
+            else {ajuC=0;}
+
+            if (isD_enable){
+                tmp=randomGenerator.nextInt(ajudaDisp);
+                ajuD= ajuD+tmp;
+                ajudaDisp=ajudaDisp-tmp;
+
+                if (ajudaDisp <5)
+                {
+                    ajuD = ajuD + ajudaDisp;
+                    break;
+                }
+            }
+            else {ajuD=0;}
+        }while (ajudaDisp>0);
+
+
+
 
         rspA.setProgress(ajuA);
         tv_A.setText(ajuA + "%");
