@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onResume();
         // put your code here...
         sound_menu= MediaPlayer.create(MainActivity.this, R.raw.sound_menu);
+        sound_menu.setLooping(true);
         sound_menu.start();
     }
 
