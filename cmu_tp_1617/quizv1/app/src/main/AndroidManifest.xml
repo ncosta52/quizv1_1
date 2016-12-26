@@ -41,11 +41,18 @@
             android:value="@integer/google_play_services_version" />
         <!-- <activity android:name=".PerguntaFragment"></activity> -->
 
-        <activity android:name=".QuemQuerSerMilio_Fragment" />
+        <!--<activity android:name=".QuemQuerSerMilio_Fragment" />-->
         <activity android:name=".QQSM_Activity" />
-        <activity android:name=".PerguntaDetailFragment" />
-        <activity android:name=".QQSM_Niveis_Fragment" />
-        <activity android:name=".NiveisFragment"></activity>
+        <!--<activity android:name=".PerguntaDetailFragment" />-->
+        <!--<activity android:name=".QQSM_Niveis_Fragment" />-->
+        <!--<activity android:name=".NiveisFragment"></activity>-->
+        <receiver android:name="MyBroadcastReceiverWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="pt.ipp.estgf.cmu.widgetproject.MESSAGE"></action>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/widget_info"/>
+        </receiver>
     </application>
 
 </manifest>

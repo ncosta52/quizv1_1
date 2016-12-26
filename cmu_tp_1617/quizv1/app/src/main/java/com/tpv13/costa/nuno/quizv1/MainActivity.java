@@ -1,25 +1,37 @@
 package com.tpv13.costa.nuno.quizv1;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button bt_quemQuerSerMilionario, bt_novoJogo, bt_estatisticas;
+    Button bt_quemQuerSerMilionario, bt_novoJogo, bt_estatisticas, bt_testeWidget;
     MediaPlayer sound_menu ;
+    private MyDbHelper_game dbHelper;
 
+    private ArrayList<Pergunta> perguLS=new ArrayList<>();
 
-//    private GoogleApiClient client;
+    public static final String INTENT_MESSAGE = "pt.ipp.estgf.cmu.widgetproject.MESSAGE";
+    public static final String INTENT_MESSAGE_EXTRA = "message_extra";
+
+    private Random randomGenerator=new Random();
 
 
     @Override
@@ -38,9 +50,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt_quemQuerSerMilionario = (Button) findViewById(R.id.bt_quemQuerSerMilionario);
         bt_quemQuerSerMilionario.setOnClickListener(this);
 
+        bt_testeWidget=(Button) findViewById(R.id.bt_testeWidget);
+        bt_testeWidget.setOnClickListener(this);
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         //rrclient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        dbHelper = new MyDbHelper_game(this);
+
+        carregarLstTesteWidget();
+    }
+
+    private void carregarLstTesteWidget(){
+        Pergunta p=null ;
+        ArrayList<Resposta> r=new ArrayList<>();
+
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM Perguntas",null);
+        Cursor d;
+        boolean certa;
+
+        try
+        {
+            if (c.getCount()>0 ) {
+                c.moveToFirst();
+                // Loop through all Results
+                do {
+                    d=db.rawQuery("SELECT * FROM Respostas WHERE Perguntas_Id=" +  c.getInt(0) ,null);
+                    if (d.getCount()>0 ) {
+                        d.moveToFirst();
+
+                        do {
+
+                            if (d.getString(3).equals("S")) {
+                                certa = true;
+                            } else {
+                                certa = false;
+                            }
+
+                            r.add(new Resposta(d.getInt(0), d.getInt(1), d.getString(2), certa));
+                            //int _id, int _perguntaId, String _descricao, boolean _correta
+                        } while (d.moveToNext());
+
+                        p = new Pergunta(c.getInt(0), c.getInt(1),c.getString(3), c.getInt(4), c.getInt(2),r );
+    //                    int _id, int _nivelID, String _pergunta, int _pontucao,int _categoria, ArrayList<Resposta> _resposta
+
+                        perguLS.add(p);
+                    }
+                    d.close();
+                }while(c.moveToNext());
+
+            }
+
+            c.close();
+            db.close();
+
+        }
+        catch(Exception e) {
+            Log.e("Error", "Error", e);
+            throw e;
+        }
+
     }
 
     //http://stackoverflow.com/questions/15658687/how-to-use-onresume
@@ -74,6 +146,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.bt_estatisticas: //error
                 //launch activity
+                break;
+            case R.id.bt_testeWidget:
+                testeWidget();
                 break;
             default:
                 break;
@@ -114,5 +189,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         //AppIndex.AppIndexApi.end(client, getIndexApiAction());
         //client.disconnect();
+    }
+
+    private void testeWidget(){
+        int index=0;
+
+        if (perguLS.size()>0) {
+
+
+            index = randomGenerator.nextInt(perguLS.size());
+
+//        if (v.getId() == R.id.btnAction) {
+            String msg = perguLS.get(index).getPergunta();
+            perguLS.remove(index);
+
+            // intent que indica a ac��o a executar e cont�m os dados a enviar
+            // o identificador da ac��o est� registado no intent-filter do broadcast receiver no manifest
+            Intent intent = new Intent(INTENT_MESSAGE);
+            intent.putExtra(INTENT_MESSAGE_EXTRA, msg);
+            sendBroadcast(intent);
+        }
+//            Toast.makeText(this, getString(R.string.messageSent), Toast.LENGTH_LONG).show();
+//        }
     }
 }

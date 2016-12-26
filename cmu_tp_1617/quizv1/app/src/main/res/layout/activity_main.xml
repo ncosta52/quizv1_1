@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/activity_main"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -7,25 +7,35 @@
     android:orientation="vertical"
     >
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.55">
+    </LinearLayout>
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bt_novoJogo"
         android:text="@string/newGame"
-        android:layout_weight="0.35"
+        android:layout_weight="0.25"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:background="@android:color/transparent"
         android:textSize="25dp"/>
-
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/bt_quemQuerSerMilionario"
         android:text="@string/quemQuerSerMilionario"
-        android:layout_weight="0.3"
-        android:layout_marginTop="50dp"
+        android:layout_weight="0.25"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:textSize="20dp"/>
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_testeWidget"
+        android:text="Teste Widget"
+        android:layout_weight="0.25"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:textSize="20dp"/>
@@ -35,14 +45,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/bt_estatisticas"
         android:text="@string/estatisticas"
-        android:layout_marginTop="120dp"
-        android:layout_weight="0.35"
+        android:layout_marginTop="50dp"
+        android:layout_weight="0.25"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:textSize="25dp"/>
-
-
-
-
-
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.55">
+    </LinearLayout>
+</LinearLayout>
