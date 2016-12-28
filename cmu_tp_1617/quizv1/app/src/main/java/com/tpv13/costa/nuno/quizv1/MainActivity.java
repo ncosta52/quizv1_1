@@ -1,8 +1,11 @@
 package com.tpv13.costa.nuno.quizv1;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +13,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
@@ -20,10 +26,11 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener,CompoundButton.OnCheckedChangeListener  {
 
-    Button bt_quemQuerSerMilionario, bt_novoJogo, bt_estatisticas, bt_testeWidget;
-    MediaPlayer sound_menu ;
+    private Button bt_quemQuerSerMilionario, bt_novoJogo, bt_estatisticas, bt_testeWidget;
+    private Switch mySwitch;
+    private MediaPlayer sound_menu ;
     private MyDbHelper_game dbHelper;
 
     private ArrayList<Pergunta> perguLS=new ArrayList<>();
@@ -33,13 +40,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Random randomGenerator=new Random();
 
+    AudioManager a;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        a=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
 
         bt_novoJogo = (Button) findViewById(R.id.bt_novoJogo);
         bt_novoJogo.setOnClickListener(this);
@@ -58,6 +67,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //rrclient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         dbHelper = new MyDbHelper_game(this);
+
+        mySwitch = (Switch) findViewById(R.id.sw);
+        //set the switch to ON
+        mySwitch.setChecked(false);
+        //attach a listener to check for changes in state
+        mySwitch.setOnCheckedChangeListener(this);
+
+
+//        //check the current state before we display the screen
+        if(mySwitch.isChecked()){
+            a.setMode(AudioManager.MODE_NORMAL);
+            a.setStreamSolo(AudioManager.STREAM_VOICE_CALL, false);
+//            Toast.makeText(this, "Switch is currently ON", Toast.LENGTH_SHORT).show();
+
+        }else{
+            a.setMode(AudioManager.MODE_IN_CALL);
+            a.setStreamSolo(AudioManager.STREAM_VOICE_CALL, true);
+//            Toast.makeText(this, "Switch is currently OFF", Toast.LENGTH_SHORT).show();
+        }
 
         carregarLstTesteWidget();
     }
@@ -133,6 +161,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             sound_menu.pause();
         }
     }
+
+
 
     @Override
     public void onClick(View view) {
@@ -211,5 +241,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 //            Toast.makeText(this, getString(R.string.messageSent), Toast.LENGTH_LONG).show();
 //        }
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        boolean isChecked=b;
+            if(isChecked){
+                a.setMode(AudioManager.MODE_NORMAL);
+                a.setStreamSolo(AudioManager.STREAM_VOICE_CALL, false);
+//                Toast.makeText(this, "Switch is currently ON", Toast.LENGTH_SHORT).show();
+
+            }else{
+                a.setMode(AudioManager.MODE_IN_CALL);
+                a.setStreamSolo(AudioManager.STREAM_VOICE_CALL, true);
+//                Toast.makeText(this, "Switch is currently OFF", Toast.LENGTH_SHORT).show();
+            }
     }
 }
