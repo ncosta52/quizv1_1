@@ -1,5 +1,8 @@
 package com.tpv13.costa.nuno.quizv1;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -23,6 +26,8 @@ public class Pergunta implements Serializable {
         this.setPontuacao(_pontucao);
         this.respostas=_respostas;
     }
+
+
 
 
     public int getId() {
@@ -68,4 +73,7 @@ public class Pergunta implements Serializable {
     public Resposta getRespostaByIndex(int index){
         return this.respostas.get(index);
     }
+
+
+
 }

@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.VolumeProvider;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class MainActivity extends Activity implements View.OnClickListener,Compo
     public static final String INTENT_MESSAGE = "pt.ipp.estgf.cmu.widgetproject.MESSAGE";
     public static final String INTENT_MESSAGE_EXTRA = "message_extra";
 
-    private Random randomGenerator=new Random();
+//    private Random randomGenerator=new Random();
 
     AudioManager a;
 
@@ -71,6 +72,7 @@ public class MainActivity extends Activity implements View.OnClickListener,Compo
         mySwitch = (Switch) findViewById(R.id.sw);
         //set the switch to ON
         mySwitch.setChecked(false);
+
         //attach a listener to check for changes in state
         mySwitch.setOnCheckedChangeListener(this);
 
@@ -227,16 +229,17 @@ public class MainActivity extends Activity implements View.OnClickListener,Compo
         if (perguLS.size()>0) {
 
 
-            index = randomGenerator.nextInt(perguLS.size());
-
-//        if (v.getId() == R.id.btnAction) {
-            String msg = perguLS.get(index).getPergunta();
-            perguLS.remove(index);
+//            index = randomGenerator.nextInt(perguLS.size());
+//
+////        if (v.getId() == R.id.btnAction) {
+//            String msg = perguLS.get(index).getPergunta();
+//            perguLS.remove(index);
 
             // intent que indica a ac��o a executar e cont�m os dados a enviar
             // o identificador da ac��o est� registado no intent-filter do broadcast receiver no manifest
             Intent intent = new Intent(INTENT_MESSAGE);
-            intent.putExtra(INTENT_MESSAGE_EXTRA, msg);
+            intent.putExtra("Pergunta",perguLS);
+            intent.putExtra(INTENT_MESSAGE_EXTRA, "msg");
             sendBroadcast(intent);
         }
 //            Toast.makeText(this, getString(R.string.messageSent), Toast.LENGTH_LONG).show();

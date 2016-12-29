@@ -2,7 +2,9 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
     android:minWidth="250dp"
     android:minHeight="110dp"
-    android:updatePeriodMillis="14400000"
+    android:updatePeriodMillis="20000"
     android:initialLayout="@layout/widget_layout">
     <!-- (4h) Note: Updates requested with updatePeriodMillis will not be delivered more than once every 30 minutes. -->
 </appwidget-provider>
+
+    <!--android:updatePeriodMillis="14400000"-->

@@ -1,10 +1,12 @@
 package com.tpv13.costa.nuno.quizv1;
 
+import java.io.Serializable;
+
 /**
  * Created by Nuno on 02-12-2016.
  */
 
-public class Resposta {
+public class Resposta implements Serializable {
 
     private int id;
     private int perguntaID;
