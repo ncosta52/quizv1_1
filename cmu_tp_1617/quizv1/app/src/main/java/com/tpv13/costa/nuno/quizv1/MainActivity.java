@@ -40,7 +40,7 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
     public static final boolean SOM_PREFERENCE_DEFAULT = false;
     public static final String CurrentUSer_Preference="pref_currentUser";
 
-    private Button bt_quemQuerSerMilionario, bt_novoJogo, bt_estatisticas, bt_testeWidget, bt_preferencias;
+    private Button bt_quemQuerSerMilionario, bt_novoJogo, bt_estatisticas, bt_testeWidget, bt_preferencias, bt_addcategoria, bt_addPergunta;
     private TextView tv_currentUser;
 //    private Switch mySwitch;
     private MediaPlayer sound_menu ;
@@ -87,6 +87,11 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
 
         bt_preferencias=(Button) findViewById(R.id.bt_preferencias);
         bt_preferencias.setOnClickListener(this);
+
+        bt_addcategoria = (Button) findViewById(R.id.bt_addCategarias );
+        bt_addPergunta=(Button) findViewById(R.id.bt_addPergunta );
+
+
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -167,6 +172,12 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
             a.setStreamSolo(AudioManager.STREAM_VOICE_CALL, true);
 //            Toast.makeText(this, "Switch is currently OFF", Toast.LENGTH_SHORT).show();
         }
+
+        if (nivelUser(mSettings.getString(CurrentUSer_Preference, ""))<3){
+            bt_addcategoria.setVisibility(View.INVISIBLE);
+            bt_addPergunta.setVisibility(View.INVISIBLE);
+        }
+
 
         // put your code here...
         sound_menu= MediaPlayer.create(MainActivity.this, R.raw.sound_menu);
@@ -288,6 +299,28 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
         }
 //            Toast.makeText(this, getString(R.string.messageSent), Toast.LENGTH_LONG).show();
 //        }
+    }
+
+    private int nivelUser(String user)
+    {
+        Cursor d;
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        String query;
+        int nivel=1;
+
+        query="SELECT * FROM Utilizadores WHERE Username='" + user + "'";
+
+        d=db.rawQuery(query ,null);
+        if (d.getCount()>0 ) {
+            d.moveToFirst();
+
+            nivel=d.getInt(3);
+
+        }
+
+        d.close();
+
+        return nivel;
     }
 
 //    @Override

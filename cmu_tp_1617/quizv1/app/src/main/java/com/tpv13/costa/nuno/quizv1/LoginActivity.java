@@ -101,7 +101,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (d.getCount()>0 ) {
             d.moveToFirst();
 
-                if (d.getString(1).equals(this.editT_pass.getText().toString())) {
+                if (d.getString(2).equals(this.editT_pass.getText().toString())) {
                     valido = true;
                 }
                 else{

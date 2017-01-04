@@ -16,6 +16,8 @@
     <string name="newGame">Novo Jogo</string>
     <string name="estatisticas">Estatísticas</string>
     <string name="preferencias">Preferências</string>
+    <string name="addCategoria">Adicionar Categoria</string>
+    <string name="addPergunta">Adicionar Petgunta</string>
     <string name="jogar">Jogar!</string>
     <string name="vencedor_Str">----  É UM VENCEDOR!!!  ----</string>
     <string name="responder_Str">Responder</string>

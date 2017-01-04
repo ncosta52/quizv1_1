@@ -43,6 +43,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/prompt_user"
                     android:inputType="textPersonName"
+                    android:text="admin"
                     android:maxLines="1"
                     android:singleLine="true" />
 
@@ -62,6 +63,7 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
+                    android:text="admin"
                     android:singleLine="true" />
 
             </android.support.design.widget.TextInputLayout>
