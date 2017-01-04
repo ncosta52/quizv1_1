@@ -2,9 +2,9 @@
     <string name="app_name">Quiz v1</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="prompt_user">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Log in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -15,6 +15,7 @@
 
     <string name="newGame">Novo Jogo</string>
     <string name="estatisticas">Estatísticas</string>
+    <string name="preferencias">Preferências</string>
     <string name="jogar">Jogar!</string>
     <string name="vencedor_Str">----  É UM VENCEDOR!!!  ----</string>
     <string name="responder_Str">Responder</string>
@@ -27,24 +28,42 @@
     <string name="quemQuerSerMilionario">Quem Quer Ser Milionário</string>
     <string name="lista_vazia">Lista vazia!</string>
 
+    <string name="somOnOff">Ligar/Desligar os sons da aplicação</string>
+    <string name="currentUser">Utilizador Actual</string>
+
         
          
-    <string-array name="niveis_array">                
-        <item>€1MILHÃO</item>                
-        <item>€500.000</item>                
-        <item>€250.000</item>                
-        <item>€125.000</item>                
-        <item>€64.000</item>                
-        <item>€32.000</item>                
-        <item>€16.000</item>                
-        <item>€8.000</item>                
-        <item>€4.000</item>                
-        <item>€2.000</item>                
-        <item>€1.000</item>                
-        <item>€500</item>                
-        <item>€300</item>                
-        <item>€200</item>                
-        <item>€100</item>            
+    <string-array name="niveis_array">        
+        <item>€1MILHÃO</item>
+                
+        <item>€500.000</item>
+                
+        <item>€250.000</item>
+                
+        <item>€125.000</item>
+                
+        <item>€64.000</item>
+                
+        <item>€32.000</item>
+                
+        <item>€16.000</item>
+                
+        <item>€8.000</item>
+                
+        <item>€4.000</item>
+                
+        <item>€2.000</item>
+                
+        <item>€1.000</item>
+                
+        <item>€500</item>
+                
+        <item>€300</item>
+                
+        <item>€200</item>
+                
+        <item>€100</item>
+            
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

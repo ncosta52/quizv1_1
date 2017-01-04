@@ -5,6 +5,9 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import java.util.ArrayList;
@@ -19,6 +22,8 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
     private ArrayList<Pergunta> perguLS;//=new ArrayList<>();
     private Random randomGenerator=new Random();
     private int index;
+    private MyDbHelper_game dbHelper;
+
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -26,10 +31,17 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
 
         ComponentName thisWidget = new ComponentName(context, MyBroadcastReceiverWidget.class);
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+
+        dbHelper = new MyDbHelper_game(context);
+
         perguLS=new ArrayList<Pergunta>();
+
+        carregarLstTesteWidget();
+
         if(intent.hasExtra(MainActivity.INTENT_MESSAGE_EXTRA))
-            tmp = intent.getStringExtra(MainActivity.INTENT_MESSAGE_EXTRA);
-            perguLS= (ArrayList<Pergunta>) intent.getSerializableExtra("Pergunta");
+            //perguLS=new ArrayList<Pergunta>();
+//            tmp = intent.getStringExtra(MainActivity.INTENT_MESSAGE_EXTRA);
+//            perguLS= (ArrayList<Pergunta>) intent.getSerializableExtra("Pergunta");
 
 
         lastAction = intent.getAction();
@@ -89,6 +101,60 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
         views.setTextViewText(R.id.respC,perguLS.get(index).getRespostaByIndex(2).getDescricao());
         views.setTextViewText(R.id.respD,perguLS.get(index).getRespostaByIndex(3).getDescricao());
         appWidgetManager.updateAppWidget(appWidgetId, views);
+    }
+
+
+    private void carregarLstTesteWidget(){
+        Pergunta p=null ;
+        ArrayList<Resposta> r=new ArrayList<>();
+
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor c= db.rawQuery("SELECT * FROM Perguntas",null);
+        Cursor d;
+        boolean certa;
+
+        try
+        {
+            if (c.getCount()>0 ) {
+                c.moveToFirst();
+                // Loop through all Results
+                do {
+                    d=db.rawQuery("SELECT * FROM Respostas WHERE Perguntas_Id=" +  c.getInt(0) ,null);
+                    if (d.getCount()>0 ) {
+                        d.moveToFirst();
+
+                        do {
+
+                            if (d.getString(3).equals("S")) {
+                                certa = true;
+                            } else {
+                                certa = false;
+                            }
+
+                            r.add(new Resposta(d.getInt(0), d.getInt(1), d.getString(2), certa));
+                            //int _id, int _perguntaId, String _descricao, boolean _correta
+                        } while (d.moveToNext());
+
+                        p = new Pergunta(c.getInt(0), c.getInt(1),c.getString(3), c.getInt(4), c.getInt(2),r );
+                        //                    int _id, int _nivelID, String _pergunta, int _pontucao,int _categoria, ArrayList<Resposta> _resposta
+
+                        perguLS.add(p);
+                    }
+                    d.close();
+                }while(c.moveToNext());
+
+            }
+
+            c.close();
+            db.close();
+
+        }
+        catch(Exception e) {
+            Log.e("Error", "Error", e);
+            throw e;
+        }
+
     }
 
 }

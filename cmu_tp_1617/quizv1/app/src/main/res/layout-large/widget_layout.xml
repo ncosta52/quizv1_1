@@ -2,9 +2,9 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="180dp"
-    android:background="@drawable/widget_frame_4x2"
+    android:layout_width="530dp"
+    android:layout_height="250dp"
+    android:background="@drawable/widget_frame_6x3"
     android:padding="35dp">
 
     <LinearLayout

@@ -3,20 +3,27 @@ package com.tpv13.costa.nuno.quizv1;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.VolumeProvider;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
@@ -27,21 +34,28 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class MainActivity extends Activity implements View.OnClickListener,CompoundButton.OnCheckedChangeListener  {
+public class MainActivity extends Activity implements View.OnClickListener{//},CompoundButton.OnCheckedChangeListener  {
 
-    private Button bt_quemQuerSerMilionario, bt_novoJogo, bt_estatisticas, bt_testeWidget;
-    private Switch mySwitch;
+    public static final String SOM_PREFERENCE_State = "pref_somOnOff";
+    public static final boolean SOM_PREFERENCE_DEFAULT = false;
+    public static final String CurrentUSer_Preference="pref_currentUser";
+
+    private Button bt_quemQuerSerMilionario, bt_novoJogo, bt_estatisticas, bt_testeWidget, bt_preferencias;
+    private TextView tv_currentUser;
+//    private Switch mySwitch;
     private MediaPlayer sound_menu ;
     private MyDbHelper_game dbHelper;
 
     private ArrayList<Pergunta> perguLS=new ArrayList<>();
+
+    private SharedPreferences mSettings;
 
     public static final String INTENT_MESSAGE = "pt.ipp.estgf.cmu.widgetproject.MESSAGE";
     public static final String INTENT_MESSAGE_EXTRA = "message_extra";
 
 //    private Random randomGenerator=new Random();
 
-    AudioManager a;
+   private AudioManager a;
 
 
     @Override
@@ -49,7 +63,15 @@ public class MainActivity extends Activity implements View.OnClickListener,Compo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mSettings = PreferenceManager.getDefaultSharedPreferences(this);
+
         a=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
+
+        tv_currentUser=(TextView) findViewById(R.id.tv_currentUser);
+        SpannableString content = new SpannableString(mSettings.getString(CurrentUSer_Preference, ""));
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        tv_currentUser.setText(content);
+        tv_currentUser.setOnClickListener(this);
 
         bt_novoJogo = (Button) findViewById(R.id.bt_novoJogo);
         bt_novoJogo.setOnClickListener(this);
@@ -63,31 +85,15 @@ public class MainActivity extends Activity implements View.OnClickListener,Compo
         bt_testeWidget=(Button) findViewById(R.id.bt_testeWidget);
         bt_testeWidget.setOnClickListener(this);
 
+        bt_preferencias=(Button) findViewById(R.id.bt_preferencias);
+        bt_preferencias.setOnClickListener(this);
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         //rrclient = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         dbHelper = new MyDbHelper_game(this);
 
-        mySwitch = (Switch) findViewById(R.id.sw);
-        //set the switch to ON
-        mySwitch.setChecked(false);
-
-        //attach a listener to check for changes in state
-        mySwitch.setOnCheckedChangeListener(this);
-
-
-//        //check the current state before we display the screen
-        if(mySwitch.isChecked()){
-            a.setMode(AudioManager.MODE_NORMAL);
-            a.setStreamSolo(AudioManager.STREAM_VOICE_CALL, false);
-//            Toast.makeText(this, "Switch is currently ON", Toast.LENGTH_SHORT).show();
-
-        }else{
-            a.setMode(AudioManager.MODE_IN_CALL);
-            a.setStreamSolo(AudioManager.STREAM_VOICE_CALL, true);
-//            Toast.makeText(this, "Switch is currently OFF", Toast.LENGTH_SHORT).show();
-        }
 
         carregarLstTesteWidget();
     }
@@ -149,6 +155,19 @@ public class MainActivity extends Activity implements View.OnClickListener,Compo
     @Override
     public void onResume(){
         super.onResume();
+
+
+        if(mSettings.getBoolean(SOM_PREFERENCE_State, SOM_PREFERENCE_DEFAULT)){
+            a.setMode(AudioManager.MODE_NORMAL);
+            a.setStreamSolo(AudioManager.STREAM_VOICE_CALL, false);
+//            Toast.makeText(this, "Switch is currently ON", Toast.LENGTH_SHORT).show();
+
+        }else{
+            a.setMode(AudioManager.MODE_IN_CALL);
+            a.setStreamSolo(AudioManager.STREAM_VOICE_CALL, true);
+//            Toast.makeText(this, "Switch is currently OFF", Toast.LENGTH_SHORT).show();
+        }
+
         // put your code here...
         sound_menu= MediaPlayer.create(MainActivity.this, R.raw.sound_menu);
         sound_menu.setLooping(true);
@@ -182,9 +201,34 @@ public class MainActivity extends Activity implements View.OnClickListener,Compo
             case R.id.bt_testeWidget:
                 testeWidget();
                 break;
+            case R.id.bt_preferencias:
+                startActivity(new Intent(this, PreferencesActivity.class));
+                break;
+            case R.id.tv_currentUser:
+                Toast.makeText(this, "SAIR LOG OUT", Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor mEditor = mSettings.edit();
+                mEditor.putString(CurrentUSer_Preference, "");
+                mEditor.apply();
+                finish();
+                break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, 0, 0, R.string.preferencias);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        if(item.getItemId() == 0)
+            startActivity(new Intent(this, PreferencesActivity.class));
+
+        return true;
     }
 
     /**
@@ -246,18 +290,18 @@ public class MainActivity extends Activity implements View.OnClickListener,Compo
 //        }
     }
 
-    @Override
-    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-        boolean isChecked=b;
-            if(isChecked){
-                a.setMode(AudioManager.MODE_NORMAL);
-                a.setStreamSolo(AudioManager.STREAM_VOICE_CALL, false);
-//                Toast.makeText(this, "Switch is currently ON", Toast.LENGTH_SHORT).show();
-
-            }else{
-                a.setMode(AudioManager.MODE_IN_CALL);
-                a.setStreamSolo(AudioManager.STREAM_VOICE_CALL, true);
-//                Toast.makeText(this, "Switch is currently OFF", Toast.LENGTH_SHORT).show();
-            }
-    }
+//    @Override
+//    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+//        boolean isChecked=b;
+//            if(isChecked){
+//                a.setMode(AudioManager.MODE_NORMAL);
+//                a.setStreamSolo(AudioManager.STREAM_VOICE_CALL, false);
+////                Toast.makeText(this, "Switch is currently ON", Toast.LENGTH_SHORT).show();
+//
+//            }else{
+//                a.setMode(AudioManager.MODE_IN_CALL);
+//                a.setStreamSolo(AudioManager.STREAM_VOICE_CALL, true);
+////                Toast.makeText(this, "Switch is currently OFF", Toast.LENGTH_SHORT).show();
+//            }
+//    }
 }

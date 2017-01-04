@@ -5,29 +5,32 @@
     android:layout_height="fill_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
+    android:background="@drawable/fundo1"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="right"
         android:layout_weight="0.55">
         <TextView
+            android:id="@+id/tv_currentUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SOM"
             android:textSize="25dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="30dp"/>
-        <Switch
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:id="@+id/sw"
-            android:layout_marginLeft="5dp"
-            android:layout_gravity="center_vertical"
-            />
+            android:layout_gravity="right"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"/>
+        <!--<Switch-->
+            <!--android:layout_width="200dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:id="@+id/sw"-->
+            <!--android:layout_marginLeft="5dp"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--/>-->
     </LinearLayout>
+
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -56,6 +59,7 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:textSize="20dp"/>
 
+
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -66,9 +70,19 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:textSize="25dp"/>
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bt_preferencias"
+        android:text="@string/preferencias"
+        android:layout_weight="0.25"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:textSize="25dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.55">
+
     </LinearLayout>
 </LinearLayout>
