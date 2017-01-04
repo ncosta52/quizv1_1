@@ -21,6 +21,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public static final String CurrentUSer_Preference="pref_currentUser";
     public static final boolean SOM_PREFERENCE_DEFAULT = false;
 
+    public static final boolean DEBUG=true;
+
     private EditText editT_user, editT_pass;
     private Button bt_submit;
 
@@ -41,6 +43,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         editT_user = (EditText) findViewById(R.id.et_user);
         editT_pass =(EditText) findViewById(R.id.et_password);
+
+
 
         bt_submit=(Button) findViewById(R.id.sign_in_button);
         bt_submit.setOnClickListener(this);
@@ -67,6 +71,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         sound_menu.start();
 
         editT_user.requestFocus();
+
     }
 
     @Override
