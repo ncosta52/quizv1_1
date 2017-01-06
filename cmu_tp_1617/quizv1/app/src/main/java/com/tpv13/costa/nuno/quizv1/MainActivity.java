@@ -89,7 +89,10 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
         bt_preferencias.setOnClickListener(this);
 
         bt_addcategoria = (Button) findViewById(R.id.bt_addCategarias );
+        bt_addcategoria.setOnClickListener(this);
+
         bt_addPergunta=(Button) findViewById(R.id.bt_addPergunta );
+        bt_addPergunta.setOnClickListener(this);
 
 
 
@@ -221,6 +224,12 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
                 mEditor.putString(CurrentUSer_Preference, "");
                 mEditor.apply();
                 finish();
+                break;
+            case R.id.bt_addCategarias:
+                startActivity(new Intent(this, AddCategorias.class));
+                break;
+            case R.id.bt_addPergunta:
+                startActivity(new Intent(this, AddPerguntas.class));
                 break;
             default:
                 break;

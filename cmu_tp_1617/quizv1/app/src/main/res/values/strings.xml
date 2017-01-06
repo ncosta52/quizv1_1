@@ -17,7 +17,11 @@
     <string name="estatisticas">Estatísticas</string>
     <string name="preferencias">Preferências</string>
     <string name="addCategoria">Adicionar Categoria</string>
-    <string name="addPergunta">Adicionar Petgunta</string>
+    <string name="addPergunta">Adicionar Pergunta</string>
+    <string name="categoria">Nova categoria</string>
+    <string name="txtview_categorias">Escolha uma categorias</string>
+    <string name="spin_categorias">Escolha uma categoria</string>
+    <string name="pergunta">Nova Pergunta</string>
     <string name="jogar">Jogar!</string>
     <string name="vencedor_Str">----  É UM VENCEDOR!!!  ----</string>
     <string name="responder_Str">Responder</string>
