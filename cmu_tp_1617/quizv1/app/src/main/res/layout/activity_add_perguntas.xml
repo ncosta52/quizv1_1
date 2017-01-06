@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:background="@drawable/fundo1"
-    >
+    android:background="@drawable/fundo1">
 
     <TextView
         android:layout_width="match_parent"
@@ -17,63 +15,128 @@
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:id="@+id/spinner_categorias"/>
-    <!--<Spinner-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/spinner_niveis">-->
-    <!--</Spinner>-->
 
-    <!--<TextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
-        <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
-        <!--android:layout_marginTop="50dp"-->
-        <!--android:text="@string/pergunta"/>-->
-    <!--<EditText-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
-        <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
-        <!--android:id="@+id/new_pergunta"/> &lt;!&ndash;id&ndash;&gt;-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/spin_niveis"/>
 
-    <!--<TableLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="50dp"
-        android:stretchColumns="1">-->
-        <!--<TableRow>-->
-            <!--<TextView android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_column="1"-->
-                <!--android:layout_weight="0.8"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:text="Pergunta"/>-->
-            <!--<TextView android:layout_width="15dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="0.2"-->
-                <!--android:layout_gravity="right"-->
-                <!--android:text="correto"/>-->
-        <!--</TableRow>-->
-        <!--<TableRow>-->
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/spinner_niveis"/>
 
-            <!--<TextView android:layout_width="match_parent"-->
-                <!--android:layout_column="1"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="0.8"-->
-                <!--android:layout_gravity="center_horizontal"/>-->
-            <!--&lt;!&ndash;edittext&ndash;&gt;-->
-            <!--<TextView android:layout_width="15dp"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:layout_weight="0.2"-->
-                <!--android:layout_gravity="right"/>-->
-            <!--&lt;!&ndash;radio&ndash;&gt;-->
-        <!--</TableRow>-->
 
-    <!--</TableLayout>-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="20dp"
+        android:text="@string/pede_nova_pergunta"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:id="@+id/new_pergunta"/>
+
+    <TableLayout
+        android:id="@+id/tabelaRespostas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TableRow
+            android:id="@+id/linha1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_tbl_respostas"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:text="Respostas"
+                android:layout_weight="0.7"/>
+
+            <TextView
+                android:id="@+id/tv_tbl_corretas"
+                android:layout_gravity="center_horizontal"
+                android:text="Corretas"/>
+        </TableRow>
+
+        <TableRow
+        android:id="@+id/linha2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/resposta_1"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.7"/>
+
+        <RadioButton
+            android:id="@+id/rd_bt_resposta1"
+            android:layout_gravity="center_horizontal"/>
+    </TableRow>
+
+        <TableRow
+            android:id="@+id/linha3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/resposta_2"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.7"/>
+
+            <RadioButton
+                android:id="@+id/rd_bt_resposta2"
+                android:layout_gravity="center_horizontal"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/linha4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/resposta_3"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.7"/>
+
+            <RadioButton
+                android:id="@+id/rd_bt_resposta3"
+                android:layout_gravity="center_horizontal"/>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/linha5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/resposta_4"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.7"/>
+
+            <RadioButton
+                android:id="@+id/rd_bt_resposta4"
+                android:layout_gravity="center_horizontal"/>
+
+        </TableRow>
+
+    </TableLayout>
 
     <!--<LinearLayout-->
     <!--android:layout_width="fill_parent"-->
@@ -166,7 +229,7 @@
         android:text="@string/addPergunta"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:textSize="20dp"/>
 
 </LinearLayout>

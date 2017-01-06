@@ -21,7 +21,9 @@
     <string name="categoria">Nova categoria</string>
     <string name="txtview_categorias">Escolha uma categorias</string>
     <string name="spin_categorias">Escolha uma categoria</string>
+    <string name="spin_niveis">Escolha um nivel</string>
     <string name="pergunta">Nova Pergunta</string>
+    <string name="pede_nova_pergunta">Insira uma pergunta nova</string>
     <string name="jogar">Jogar!</string>
     <string name="vencedor_Str">----  É UM VENCEDOR!!!  ----</string>
     <string name="responder_Str">Responder</string>

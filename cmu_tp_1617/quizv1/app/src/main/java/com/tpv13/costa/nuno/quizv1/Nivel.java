@@ -17,6 +17,12 @@ public class Nivel {
         this.setDescricao(_descricao);
     }
 
+    public Nivel(int _id, String _nome)
+    {
+        this.setId(_id);
+        this.setNome(_nome);
+    }
+
 
     public int getId() {
         return id;
