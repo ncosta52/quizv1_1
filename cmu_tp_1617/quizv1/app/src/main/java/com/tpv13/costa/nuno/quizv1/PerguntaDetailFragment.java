@@ -8,6 +8,7 @@ import android.media.SoundPool;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class PerguntaDetailFragment extends Fragment implements View.OnClickListener  {
@@ -36,6 +38,8 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
     private ImageButton btn_ajuda_50, btn_ajudaTlf, btn_ajudaPublico;
 
     private AjudaPublico_Dialog ajudaPublico_dial;
+    private AjudaTelefone_Dialog ajudaTelefone_dial;
+
 
     private Animation myAnim;
 
@@ -103,19 +107,24 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
     }
 
     public void updatePergunta() {
+        String tmp;
 
         if (getApresPergunta() != null && tvPergunta!= null && btnA != null && btnB != null && btnC != null && btnD != null) {
             tvPergunta.setText(getApresPergunta().getPergunta());
-            btnA.setText(getApresPergunta().getRespostaByIndex(0).getDescricao());
+            tmp="<b>A. </b> " + getApresPergunta().getRespostaByIndex(0).getDescricao();
+            btnA.setText(Html.fromHtml(tmp));
             btnA.setTag("" + getApresPergunta().getRespostaByIndex(0).isCorreta());
 
-            btnB.setText(getApresPergunta().getRespostaByIndex(1).getDescricao());
+            tmp="<b>B. </b> " + getApresPergunta().getRespostaByIndex(1).getDescricao();
+            btnB.setText(Html.fromHtml(tmp));
             btnB.setTag("" + getApresPergunta().getRespostaByIndex(1).isCorreta());
 
-            btnC.setText(getApresPergunta().getRespostaByIndex(2).getDescricao());
+            tmp="<b>C. </b> " + getApresPergunta().getRespostaByIndex(2).getDescricao();
+            btnC.setText(Html.fromHtml(tmp));
             btnC.setTag("" + getApresPergunta().getRespostaByIndex(2).isCorreta());
 
-            btnD.setText(getApresPergunta().getRespostaByIndex(3).getDescricao());
+            tmp="<b>D. </b> " + getApresPergunta().getRespostaByIndex(3).getDescricao();
+            btnD.setText(Html.fromHtml(tmp));
             btnD.setTag("" + getApresPergunta().getRespostaByIndex(3).isCorreta());
 
 
@@ -191,7 +200,26 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
                     case R.id.btn_ajudaTlf: //error
                         mListanerAjudas.onAjuda_Tlf(true);
                         this.btn_ajudaTlf.setEnabled(false);
-                        Toast.makeText(this.getContext(), "btn_ajudaTlf", Toast.LENGTH_SHORT).show();
+                        List<String> rspDisp=new ArrayList<String>();
+
+                        if (this.btnA.isEnabled()){
+                            rspDisp.add(btnA.getText().toString());
+                        }
+
+                        if (this.btnB.isEnabled()){
+                            rspDisp.add(btnB.getText().toString());
+                        }
+
+                        if (this.btnC.isEnabled()){
+                            rspDisp.add(btnC.getText().toString());
+                        }
+
+                        if (this.btnD.isEnabled()){
+                            rspDisp.add(btnD.getText().toString());
+                        }
+
+                        ajudaTelefone_dial= new AjudaTelefone_Dialog(this.getActivity(),getApresPergunta(),rspDisp);
+                        ajudaTelefone_dial.show();
                         break;
                     default:
                         break;

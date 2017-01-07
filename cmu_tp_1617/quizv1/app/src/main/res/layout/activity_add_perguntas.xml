@@ -25,7 +25,6 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_gravity="center_horizontal"
         android:text="@string/spin_niveis"/>
-
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,7 +67,6 @@
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:text="Respostas"
                 android:layout_weight="0.7"/>
-
             <TextView
                 android:id="@+id/tv_tbl_corretas"
                 android:layout_gravity="center_horizontal"
@@ -81,7 +79,7 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:id="@+id/resposta_1"
+            android:id="@+id/new_resposta_1"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.7"/>
 
@@ -96,7 +94,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/resposta_2"
+                android:id="@+id/new_resposta_2"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="0.7"/>
 
@@ -111,7 +109,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/resposta_3"
+                android:id="@+id/new_resposta_3"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="0.7"/>
 
@@ -126,7 +124,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/resposta_4"
+                android:id="@+id/new_resposta_4"
                 android:layout_gravity="center_horizontal"
                 android:layout_weight="0.7"/>
 

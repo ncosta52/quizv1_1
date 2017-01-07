@@ -39,6 +39,10 @@
     <string name="somOnOff">Ligar/Desligar os sons da aplicação</string>
     <string name="currentUser">Utilizador Actual</string>
 
+    <string name="achoQue">Penso que a resposta certa é a </string>
+    <string name="rspCerta_e">A resposta certa é a </string>
+    <string name="naoSeiRsp">Desculpa. Não faço ideia qual a resposta certa</string>
+
         
          
     <string-array name="niveis_array">        

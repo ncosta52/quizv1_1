@@ -107,8 +107,7 @@ public class MyDbHelper_game extends SQLiteOpenHelper
         db.execSQL("INSERT INTO Categorias (Descricao) VALUES ('ESTG');");
     }
 
-    private void dadosIniciais_Perguntas(SQLiteDatabase db)
-    {
+    private void dadosIniciais_Perguntas(SQLiteDatabase db){
         //Perguntas acerca da ESTG
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,4,'Em que cidade se situa a ESTG?',1 );");          //1
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (1,4,'Como é que conhecido o edíficio onde a escola funciona?',1 );");
@@ -178,8 +177,7 @@ public class MyDbHelper_game extends SQLiteOpenHelper
         db.execSQL("INSERT INTO Perguntas (Niveis_Id, Categorias_Id, Pergunta, Pontuacao) VALUES (3,3,'The social network retrata que aplicação informatica?',3 );");
     }
 
-    private void dadosIniciais_Respostas(SQLiteDatabase db)
-    {
+    private void dadosIniciais_Respostas(SQLiteDatabase db){
         //Respostas ESTG
         db.execSQL("INSERT INTO Respostas ( Perguntas_Id, Descricao, Correta) VALUES (1,'Felgueiras','S' );");
         db.execSQL("INSERT INTO Respostas ( Perguntas_Id, Descricao, Correta) VALUES (1,'Porto','N' );");

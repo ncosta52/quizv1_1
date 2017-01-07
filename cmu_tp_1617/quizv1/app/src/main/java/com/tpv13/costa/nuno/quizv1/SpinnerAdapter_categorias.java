@@ -46,7 +46,7 @@ public class SpinnerAdapter_categorias extends ArrayAdapter<Categoria> {
         //This is for the first item before dropdown or default state.
         TextView label = new TextView(mContext);
         label.setTextColor(Color.BLACK);
-        //label.setTextSize(18);
+        label.setTextSize(24);
         label.setText(" " + mValues.get(position).getDescricao() );
         //label.setHeight(50);
         label.setGravity(Gravity.LEFT | Gravity.CENTER );
