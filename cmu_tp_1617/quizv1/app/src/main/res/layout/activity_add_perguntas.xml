@@ -11,12 +11,13 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:text="@string/spin_categorias"/>
+        android:text="@string/txtview_categorias"/>
     <Spinner
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_gravity="center_horizontal"
-        android:id="@+id/spinner_categorias"/>
+        android:id="@+id/spinner_categorias"
+        />
 
     <TextView
         android:layout_width="match_parent"
@@ -27,7 +28,7 @@
         android:text="@string/spin_niveis"/>
     <Spinner
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
         android:layout_gravity="center_horizontal"
         android:id="@+id/spinner_niveis"/>
 
@@ -38,7 +39,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/pede_nova_pergunta"/>
 
     <EditText
@@ -49,175 +50,55 @@
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:id="@+id/new_pergunta"/>
 
-    <TableLayout
-        android:id="@+id/tabelaRespostas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-
-        <TableRow
-            android:id="@+id/linha1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_tbl_respostas"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:text="Respostas"
-                android:layout_weight="0.7"/>
-            <TextView
-                android:id="@+id/tv_tbl_corretas"
-                android:layout_gravity="center_horizontal"
-                android:text="Corretas"/>
-        </TableRow>
-
-        <TableRow
-        android:id="@+id/linha2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="10dp"
+            android:text="@string/tv_resposta_correta"/>
 
         <EditText
-            android:id="@+id/new_resposta_1"
+            android:id="@+id/new_resposta_correta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.7"/>
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
-        <RadioButton
-            android:id="@+id/rd_bt_resposta1"
-            android:layout_gravity="center_horizontal"/>
-    </TableRow>
-
-        <TableRow
-            android:id="@+id/linha3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="@string/tv_respostas_erradas"
+            android:layout_marginTop="10dp"/>
 
             <EditText
                 android:id="@+id/new_resposta_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="0.7"/>
-
-            <RadioButton
-                android:id="@+id/rd_bt_resposta2"
-                android:layout_gravity="center_horizontal"/>
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/linha4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
             <EditText
                 android:id="@+id/new_resposta_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="0.7"/>
-
-            <RadioButton
-                android:id="@+id/rd_bt_resposta3"
-                android:layout_gravity="center_horizontal"/>
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/linha5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
             <EditText
                 android:id="@+id/new_resposta_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="0.7"/>
-
-            <RadioButton
-                android:id="@+id/rd_bt_resposta4"
-                android:layout_gravity="center_horizontal"/>
-
-        </TableRow>
-
-    </TableLayout>
-
-    <!--<LinearLayout-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:orientation="horizontal"-->
-    <!--android:layout_marginTop="50dp"-->
-    <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
-    <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
-    <!--&gt;-->
-
-    <!--<EditText-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center_horizontal"-->
-        <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
-        <!--android:layout_marginRight="@dimen/activity_horizontal_margin"/>-->
-
-    <!--<RadioButton-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="match_parent" />-->
-
-<!--</LinearLayout>-->
-    <!--<LinearLayout-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
-        <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
-        <!--&gt;-->
-
-        <!--<EditText-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
-            <!--android:layout_marginRight="@dimen/activity_horizontal_margin"/>-->
-
-        <!--<RadioButton-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent" />-->
-
-    <!--</LinearLayout>-->
-    <!--<LinearLayout-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
-        <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
-        <!--&gt;-->
-
-        <!--<EditText-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
-            <!--android:layout_marginRight="@dimen/activity_horizontal_margin"/>-->
-
-        <!--<RadioButton-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent" />-->
-
-    <!--</LinearLayout>-->
-    <!--<LinearLayout-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
-        <!--android:layout_marginRight="@dimen/activity_horizontal_margin"-->
-        <!--&gt;-->
-
-        <!--<EditText-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"-->
-            <!--android:layout_marginRight="@dimen/activity_horizontal_margin"/>-->
-
-        <!--<RadioButton-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent" />-->
-
-    <!--</LinearLayout>-->
-
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
 
     <Button
         android:layout_width="wrap_content"

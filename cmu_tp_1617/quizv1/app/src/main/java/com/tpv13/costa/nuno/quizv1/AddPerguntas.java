@@ -66,7 +66,7 @@ public class AddPerguntas extends AppCompatActivity implements View.OnClickListe
         spn_Nivel.setOnItemSelectedListener(this);
 
         _new_pergunta=(EditText) findViewById(R.id.new_pergunta);
-        _new_resposta_1=(EditText) findViewById(R.id.new_resposta_1);
+        _new_resposta_1=(EditText) findViewById(R.id.new_resposta_correta);
         _new_resposta_2=(EditText) findViewById(R.id.new_resposta_2);
         _new_resposta_3=(EditText) findViewById(R.id.new_resposta_3);
         _new_resposta_4=(EditText) findViewById(R.id.new_resposta_4);
@@ -135,7 +135,14 @@ public class AddPerguntas extends AppCompatActivity implements View.OnClickListe
         valuesPerg.put("Niveis_Id", nivelSelectedId);
         valuesPerg.put("Categorias_Id", categoriaSelectdId);
         valuesPerg.put("Pergunta", (this._new_pergunta.getText().toString().trim() +"?").replace("??","?"));
-        valuesPerg.put("Pontuacao",1);
+
+        if(nivelSelectedId == 1)
+        {valuesPerg.put("Pontuacao",1);}
+        else
+        if(nivelSelectedId == 2)
+        {valuesPerg.put("Pontuacao",2);}
+        if(nivelSelectedId == 3)
+        {valuesPerg.put("Pontuacao",3);}
 
         Toast.makeText(this, "Aqui temos de verificar qual o nivel e atribuir a pontuação.", Toast.LENGTH_LONG).show();
 
@@ -239,6 +246,7 @@ public class AddPerguntas extends AppCompatActivity implements View.OnClickListe
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
         if (adapterView== findViewById(R.id.spinner_categorias)){
             Categoria selected = (Categoria) adapterView.getItemAtPosition(position);
+            ((TextView) adapterView.getChildAt(0)).setTextSize(15);
 
             categoriaSelectdId=selected.getId();
 
@@ -249,7 +257,7 @@ public class AddPerguntas extends AppCompatActivity implements View.OnClickListe
             if(adapterView == findViewById(R.id.spinner_niveis))
             {
                 Nivel selected = (Nivel) adapterView.getItemAtPosition(position);
-
+                ((TextView) adapterView.getChildAt(0)).setTextSize(15);
                 nivelSelectedId=selected.getId();
 
 //                Toast.makeText(this, " Escolhi o Nivel: "+ selected.getNome() +
