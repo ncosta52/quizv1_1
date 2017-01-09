@@ -28,8 +28,6 @@ public class Pergunta implements Serializable {
     }
 
 
-
-
     public int getId() {
         return id;
     }
