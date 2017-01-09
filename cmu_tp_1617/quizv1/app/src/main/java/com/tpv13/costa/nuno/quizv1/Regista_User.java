@@ -19,6 +19,8 @@ public class Regista_User extends Activity implements View.OnClickListener
     Button bt_cam;
     ImageView imageView;
 
+    private Button bt_cancelar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,16 +29,39 @@ public class Regista_User extends Activity implements View.OnClickListener
         bt_cam = (Button) findViewById(R.id.bt_uploadFoto);
         imageView = (ImageView) findViewById(R.id.image_view);
         bt_cam.setOnClickListener(this);
+
+        bt_cancelar = (Button) findViewById(R.id.bt_cancelar);
+        bt_cancelar.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view)
+    {
+//        Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        File file = getFile();
+//        camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
+//        startActivityForResult(camera_intent,1);
+
+        switch (view.getId()) {
+            case R.id.bt_uploadFoto: //error
+                chamaCamera();
+                break;
+            case R.id.bt_cancelar:
+                finish();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void chamaCamera()
     {
         Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File file = getFile();
         camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
         startActivityForResult(camera_intent,1);
     }
+
 
     private File getFile()
     {
