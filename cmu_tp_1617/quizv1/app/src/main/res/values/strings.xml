@@ -25,10 +25,14 @@
     <string name="tv_respostas_erradas">Introduza tres respostas erradas!</string>
     <string name="pergunta">Nova Pergunta</string>
     <string name="pede_nova_pergunta">Insira uma pergunta nova</string>
+    <string name="new_user">Nome do utilizador</string>
+    <string name="new_pass">Password</string>
+    <string name="new_foto">Prima o botao seguinte e sorria!</string>
     <string name="jogar">Jogar!</string>
     <string name="vencedor_Str">----  É UM VENCEDOR!!!  ----</string>
     <string name="responder_Str">Responder</string>
     <string name="seguinte_Str">Próxima pergunta</string>
+    <string name="tirar_foto">Camera</string>
     <string name="terminar_Str">Terminar</string>
     <string name="rsp_Sim">Sim</string>
     <string name="rsp_Nao">Não</string>
