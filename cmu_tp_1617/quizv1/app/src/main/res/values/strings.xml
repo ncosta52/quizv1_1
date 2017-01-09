@@ -5,6 +5,7 @@
     <string name="prompt_user">Username</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Log in</string>
+    <string name="action_register">Registe-se</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -27,6 +28,7 @@
     <string name="pede_nova_pergunta">Insira uma pergunta nova</string>
     <string name="new_user">Nome do utilizador</string>
     <string name="new_pass">Password</string>
+    <string name="new_pass_confirm">insira novamente a password</string>
     <string name="new_foto">Prima o botao seguinte e sorria!</string>
     <string name="jogar">Jogar!</string>
     <string name="vencedor_Str">----  É UM VENCEDOR!!!  ----</string>

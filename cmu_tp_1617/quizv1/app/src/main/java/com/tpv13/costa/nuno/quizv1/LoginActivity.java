@@ -25,6 +25,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private EditText editT_user, editT_pass;
     private Button bt_submit;
+    private Button bt_regist;
 
     private MyDbHelper_game dbHelper;
     private AudioManager a;
@@ -48,6 +49,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         bt_submit=(Button) findViewById(R.id.sign_in_button);
         bt_submit.setOnClickListener(this);
+
+        bt_regist = (Button) findViewById(R.id.regist_button);
+        bt_regist.setOnClickListener(this);
     }
 
     @Override
@@ -88,6 +92,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         switch (view.getId()) {
             case R.id.sign_in_button: //error
                 validarLogIn();
+                break;
+            case R.id.regist_button:
+                regista();
                 break;
             default:
                 break;
@@ -135,5 +142,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             startActivity(new Intent(this, MainActivity.class));
         }
+    }
+
+    private void regista()
+    {
+        startActivity(new Intent(this,Regista_User.class));
     }
 }
