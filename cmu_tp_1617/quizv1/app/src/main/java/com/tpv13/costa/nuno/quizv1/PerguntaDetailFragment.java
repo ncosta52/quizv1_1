@@ -24,6 +24,8 @@ import java.util.List;
 import java.util.Random;
 
 public class PerguntaDetailFragment extends Fragment implements View.OnClickListener  {
+
+
     private OnRspSelecionada mListenerRsp;
     private OnAjudasSelectListener mListanerAjudas;
 
@@ -34,6 +36,8 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
     private Button btnA, btnB, btnC, btnD;//, btn_valSeg;
     private Pergunta apresPergunta;
     private boolean ajuda_50, ajuda_Tlf, ajuda_Pub;
+
+    private String valor_aGanhar;
 
     private ImageButton btn_ajuda_50, btn_ajudaTlf, btn_ajudaPublico;
 
@@ -330,58 +334,115 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
 
 //            IsRspFinal_Dialog isRspFinal_dialog=new IsRspFinal_Dialog(this);
 //            isRspFinal_dialog.show();
-//
-            final Resposta tmp_apresPergunta= this.getApresPergunta().getRespostaByIndex(_rspSelecionada);
 
-            AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
-            builder.setMessage(R.string.rsp_Final);
-            //builder.setTitle("Responder");
+            IsRspFinal_Dialog customizeDialog = new IsRspFinal_Dialog(this.getActivity(),this.getValor_aGanhar());
+            customizeDialog.setmListener(new IsRSpFinal_Dialog_listener()
+            {
+                final int BLOQUEAR_RSP_DADA=0;
+                final int CANCELAR_RSP_DADA=1;
+                final int DESISTIR=2;
 
-            builder.setPositiveButton(R.string.rsp_Sim, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int id) {
-
-
-                    try {
-
-                        if (tmp_apresPergunta.isCorreta()){
-                            pintarCorreta(_rspSelecionada);
-
-                        }
-                        else{
-                            pintarErrada(_rspSelecionada);
-                        }
-//
-
-
-                    } catch (Exception e) {
-                        throw e;
+                public void userSelectedAValue(int value)
+                {
+                    switch (value){
+                        case BLOQUEAR_RSP_DADA:
+                            validarRsp(_rspSelecionada);
+                            break;
+                        case CANCELAR_RSP_DADA:
+                            cancelarRsp();
+                            break;
+                        case DESISTIR:
+                            Toast.makeText(getContext(), "Desisti e ganhei " + valor_aGanhar + ".", Toast.LENGTH_SHORT).show();
+                            getActivity().finish();
+                            break;
                     }
 
 
                 }
+                public void userCanceled()
+                {
+                    Toast.makeText(getContext(), "public void userCanceled()", Toast.LENGTH_SHORT).show();
+                }
             });
+            customizeDialog.show();
 
-            builder.setNegativeButton(R.string.rsp_Nao, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            btnA.setBackgroundResource(android.R.drawable.btn_default);
-                            btnB.setBackgroundResource(android.R.drawable.btn_default);
-                            btnC.setBackgroundResource(android.R.drawable.btn_default);
-                            btnD.setBackgroundResource(android.R.drawable.btn_default);
-                            //_rspSelecionada = -1;
+//
 
 
-                        }
-                    }
-
-            );
-
-            AlertDialog mDialog = builder.create();
-            mDialog.show();
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this.getContext());
+//            builder.setMessage(R.string.rsp_Final);
+//            //builder.setTitle("Responder");
+//
+//            builder.setPositiveButton(R.string.rsp_Sim, new DialogInterface.OnClickListener() {
+//                public void onClick(DialogInterface dialog, int id) {
+//
+//
+//                    try {
+//
+//                        if (tmp_apresPergunta.isCorreta()){
+//                            pintarCorreta(_rspSelecionada);
+//
+//                        }
+//                        else{
+//                            pintarErrada(_rspSelecionada);
+//                        }
+////
+//
+//
+//                    } catch (Exception e) {
+//                        throw e;
+//                    }
+//
+//
+//                }
+//            });
+//
+//            builder.setNegativeButton(R.string.rsp_Nao, new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            btnA.setBackgroundResource(android.R.drawable.btn_default);
+//                            btnB.setBackgroundResource(android.R.drawable.btn_default);
+//                            btnC.setBackgroundResource(android.R.drawable.btn_default);
+//                            btnD.setBackgroundResource(android.R.drawable.btn_default);
+//                            //_rspSelecionada = -1;
+//
+//
+//                        }
+//                    }
+//
+//            );
+//
+//            AlertDialog mDialog = builder.create();
+//            mDialog.show();
 
         }
 
 
 
+    }
+
+    private void validarRsp (final int _rspSelecionada){
+        final Resposta tmp_apresPergunta= this.getApresPergunta().getRespostaByIndex(_rspSelecionada);
+
+        try {
+
+            if (tmp_apresPergunta.isCorreta()){
+                pintarCorreta(_rspSelecionada);
+            }
+            else{
+                pintarErrada(_rspSelecionada);
+            }
+
+        } catch (Exception e) {
+            throw e;
+        }
+
+    }
+
+    private void cancelarRsp(){
+        btnA.setBackgroundResource(android.R.drawable.btn_default);
+        btnB.setBackgroundResource(android.R.drawable.btn_default);
+        btnC.setBackgroundResource(android.R.drawable.btn_default);
+        btnD.setBackgroundResource(android.R.drawable.btn_default);
     }
 
     private void pintarCorreta(int _rspDada){
@@ -525,6 +586,14 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
         this.ajuda_50=_ajuda_50;
         this.ajuda_Tlf=_ajuda_Tlf;
         this.ajuda_Pub=_ajuda_Pub;
+    }
+
+    public String getValor_aGanhar() {
+        return valor_aGanhar;
+    }
+
+    public void setValor_aGanhar(String valor_aGanhar) {
+        this.valor_aGanhar = valor_aGanhar;
     }
 }
 

@@ -32,7 +32,8 @@ public class MyDbHelper_game extends SQLiteOpenHelper
             db.execSQL("CREATE TABLE Niveis("+
                     "Id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "Nome VARCHAR(200) NOT NULL, " +
-                    "Descricao VARCHAR(200) NOT NULL)");
+                    "Descricao VARCHAR(200) NOT NULL, " +
+                    "Pontuacao INREGER NOT NULL)");
             dadosIniciais_Niveis(db);
 
             // cria a tabela Categorias
@@ -95,9 +96,9 @@ public class MyDbHelper_game extends SQLiteOpenHelper
 
     private void dadosIniciais_Niveis(SQLiteDatabase db){
 
-        db.execSQL("INSERT INTO Niveis (Nome, Descricao) VALUES ('Principiante', 'Perguntas mais acessíveis. Permite conhecer melhor até passar a um nível mais dificil.');");
-        db.execSQL("INSERT INTO Niveis (Nome, Descricao) VALUES ('Intermédio', 'Perguntas de um grau de dificuldade superior ao nível Principienate.');");
-        db.execSQL("INSERT INTO Niveis (Nome, Descricao) VALUES ('Master', 'Perguntas de um grau de dificuldade elevado.');");
+        db.execSQL("INSERT INTO Niveis (Nome, Descricao, Pontuacao) VALUES ('Principiante', 'Perguntas mais acessíveis. Permite conhecer melhor até passar a um nível mais dificil.',1);");
+        db.execSQL("INSERT INTO Niveis (Nome, Descricao, Pontuacao) VALUES ('Intermédio', 'Perguntas de um grau de dificuldade superior ao nível Principienate.',2);");
+        db.execSQL("INSERT INTO Niveis (Nome, Descricao, Pontuacao) VALUES ('Master', 'Perguntas de um grau de dificuldade elevado.',3);");
     }
 
     private void dadosIniciais_Categorias(SQLiteDatabase db){

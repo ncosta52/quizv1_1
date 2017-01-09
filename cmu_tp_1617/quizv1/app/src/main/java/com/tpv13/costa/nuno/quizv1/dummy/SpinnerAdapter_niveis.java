@@ -49,7 +49,7 @@ public class SpinnerAdapter_niveis extends ArrayAdapter<Nivel>
         label.setTextColor(Color.BLACK);
         label.setTextSize(24);
         label.setText(" " + mValues.get(position).getNome() );
-        //label.setHeight(50);
+        label.setHeight(60);
         label.setGravity(Gravity.LEFT | Gravity.CENTER );
         return label;
     }
@@ -61,11 +61,23 @@ public class SpinnerAdapter_niveis extends ArrayAdapter<Nivel>
         // beneath it
         TextView label = new TextView(mContext);
         label.setTextColor(Color.BLACK);
-        //label.setTextSize(18);
+        label.setTextSize(18);
         label.setText(" " + mValues.get(position).getNome());
-        //label.setHeight(70);
+        //label.setHeight(50);
         label.setGravity(Gravity.LEFT | Gravity.CENTER );
 
         return label;
+    }
+
+    public int getPontuacao(int _nivelId){
+
+        for (Nivel n : mValues)
+        {
+            if (n.getId() == _nivelId){
+                return n.getPontuacao();
+            }
+        }
+
+        return 0;
     }
 }

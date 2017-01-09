@@ -103,7 +103,7 @@ public class NovoJogoOpcoes extends ListActivity implements View.OnClickListener
                 c.moveToFirst();
                 // Loop through all Results
                 do {
-                    mNivel.add(new Nivel(c.getInt(0), c.getString(1), c.getString(2)));
+                    mNivel.add(new Nivel(c.getInt(0), c.getString(1), c.getString(2), c.getInt(3)));
 
                 }while(c.moveToNext());
             }

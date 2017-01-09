@@ -135,14 +135,7 @@ public class AddPerguntas extends AppCompatActivity implements View.OnClickListe
         valuesPerg.put("Niveis_Id", nivelSelectedId);
         valuesPerg.put("Categorias_Id", categoriaSelectdId);
         valuesPerg.put("Pergunta", (this._new_pergunta.getText().toString().trim() +"?").replace("??","?"));
-
-        if(nivelSelectedId == 1)
-        {valuesPerg.put("Pontuacao",1);}
-        else
-        if(nivelSelectedId == 2)
-        {valuesPerg.put("Pontuacao",2);}
-        if(nivelSelectedId == 3)
-        {valuesPerg.put("Pontuacao",3);}
+        valuesPerg.put("Pontuacao",nivelAdapter.getPontuacao(nivelSelectedId));
 
         Toast.makeText(this, "Aqui temos de verificar qual o nivel e atribuir a pontuação.", Toast.LENGTH_LONG).show();
 

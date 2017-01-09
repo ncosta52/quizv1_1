@@ -48,7 +48,7 @@ public class SpinnerAdapter_categorias extends ArrayAdapter<Categoria> {
         label.setTextColor(Color.BLACK);
         label.setTextSize(24);
         label.setText(" " + mValues.get(position).getDescricao() );
-        //label.setHeight(50);
+        label.setHeight(60);
         label.setGravity(Gravity.LEFT | Gravity.CENTER );
         return label;
     }
@@ -60,7 +60,7 @@ public class SpinnerAdapter_categorias extends ArrayAdapter<Categoria> {
         // beneath it
         TextView label = new TextView(mContext);
         label.setTextColor(Color.BLACK);
-        //label.setTextSize(18);
+        label.setTextSize(18);
         label.setText(" " + mValues.get(position).getDescricao());
         //label.setHeight(70);
         label.setGravity(Gravity.LEFT | Gravity.CENTER );

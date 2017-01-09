@@ -5,51 +5,87 @@
     android:orientation="vertical"
     android:background="@drawable/fundo1">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:text="@string/txtview_categorias"/>
-    <Spinner
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:orientation="vertical"
+        android:background="@drawable/curve_shap"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:text="@string/txtview_categorias"/>
+        <Spinner
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+            android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:id="@+id/spinner_categorias"
         />
+    </LinearLayout>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/spin_niveis"/>
-    <Spinner
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/curve_shap"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/spin_niveis"/>
+        <Spinner
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
         android:id="@+id/spinner_niveis"/>
+    </LinearLayout>
 
-
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="10dp"
-        android:text="@string/pede_nova_pergunta"/>
-
-    <EditText
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/curve_shap"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="10dp"
+            android:text="@string/pede_nova_pergunta"/>
+        <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:id="@+id/new_pergunta"/>
+    </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/curve_shap"
+        >
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,7 +94,6 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginTop="10dp"
             android:text="@string/tv_resposta_correta"/>
-
         <EditText
             android:id="@+id/new_resposta_correta"
             android:layout_width="match_parent"
@@ -75,7 +110,6 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/tv_respostas_erradas"
             android:layout_marginTop="10dp"/>
-
             <EditText
                 android:id="@+id/new_resposta_2"
                 android:layout_width="match_parent"
@@ -83,7 +117,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"/>
-
             <EditText
                 android:id="@+id/new_resposta_3"
                 android:layout_width="match_parent"
@@ -91,7 +124,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"/>
-
             <EditText
                 android:id="@+id/new_resposta_4"
                 android:layout_width="match_parent"
@@ -99,6 +131,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"

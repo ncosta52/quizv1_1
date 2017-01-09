@@ -9,12 +9,14 @@ public class Nivel {
     private int id;
     private String nome;
     private String descricao;
+    private int pontuacao;
 
-    public Nivel(int _id, String _nome, String _descricao)
+    public Nivel(int _id, String _nome, String _descricao, int _pontuacao)
     {
         this.setId(_id);
         this.setNome(_nome);
         this.setDescricao(_descricao);
+        this.setPontuacao(_pontuacao);
     }
 
     public Nivel(int _id, String _nome)
@@ -46,5 +48,13 @@ public class Nivel {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public int getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
     }
 }

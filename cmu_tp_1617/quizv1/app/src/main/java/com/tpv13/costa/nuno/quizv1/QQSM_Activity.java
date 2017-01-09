@@ -295,14 +295,25 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
             @Override
             public void onAnimationEnd(Animation animation) {
                 perguntaFragment = (PerguntaDetailFragment) getSupportFragmentManager().findFragmentById(R.id.b_fragment);
+                String[] tmpNi=getResources().getStringArray(R.array.niveis_array);
+                String valorAdquirido;
+
+                if (tmpNi.length-nivelSel+1>=tmpNi.length){
+                    valorAdquirido="€0";
+                }
+                else{
+                    valorAdquirido=tmpNi[15-nivelSel+1];
+                }
 
                 if (perguntaFragment != null) {
                     perguntaFragment.setAjudasEstado(isAjuda_50(),isAjuda_Tlf(),isAjuda_Publico());
                     perguntaFragment.setPergunta(carregarPerguntaSelecionada(_pergId));  //tablet
+                    perguntaFragment.setValor_aGanhar(valorAdquirido);
                 } else {
                     perguntaFragment = new PerguntaDetailFragment(); //tlm
                     perguntaFragment.setAjudasEstado(isAjuda_50(),isAjuda_Tlf(),isAjuda_Publico());
                     perguntaFragment.setPergunta(carregarPerguntaSelecionada(_pergId));
+                    perguntaFragment.setValor_aGanhar(valorAdquirido);
 
                     FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
                     transaction.replace(R.id.fragment_container, perguntaFragment);

@@ -44,6 +44,11 @@
     <string name="rspCerta_e">A resposta certa é a </string>
     <string name="naoSeiRsp">Desculpa. Não faço ideia qual a resposta certa</string>
 
+    <string name="queFazer">O que pretende fazer?</string>
+    <string name="bloquearRso">Bloquear resposta dada.</string>
+    <string name="pensarMelhor">Pensar melhor.</string>
+    <string name="desistir">Não responder.\nDesistir e ganhar %1$s.</string>
+
         
          
     <string-array name="niveis_array">        
