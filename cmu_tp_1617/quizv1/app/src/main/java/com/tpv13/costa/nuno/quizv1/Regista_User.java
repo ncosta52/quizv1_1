@@ -65,14 +65,14 @@ public class Regista_User extends Activity implements View.OnClickListener
 
     private File getFile()
     {
-        File folder = new File("sdcard/camera_app");
+        File folder = new File("sdcard/camera_app"); //sdcard/quizImages
 
         if(!folder.exists())
         {
             folder.mkdir();
         }
 
-        File image_file = new File(folder,"cam_image.jpg");
+        File image_file = new File(folder,"cam_image.jpg"); //username.jpg
         return image_file;
     }
 

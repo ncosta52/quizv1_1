@@ -20,7 +20,10 @@ import java.util.Random;
 //package pt.ipp.estgf.cmu.widgetproject;
 
 public class MyBroadcastReceiverWidget extends AppWidgetProvider {
-    private static final String MyOnClick = "myOnClickTag";
+    private static final String MyOnClickA = "myOnClickTagA";
+    private static final String MyOnClickB = "myOnClickTagB";
+    private static final String MyOnClickC = "myOnClickTagC";
+    private static final String MyOnClickD = "myOnClickTagD";
 
     private String lastAction = "No action";
     private String pergunta, tmp ;
@@ -38,10 +41,28 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        if (MyOnClick.equals(intent.getAction())){
-            //your onClick action is here
+        if (intent!=null) {
+            switch (intent.getAction()) {
+                case MyOnClickA:
+                    Toast.makeText(context, "A", Toast.LENGTH_SHORT).show();
+                    break;
+                case MyOnClickB:
+                    Toast.makeText(context, "B", Toast.LENGTH_SHORT).show();
+                    break;
+                case MyOnClickC:
+                    Toast.makeText(context, "C", Toast.LENGTH_SHORT).show();
+                    break;
+                case MyOnClickD:
+                    Toast.makeText(context, "D", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
 
+//        if (MyOnClick.equals(intent.getAction())){
+//            //your onClick action is here
+//
+//        }
+        tmpPerg=null;
 
         cont=context;
         ComponentName thisWidget = new ComponentName(context, MyBroadcastReceiverWidget.class);
@@ -97,32 +118,46 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
         }
 
 
-        // update a cada inst�ncia da widget
-        final int N = appWidgetIds.length;
-        for (int i = 0; i < N; i++) {
-            int appWidgetId = appWidgetIds[i];
-            updateAppWidget(context, appWidgetManager, appWidgetId);
+        if (appWidgetIds!=null && appWidgetIds.length>0) {
+            // update a cada inst�ncia da widget
+            final int N = appWidgetIds.length;
+            for (int i = 0; i < N; i++) {
+                int appWidgetId = appWidgetIds[i];
+                updateAppWidget(context, appWidgetManager, appWidgetId);
+            }
         }
 
     }
 
     private void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         // cria um objecto RemoteViews com o layout da widget
-        Resposta rsp1=getTmpPerg().getRespostaByIndex(0);
-        Resposta rsp2=getTmpPerg().getRespostaByIndex(1);
-        Resposta rsp3=getTmpPerg().getRespostaByIndex(2);
-        Resposta rsp4=getTmpPerg().getRespostaByIndex(3);
+        Resposta rsp1=null, rsp2=null, rsp3=null, rsp4=null;
+        if (getTmpPerg()!=null) {
+             rsp1 = getTmpPerg().getRespostaByIndex(0);
+             rsp2 = getTmpPerg().getRespostaByIndex(1);
+             rsp3 = getTmpPerg().getRespostaByIndex(2);
+             rsp4 = getTmpPerg().getRespostaByIndex(3);
+        }
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-            views.setOnClickPendingIntent(R.id.button,
-                    getPendingSelfIntent(context, MyOnClick));
+
+        views.setOnClickPendingIntent(R.id.respA_Widget,
+                    getPendingSelfIntent(context, MyOnClickA));
+        views.setOnClickPendingIntent(R.id.respB_Widget,
+                getPendingSelfIntent(context, MyOnClickB));
+        views.setOnClickPendingIntent(R.id.respC_Widget,
+                getPendingSelfIntent(context, MyOnClickC));
+        views.setOnClickPendingIntent(R.id.respD_Widget,
+                getPendingSelfIntent(context, MyOnClickD));
 
         views.setTextViewText(R.id.txtPerguntaWidget , pergunta );
 
-        views.setTextViewText(R.id.respA, rsp1.getDescricao());
-        views.setTextViewText(R.id.respB, rsp2.getDescricao());
-        views.setTextViewText(R.id.respC, rsp3.getDescricao());
-        views.setTextViewText(R.id.respD, rsp4.getDescricao());
+        views.setTextViewText(R.id.respA_Widget, rsp1.getDescricao());
+        views.setTextViewText(R.id.respB_Widget, rsp2.getDescricao());
+        views.setTextViewText(R.id.respC_Widget, rsp3.getDescricao());
+        views.setTextViewText(R.id.respD_Widget, rsp4.getDescricao());
+
+
 
 //        views.setTextViewText(R.id.respD,perguLS.get(index).getRespostaByIndex(3).getDescricao());
         appWidgetManager.updateAppWidget(appWidgetId, views);
@@ -192,6 +227,7 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
     }
 
     protected PendingIntent getPendingSelfIntent(Context context, String action) {
+        //Toast.makeText(context, "hello widget PendingIntent" + action, Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(context, getClass());
         intent.setAction(action);
         return PendingIntent.getBroadcast(context, 0, intent, 0);
