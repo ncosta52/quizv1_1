@@ -76,7 +76,7 @@ public class Regista_User extends Activity implements View.OnClickListener {
                         valuesUser.put("Username", this.edit_User.getText().toString().trim());
                         valuesUser.put("Password", this.edit_Pass.getText().toString().trim());
                         valuesUser.put("Nivel", 1);
-                        valuesUser.put("Photo","");
+                        valuesUser.put("Photo",this.edit_User.getText().toString() + ".jpg");
 
                         db.insert("Utilizadores",null,valuesUser);
 
