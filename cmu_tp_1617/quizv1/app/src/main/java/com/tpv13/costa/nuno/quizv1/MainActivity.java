@@ -6,10 +6,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.VolumeProvider;
 import android.net.Uri;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,6 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +35,7 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -42,6 +47,7 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
 
     private Button bt_quemQuerSerMilionario, bt_novoJogo, bt_estatisticas, bt_testeWidget, bt_preferencias, bt_addcategoria, bt_addPergunta;
     private TextView tv_currentUser;
+    private ImageView _photoUser;
 //    private Switch mySwitch;
     private MediaPlayer sound_menu ;
     private MyDbHelper_game dbHelper;
@@ -67,11 +73,14 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
 
         a=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
 
+
         tv_currentUser=(TextView) findViewById(R.id.tv_currentUser);
         SpannableString content = new SpannableString(mSettings.getString(CurrentUSer_Preference, ""));
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+
         tv_currentUser.setText(content);
         tv_currentUser.setOnClickListener(this);
+
 
         bt_novoJogo = (Button) findViewById(R.id.bt_novoJogo);
         bt_novoJogo.setOnClickListener(this);
@@ -102,8 +111,48 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
 
         dbHelper = new MyDbHelper_game(this);
 
-
+        carregarPhotoUser(mSettings.getString(CurrentUSer_Preference, ""));
         carregarLstTesteWidget();
+    }
+
+    private void carregarPhotoUser(String user){
+        _photoUser=(ImageView) findViewById(R.id.photoUser);
+
+        String pathName="";
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor c= db.rawQuery("SELECT Photo FROM Utilizadores WHERE Username='" + user + "'",null);
+
+
+        try
+        {
+            if (c.getCount()>0 ) {
+                c.moveToFirst();
+                // Loop through all Results
+                do {
+                    pathName=c.getString(0);
+                }while(c.moveToNext());
+
+
+                File extStore = Environment.getExternalStorageDirectory();
+                File myFile = new File(extStore.getAbsolutePath() + "/quizImages/" + pathName);
+
+                if(myFile.exists()){
+                    Bitmap bmp = BitmapFactory.decodeFile(myFile.toString());
+                    _photoUser.setImageBitmap(bmp);
+                }
+                else{
+                    Toast.makeText(this, "COLOCAR IMAGEM POR DEFEITO PARA USERS SEM FOTO", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            c.close();
+            db.close();
+        }
+        catch(Exception e) {
+            Log.e("Error", "Error", e);
+            throw e;
+        }
+
     }
 
     private void carregarLstTesteWidget(){

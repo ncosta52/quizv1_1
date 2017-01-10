@@ -105,23 +105,18 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
 
         if (perguLS.size()>0) {
-
-
             index = randomGenerator.nextInt(perguLS.size());
-
 //        if (v.getId() == R.id.btnAction) {
             setTmpPerg(perguLS.get(index));
             pergunta = perguLS.get(index).getPergunta();
 
             perguLS.remove(index);
-
         }
 
 
         if (appWidgetIds!=null && appWidgetIds.length>0) {
             // update a cada inst�ncia da widget
-            final int N = appWidgetIds.length;
-            for (int i = 0; i < N; i++) {
+            for (int i = 0; i < appWidgetIds.length; i++) {
                 int appWidgetId = appWidgetIds[i];
                 updateAppWidget(context, appWidgetManager, appWidgetId);
             }
@@ -156,7 +151,6 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
         views.setTextViewText(R.id.respB_Widget, rsp2.getDescricao());
         views.setTextViewText(R.id.respC_Widget, rsp3.getDescricao());
         views.setTextViewText(R.id.respD_Widget, rsp4.getDescricao());
-
 
 
 //        views.setTextViewText(R.id.respD,perguLS.get(index).getRespostaByIndex(3).getDescricao());
