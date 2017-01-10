@@ -1,6 +1,7 @@
 package com.tpv13.costa.nuno.quizv1;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -68,8 +69,20 @@ public class Regista_User extends Activity implements View.OnClickListener {
                 {
                     if(passValida() == true)
                     {
-                        Toast.makeText(this, "Tudo valido", Toast.LENGTH_LONG).show();
                         //GRAVAR BD
+                        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+                        ContentValues valuesUser = new ContentValues();
+                        valuesUser.put("Username", this.edit_User.getText().toString().trim());
+                        valuesUser.put("Password", this.edit_Pass.getText().toString().trim());
+                        valuesUser.put("Nivel", 1);
+                        valuesUser.put("Photo","");
+
+                        db.insert("Utilizadores",null,valuesUser);
+
+                        Toast.makeText(this,this.edit_User.getText().toString().trim()+".jpeg", Toast.LENGTH_LONG).show();
+                        db.close();
+                        finish();
                     }
                     else
                     {   Toast.makeText(this, "Reveja a password", Toast.LENGTH_LONG).show();}
@@ -89,19 +102,19 @@ public class Regista_User extends Activity implements View.OnClickListener {
 
 
     private File getFile() {
-        File folder = new File("sdcard/camera_app"); //sdcard/quizImages
+        File folder = new File("sdcard/quizImages");
 
         if (!folder.exists()) {
             folder.mkdir();
         }
 
-        File image_file = new File(folder, "cam_image.jpg"); //username.jpg
+        File image_file = new File(folder, this.edit_User.getText().toString() + ".jpg");
         return image_file;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String path = "sdcard/camera_app/cam_image.jpg";
+        String path = "sdcard/quizImages/" + this.edit_User.getText().toString() + ".jpg";
         imageView.setImageDrawable(Drawable.createFromPath(path));
     }
 

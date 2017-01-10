@@ -66,7 +66,8 @@ public class MyDbHelper_game extends SQLiteOpenHelper
                     "Id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "Username VARCHAR(10) NOT NULL, " +
                     "Password VARCHAR(10) NOT NULL, " +
-                    "Nivel INTEGER NOT NULL)");
+                    "Nivel INTEGER NOT NULL, "+
+                    "Photo VARCHAR(20))");
             dadosIniciais_Utilizadores(db);
 
             // cria a tabela Users_Ranking
@@ -487,8 +488,8 @@ public class MyDbHelper_game extends SQLiteOpenHelper
 
     private void dadosIniciais_Utilizadores(SQLiteDatabase db){
 
-        db.execSQL("INSERT INTO Utilizadores (Username, Password, Nivel) VALUES ('admin', 'admin',3);");
-        db.execSQL("INSERT INTO Utilizadores (Username, Password, Nivel) VALUES ('gil2d', 'gil2d',1);");
-        db.execSQL("INSERT INTO Utilizadores (Username, Password, Nivel) VALUES ('nuno', 'nuno',1);");
+        db.execSQL("INSERT INTO Utilizadores (Username, Password, Nivel, Photo) VALUES ('admin', 'admin',3,NULL);");
+        db.execSQL("INSERT INTO Utilizadores (Username, Password, Nivel, Photo) VALUES ('gil2d', 'gil2d',1,NULL);");
+        db.execSQL("INSERT INTO Utilizadores (Username, Password, Nivel, Photo) VALUES ('nuno', 'nuno',1,NULL);");
     }
 }
