@@ -33,7 +33,7 @@ public class MyDbHelper_game extends SQLiteOpenHelper
                     "Id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "Nome VARCHAR(200) NOT NULL, " +
                     "Descricao VARCHAR(200) NOT NULL, " +
-                    "Pontuacao INREGER NOT NULL)");
+                    "Pontuacao INTEGER NOT NULL)");
             dadosIniciais_Niveis(db);
 
             // cria a tabela Categorias

@@ -80,7 +80,8 @@
         android:layout_height="150dp"
         android:id="@+id/image_view"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:background="@drawable/curve_shap"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -305,11 +305,11 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
                     valorAdquirido=tmpNi[15-nivelSel+1];
                 }
 
-                if (perguntaFragment != null) {
-                    perguntaFragment.setAjudasEstado(isAjuda_50(),isAjuda_Tlf(),isAjuda_Publico());
-                    perguntaFragment.setPergunta(carregarPerguntaSelecionada(_pergId));  //tablet
-                    perguntaFragment.setValor_aGanhar(valorAdquirido);
-                } else {
+//                if (perguntaFragment != null) {
+//                    perguntaFragment.setAjudasEstado(isAjuda_50(),isAjuda_Tlf(),isAjuda_Publico());
+//                    perguntaFragment.setPergunta(carregarPerguntaSelecionada(_pergId));  //tablet
+//                    perguntaFragment.setValor_aGanhar(valorAdquirido);
+//                } else {
                     perguntaFragment = new PerguntaDetailFragment(); //tlm
                     perguntaFragment.setAjudasEstado(isAjuda_50(),isAjuda_Tlf(),isAjuda_Publico());
                     perguntaFragment.setPergunta(carregarPerguntaSelecionada(_pergId));
@@ -319,7 +319,7 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
                     transaction.replace(R.id.fragment_container, perguntaFragment);
                     // transaction.addToBackStack("perguntaFragment");
                     transaction.commit();
-                }
+                //}
             }
 
             @Override
