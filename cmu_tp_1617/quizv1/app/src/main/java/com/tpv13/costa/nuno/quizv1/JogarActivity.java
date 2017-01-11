@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 
 public class JogarActivity extends Activity implements View.OnClickListener{
@@ -30,13 +32,14 @@ public class JogarActivity extends Activity implements View.OnClickListener{
     private MyDbHelper_game dbHelper;
     private Pergunta apresPergunta;
     private Button btnA, btnB, btnC, btnD;//, btn_valSeg;
-    private TextView tvPergunta;
+    private TextView tvPergunta, _tv_tempo;
     private ArrayList <Jogo_RespostasCertas> rspCertas;
     private ArrayList<Integer> rspCertasCategorias=new ArrayList<>();
     private int pontuacaoTotal;
     private int rspSelecionada;
 
     private Animation myAnim;
+    private static final String FORMAT = "%02d:%02d:%02d";
 
 //    private static final int savePontuacaoFinal=0;
 //    private static final ArrayList<Integer> savePerguntasId=null;
@@ -57,6 +60,7 @@ public class JogarActivity extends Activity implements View.OnClickListener{
         pontuacaoTotal=0;
 
         tvPergunta = (TextView) findViewById(R.id.tv_pergunta);
+        _tv_tempo=(TextView) findViewById(R.id.tv_tempo);
 
         btnA = (Button) findViewById(R.id.bt_respostaA);
         btnA.setOnClickListener(this);
@@ -70,7 +74,24 @@ public class JogarActivity extends Activity implements View.OnClickListener{
         btnD = (Button) findViewById(R.id.bt_respostaD);
         btnD.setOnClickListener(this);
 
-            sortearPergunta(perguntasId);
+        new CountDownTimer(16069000, 1000) { // adjust the milli seconds here
+
+            public void onTick(long millisUntilFinished) {
+
+                _tv_tempo.setText(""+String.format(FORMAT,
+                        TimeUnit.MILLISECONDS.toHours(millisUntilFinished),
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                                TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+            }
+
+            public void onFinish() {
+                _tv_tempo.setText("done!");
+            }
+        }.start();
+
+        sortearPergunta(perguntasId);
 
 
     }
