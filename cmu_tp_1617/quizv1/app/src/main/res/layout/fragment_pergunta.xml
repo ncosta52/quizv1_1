@@ -7,32 +7,29 @@
     >
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.1"
-        android:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="0.1"
+    android:orientation="horizontal">
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:id="@+id/btn_ajuda50"
-            android:background="@drawable/my_selector_cinquenta_cinquenta"
-        />
-
+            android:src="@drawable/common_google_signin_btn_icon_dark"/>
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/btn_ajudaPublic"
             android:layout_weight="0.3"
-            android:background="@drawable/my_selector_publico"/>
+            android:src="@drawable/common_google_signin_btn_icon_dark"/>
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:id="@+id/btn_ajudaTlf"
-            android:background="@drawable/my_selector_telefone"/>
+            android:src="@drawable/common_google_signin_btn_icon_dark"/>
     </LinearLayout>
-    <!---->
 
 
     <TextView
