@@ -46,6 +46,7 @@
     <string name="lista_vazia">Lista vazia!</string>
 
     <string name="somOnOff">Ligar/Desligar os sons da aplicação</string>
+    <string name="timeout">Duração do contra-relogio</string>
     <string name="currentUser">Utilizador Actual</string>
 
     <string name="achoQue">Penso que a resposta certa é a </string>

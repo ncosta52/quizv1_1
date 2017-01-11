@@ -6,8 +6,17 @@
         android:key="pref_somOnOff"
         android:defaultValue="true"/>
 
+    <EditTextPreference
+        android:title="Edit Text Preference"
+        android:key="pref_timeoutC"
+        android:summary="Altere o tempo do contra relogio (minutos)"
+        android:dialogTitle="@string/timeout"
+        android:numeric="integer"
+        />
 
-    <Preference android:key="pref_currentUser"
+
+    <Preference
+        android:key="pref_currentUser"
                 android:title="@string/currentUser"/>
 
 </PreferenceScreen>

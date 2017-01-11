@@ -3,11 +3,13 @@ package com.tpv13.costa.nuno.quizv1;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +28,11 @@ import java.util.concurrent.TimeUnit;
 
 public class JogarActivity extends Activity implements View.OnClickListener{
 
+    public static final String TIMEOUT_PREFERENCE_time = "pref_timeoutC";
+    public static final String TIMEOUT_PREFERENCE_DEFAULT = "6";
+
+
+    private SharedPreferences mSettings;
 
     //private PerguntaFragment mPerguntaFragment;
     private Random randomGenerator=new Random();
@@ -45,11 +52,15 @@ public class JogarActivity extends Activity implements View.OnClickListener{
 //    private static final ArrayList<Integer> savePerguntasId=null;
 
     private ArrayList<Integer> perguntasId;
+    private int tmpTempo;
+    private long tmpTempo2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jogar);
+
+
 
         //nivel=getIntent().getIntExtra("Nivel",0);
         perguntasId= getIntent().getIntegerArrayListExtra("Perguntas");
@@ -74,7 +85,12 @@ public class JogarActivity extends Activity implements View.OnClickListener{
         btnD = (Button) findViewById(R.id.bt_respostaD);
         btnD.setOnClickListener(this);
 
-        new CountDownTimer(60000, 1000) { // adjust the milli seconds here  (1 min = 60000ms)
+
+        mSettings = PreferenceManager.getDefaultSharedPreferences(this);
+        tmpTempo= Integer.parseInt(mSettings.getString(TIMEOUT_PREFERENCE_time,"6"));
+        tmpTempo2=(long)tmpTempo*60000;
+
+        new CountDownTimer(tmpTempo2, 1000) { // adjust the milli seconds here  (1 min = 60000ms)
 
             public void onTick(long millisUntilFinished) {
 
@@ -93,7 +109,18 @@ public class JogarActivity extends Activity implements View.OnClickListener{
             }
         }.start();
 
-            sortearPergunta(perguntasId);
+        sortearPergunta(perguntasId);
+
+
+
+
+
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
 
 
     }

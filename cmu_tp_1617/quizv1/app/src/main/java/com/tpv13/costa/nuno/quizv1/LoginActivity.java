@@ -7,9 +7,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.preference.EditTextPreference;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,6 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         a=(AudioManager)getSystemService(Context.AUDIO_SERVICE);
         mSettings = PreferenceManager.getDefaultSharedPreferences(this);
+
 
         dbHelper = new MyDbHelper_game(this);
 
