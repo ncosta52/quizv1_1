@@ -74,7 +74,7 @@ public class JogarActivity extends Activity implements View.OnClickListener{
         btnD = (Button) findViewById(R.id.bt_respostaD);
         btnD.setOnClickListener(this);
 
-        new CountDownTimer(16069000, 1000) { // adjust the milli seconds here
+        new CountDownTimer(60000, 1000) { // adjust the milli seconds here  (1 min = 60000ms)
 
             public void onTick(long millisUntilFinished) {
 
@@ -87,7 +87,9 @@ public class JogarActivity extends Activity implements View.OnClickListener{
             }
 
             public void onFinish() {
-                _tv_tempo.setText("done!");
+                _tv_tempo.setText("Acabou o Tempo!");
+                Toast.makeText(JogarActivity.this, "SAIR!\nPENDENTE-Gravar na BD..", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }.start();
 
