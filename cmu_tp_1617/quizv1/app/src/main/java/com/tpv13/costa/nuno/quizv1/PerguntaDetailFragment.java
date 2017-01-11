@@ -27,6 +27,8 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
     private Pergunta apresPergunta;
     private boolean ajuda_50, ajuda_Tlf, ajuda_Pub;
 
+    private String valor_aGanhar;
+
     private ImageButton btn_ajuda_50, btn_ajudaTlf, btn_ajudaPublico;
 
 
@@ -421,6 +423,14 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
         this.ajuda_50=_ajuda_50;
         this.ajuda_Tlf=_ajuda_Tlf;
         this.ajuda_Pub=_ajuda_Pub;
+    }
+
+    public String getValor_aGanhar() {
+        return valor_aGanhar;
+    }
+
+    public void setValor_aGanhar(String valor_aGanhar) {
+        this.valor_aGanhar = valor_aGanhar;
     }
 }
 

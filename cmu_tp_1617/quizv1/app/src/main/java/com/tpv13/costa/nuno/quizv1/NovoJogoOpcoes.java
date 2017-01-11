@@ -87,13 +87,14 @@ public class NovoJogoOpcoes extends ListActivity implements View.OnClickListener
         String[] columnsNiveisSelect={
                 "Id",
                 "Nome",
-                "Descricao"};
+                "Descricao",
+                "Pontuacao"};
 
 
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         //Cursor c = db.rawQuery("SELECT * FROM tblPessoas", null);
-        Cursor c= db.query(true,"Niveis",columnsNiveisSelect,null,null,null,null,"Nome",null);
+        Cursor c= db.query(true,"Niveis",columnsNiveisSelect,null,null,null,null,"Pontuacao",null);
 
         // Check if our result was valid.
 
