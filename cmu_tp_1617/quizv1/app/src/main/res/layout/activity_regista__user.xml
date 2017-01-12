@@ -83,7 +83,7 @@
         android:layout_marginTop="20dp"
         android:background="@drawable/curve_shap"
         android:padding="5dp"
-        android:src="@raw/userIcon"/>
+        android:src="@drawable/user_icon"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

@@ -16,7 +16,7 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."</string>
 
-    <string name="newGame">Novo Jogo</string>
+    <string name="newGame">Contra-Relógio</string>
     <string name="estatisticas">Estatísticas</string>
     <string name="preferencias">Preferências</string>
     <string name="addCategoria">Adicionar Categoria</string>

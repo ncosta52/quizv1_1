@@ -10,11 +10,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.VolumeProvider;
 import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -23,21 +21,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Random;
 
 public class MainActivity extends Activity implements View.OnClickListener{//},CompoundButton.OnCheckedChangeListener  {
 
@@ -141,7 +133,8 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
                     _photoUser.setImageBitmap(bmp);
                 }
                 else{
-                    Toast.makeText(this, "COLOCAR IMAGEM POR DEFEITO PARA USERS SEM FOTO", Toast.LENGTH_SHORT).show();
+                    _photoUser.setImageDrawable(getResources().getDrawable(R.drawable.user_icon));
+                    //qImageView.setBackgroundResource(R.drawable.thumbs_down);
                 }
             }
 

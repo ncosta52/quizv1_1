@@ -99,6 +99,7 @@ public class Regista_User extends Activity implements View.OnClickListener {
         camera_intent.putExtra("android.intent.extras.CAMERA_FACING", 1);
         camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
         startActivityForResult(camera_intent,1);
+
     }
 
 
@@ -115,8 +116,13 @@ public class Regista_User extends Activity implements View.OnClickListener {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String path = "sdcard/quizImages/" + this.edit_User.getText().toString() + ".jpg";
-        imageView.setImageDrawable(Drawable.createFromPath(path));
+        if (resultCode!=0){
+            String path = "sdcard/quizImages/" + this.edit_User.getText().toString() + ".jpg";
+            imageView.setImageDrawable(Drawable.createFromPath(path));
+        }
+        else{
+            imageView.setImageDrawable(getResources().getDrawable(R.drawable.user_icon));
+        }
     }
 
     private boolean userExist() {
