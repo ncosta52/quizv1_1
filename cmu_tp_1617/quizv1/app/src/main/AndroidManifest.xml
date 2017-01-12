@@ -2,8 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tpv13.costa.nuno.quizv1">
 
-    <uses-feature android:name="android.hardware.camera2"></uses-feature>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+    <uses-feature android:name="android.hardware.camera2" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
 
@@ -64,7 +65,8 @@
         <!-- <activity android:name=".LoginActivity"></activity> -->
         <activity android:name=".AddCategorias" />
         <activity android:name=".AddPerguntas" />
-        <activity android:name=".Regista_User"></activity>
+        <activity android:name=".Regista_User" />
+        <activity android:name=".GanhouActivity"></activity>
     </application>
 
 </manifest>

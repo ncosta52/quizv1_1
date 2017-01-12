@@ -96,6 +96,7 @@ public class Regista_User extends Activity implements View.OnClickListener {
     private void chamaCamera() {
         Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         File file = getFile();
+        camera_intent.putExtra("android.intent.extras.CAMERA_FACING", 1);
         camera_intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
         startActivityForResult(camera_intent,1);
     }

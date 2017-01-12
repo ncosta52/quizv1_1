@@ -12,6 +12,7 @@
         android:summary="Altere o tempo do contra relogio (minutos)"
         android:dialogTitle="@string/timeout"
         android:numeric="integer"
+        android:defaultValue="5"
         />
 
 

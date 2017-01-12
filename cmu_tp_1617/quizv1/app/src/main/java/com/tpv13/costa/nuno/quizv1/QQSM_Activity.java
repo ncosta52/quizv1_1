@@ -244,11 +244,19 @@ public class QQSM_Activity extends ActionBarActivity implements OnLevelSelectedL
                 if ((tmp.length - nivelSel)>=5){
                     //ganhou 1000€ ou valor na 10ª posicao
                     Toast.makeText(this, "ERRADA\n" +"Ganhou: " + tmp[10],Toast.LENGTH_SHORT).show();
+
+                    Intent i = new Intent(this, GanhouActivity.class);
+                    i.putExtra("Valor",tmp[10]);
+                    startActivity(i);
                 }
                 else{
                     if ((tmp.length - nivelSel)>=0 ){
                         //ganhou 32000€ ou valor na 5ª
                         Toast.makeText(this, "ERRADA\n" +"Ganhou: " + tmp[5],Toast.LENGTH_SHORT).show();
+
+                        Intent i = new Intent(this, GanhouActivity.class);
+                        i.putExtra("Valor",tmp[5]);
+                        startActivity(i);
                     }else{
                         //ganhou 1Milhão ou valor na posição 0
                         Toast.makeText(this, "ERRADA\n" +"Ganhou: " + tmp[0],Toast.LENGTH_SHORT).show();

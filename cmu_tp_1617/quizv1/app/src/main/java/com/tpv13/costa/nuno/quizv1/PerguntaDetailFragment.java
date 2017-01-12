@@ -318,15 +318,27 @@ public class PerguntaDetailFragment extends Fragment implements View.OnClickList
             switch (_rspSelecionada) {
                 case 0: //error
                     btnA.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+                    btnB.setBackgroundResource(android.R.drawable.btn_default);
+                    btnC.setBackgroundResource(android.R.drawable.btn_default);
+                    btnD.setBackgroundResource(android.R.drawable.btn_default);
                     break;
                 case 1: //error
                     btnB.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+                    btnA.setBackgroundResource(android.R.drawable.btn_default);
+                    btnC.setBackgroundResource(android.R.drawable.btn_default);
+                    btnD.setBackgroundResource(android.R.drawable.btn_default);
                     break;
                 case 2: //error
                     btnC.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+                    btnA.setBackgroundResource(android.R.drawable.btn_default);
+                    btnB.setBackgroundResource(android.R.drawable.btn_default);
+                    btnD.setBackgroundResource(android.R.drawable.btn_default);
                     break;
                 case 3: //error
                     btnD.setBackgroundColor(getResources().getColor(R.color.rspEscolhidaColor));
+                    btnA.setBackgroundResource(android.R.drawable.btn_default);
+                    btnB.setBackgroundResource(android.R.drawable.btn_default);
+                    btnC.setBackgroundResource(android.R.drawable.btn_default);
                     break;
                 default:
                     break;
