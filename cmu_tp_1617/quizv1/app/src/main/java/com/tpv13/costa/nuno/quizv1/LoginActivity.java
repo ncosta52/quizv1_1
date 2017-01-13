@@ -58,8 +58,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
+    public void onStart(){
+        super.onStart();
+
+//        editT_user.setText("");
+//        editT_pass.setText("");
+
+    }
+
+    @Override
     public void onResume(){
         super.onResume();
+
 
         if(mSettings.getBoolean(SOM_PREFERENCE_State, SOM_PREFERENCE_DEFAULT)){
             a.setMode(AudioManager.MODE_NORMAL);
@@ -139,9 +149,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             // N�o esquecer de invocar o m�todo commit() para guardar o registo.
             mEditor.putString(CurrentUSer_Preference, editT_user.getText().toString());
             mEditor.apply();
-
-            editT_user.setText("");
-            editT_pass.setText("");
 
             startActivity(new Intent(this, MainActivity.class));
         }

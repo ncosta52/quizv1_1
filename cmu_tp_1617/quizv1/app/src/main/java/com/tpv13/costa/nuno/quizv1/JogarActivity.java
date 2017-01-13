@@ -114,9 +114,6 @@ public class JogarActivity extends Activity implements View.OnClickListener{
     @Override
     protected void onResume(){
         super.onResume();
-
-
-
     }
 
     @Override
@@ -326,8 +323,8 @@ public class JogarActivity extends Activity implements View.OnClickListener{
     private void callActividadeResultado(String _frase){
         try{
             Intent i = new Intent(this, ResultadoActivity.class);
-                i.putExtra("NivelID",  this.getNivelID());
-//                i.putExtra("Categorias",  mAdapter_catgs.getCheckedpositions());
+
+            i.putExtra("NivelID",  this.getNivelID());
             i.putExtra("ResultadosLst", rspCertas);
             //i.putExtra("RspCertasCategorias", rspCertasCategorias);
             i.putExtra("Pontuacao",this.pontuacaoTotal);
@@ -335,7 +332,7 @@ public class JogarActivity extends Activity implements View.OnClickListener{
             i.putExtra("Frase",_frase );
 
             startActivity(i);
-            android.os.Process.killProcess(android.os.Process.myPid());
+           // android.os.Process.killProcess(android.os.Process.myPid());
         }catch (Exception e)
         {
             Toast.makeText(this, "Erro callActividadeResultado: " + e.getMessage(), Toast.LENGTH_SHORT).show();

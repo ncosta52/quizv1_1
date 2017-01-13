@@ -103,12 +103,15 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
 
         dbHelper = new MyDbHelper_game(this);
 
+        _photoUser=(ImageView) findViewById(R.id.photoUser);
+        _photoUser.setOnClickListener(this);
+
         carregarPhotoUser(mSettings.getString(CurrentUSer_Preference, ""));
         carregarLstTesteWidget();
     }
 
     private void carregarPhotoUser(String user){
-        _photoUser=(ImageView) findViewById(R.id.photoUser);
+
 
         String pathName="";
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -191,7 +194,7 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
             }
 
             c.close();
-           c
+           db.close();
 
         }
         catch(Exception e) {
@@ -252,7 +255,7 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
                 startActivity(new Intent(this, NovoJogoOpcoes.class));
                 break;
             case R.id.bt_estatisticas: //error
-                //launch activity
+                startActivity(new Intent(this, EstatisticasActivity.class));
                 break;
             case R.id.bt_testeWidget:
                 testeWidget();
@@ -265,6 +268,13 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
                 SharedPreferences.Editor mEditor = mSettings.edit();
                 mEditor.putString(CurrentUSer_Preference, "");
                 mEditor.apply();
+                finish();
+                break;
+            case R.id.photoUser:
+                Toast.makeText(this, "SAIR LOG OUT", Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor mEditor1 = mSettings.edit();
+                mEditor1.putString(CurrentUSer_Preference, "");
+                mEditor1.apply();
                 finish();
                 break;
             case R.id.bt_addCategarias:
@@ -344,7 +354,7 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
             // intent que indica a ac��o a executar e cont�m os dados a enviar
             // o identificador da ac��o est� registado no intent-filter do broadcast receiver no manifest
             Intent intent = new Intent(INTENT_MESSAGE);
-            intent.putExtra("Pergunta",perguLS);
+            //intent.putExtra("Pergunta",perguLS);
             intent.putExtra(INTENT_MESSAGE_EXTRA, "msg");
             sendBroadcast(intent);
         }

@@ -62,7 +62,7 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
 //            //your onClick action is here
 //
 //        }
-        tmpPerg=null;
+
 
         cont=context;
         ComponentName thisWidget = new ComponentName(context, MyBroadcastReceiverWidget.class);
@@ -73,14 +73,15 @@ public class MyBroadcastReceiverWidget extends AppWidgetProvider {
         perguLS=new ArrayList<Pergunta>();
 
         carregarLstTesteWidget();
+        tmpPerg=perguLS.get(0);
 
-        if(intent.hasExtra(MainActivity.INTENT_MESSAGE_EXTRA))
+        //if(intent.hasExtra(MainActivity.INTENT_MESSAGE_EXTRA))
             //perguLS=new ArrayList<Pergunta>();
 //            tmp = intent.getStringExtra(MainActivity.INTENT_MESSAGE_EXTRA);
 //            perguLS= (ArrayList<Pergunta>) intent.getSerializableExtra("Pergunta");
-
-        lastAction = intent.getAction();
-
+//if (intent!=null) {
+//    lastAction = intent.getAction();
+//}
         // executa onUpdate sempre que recebe um Intent neste caso trata-se de um Intents do tipo
         onUpdate(context, appWidgetManager, appWidgetManager.getAppWidgetIds(thisWidget));
 
