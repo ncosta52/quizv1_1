@@ -78,8 +78,6 @@ public class NovoJogoOpcoes extends ListActivity implements View.OnClickListener
         mAdapter_niveis.notifyDataSetChanged();
     }
 
-
-
     private void iniNiveis(){
 
         mNivel.clear();
@@ -158,7 +156,6 @@ public class NovoJogoOpcoes extends ListActivity implements View.OnClickListener
         //////
     }
 
-
     @Override
     public void onClick(View view) {
         if (view.getId()==R.id.bt_jogar)
@@ -224,7 +221,5 @@ public class NovoJogoOpcoes extends ListActivity implements View.OnClickListener
 
         return  lstPerg;
     }
-
-
 
 }

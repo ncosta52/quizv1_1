@@ -77,7 +77,8 @@ public class MyDbHelper_game extends SQLiteOpenHelper
                     "Niveis_Id INTEGER NOT NULL, " +
                     "PontucaoTotal INTEGER NOT NULL, " +
                     "RespostasDadasTotal INTEGER NOT NULL, " +
-                    "Tempo INTEGER NOT NULL)");
+                    "Tempo INTEGER NOT NULL, " +
+                    "created_at DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
 
             //db.execSQL("INSERT INTO tblPessoas(Nome, Idade, Sexo, Descicao, Imagem) VALUES ('Rosa', '10', 'F', 'Ela mesmo', 'c:/img/Rosa.jpg');");

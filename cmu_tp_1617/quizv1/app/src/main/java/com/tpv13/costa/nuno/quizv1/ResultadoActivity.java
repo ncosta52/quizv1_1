@@ -10,7 +10,10 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class ResultadoActivity extends Activity {
     private MyDbHelper_game dbHelper;
@@ -56,6 +59,13 @@ public class ResultadoActivity extends Activity {
 
     }
 
+    private String getDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
+    }
+
     private void inserir_Users_Ranking()
     {
         try{
@@ -67,6 +77,7 @@ public class ResultadoActivity extends Activity {
             users_Ranking_Nivel.put("PontucaoTotal", this.get_pontuacao());
             users_Ranking_Nivel.put("RespostasDadasTotal", rspCertas.size());
             users_Ranking_Nivel.put("Tempo", Integer.parseInt(mSettings.getString(TIMEOUT_PREFERENCE_time,"6")));
+            users_Ranking_Nivel.put("created_at", getDateTime());
 
 
             db_inserir_Users_Ranking.insert("Users_Ranking",null,users_Ranking_Nivel);

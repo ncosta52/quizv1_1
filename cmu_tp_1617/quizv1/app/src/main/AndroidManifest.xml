@@ -70,7 +70,8 @@
         <activity
             android:name=".EstatisticasActivity"
             android:label="@string/title_activity_estatisticas"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".EstatisticasActivity2"></activity>
     </application>
 
 </manifest>

@@ -1,9 +1,11 @@
 package com.tpv13.costa.nuno.quizv1;
 
+import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.ListFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,7 +27,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class EstatisticasActivity extends AppCompatActivity {
+public class EstatisticasActivity extends FragmentActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -96,18 +98,20 @@ public class EstatisticasActivity extends AppCompatActivity {
     /**
      * A placeholder fragment containing a simple view.
      */
-    public static class PlaceholderFragment extends Fragment {
+    public static class PlaceholderFragment extends ListFragment {
         /**
          * The fragment argument representing the section number for this
          * fragment.
          */
         private ListAdapterEstatistica mAdapter_estatistica;
-        //private ArrayList<Nivel> mNivel =new ArrayList<>();
-        //private MyDbHelper_game dbHelper;
+        private ArrayList<Nivel> mNivel =new ArrayList<>();
+        private MyDbHelper_game dbHelper;
+        private ArrayList<Ranking> mRankingList =new ArrayList<>();
 
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         public PlaceholderFragment() {
+
         }
 
         /**
@@ -115,6 +119,7 @@ public class EstatisticasActivity extends AppCompatActivity {
          * number.
          */
         public static PlaceholderFragment newInstance(int sectionNumber) {
+
             PlaceholderFragment fragment = new PlaceholderFragment();
             Bundle args = new Bundle();
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
@@ -127,18 +132,116 @@ public class EstatisticasActivity extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_estatisticas, container, false);
 
-           ListView a = (ListView) rootView.findViewById(R.id.listteste) ;
+            dbHelper=new MyDbHelper_game(this.getContext());
+           this.carregarAdapter(getArguments().getInt(ARG_SECTION_NUMBER));
 
+            mAdapter_estatistica = new ListAdapterEstatistica(this.getContext(), mRankingList);
+            //ListAdapterEstatistica mAdapter_estatistica = new ListAdapterEstatistica(this.getContext(),);
+            setListAdapter(mAdapter_estatistica);
+            //a.setAdapter(mAdapter_estatistica);
 
-            mAdapter_estatistica = new ListAdapterEstatistica(this.getContext(), getArguments().getInt(ARG_SECTION_NUMBER));
-            //setListAdapter(mAdapter_estatistica);
-            a.setAdapter(mAdapter_estatistica);
 
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            textView.setText(getNivelDescricaoTitulo(getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
         }
 
+        public void onResume()
+        {
+            super.onResume();
+            mAdapter_estatistica.notifyDataSetChanged();
+        }
+
+        private void carregarAdapter  (int nivel){
+            mRankingList.clear();
+
+            String[] columnsRankinSelect={
+                    "Id",
+                    "Utilizadores_Id",
+                    "Niveis_Id",
+                    "PontucaoTotal",
+                    "RespostasDadasTotal",
+                    "Tempo",
+                    "created_at"};
+
+            String WHERE =  "Niveis_Id=" + nivel;
+
+
+
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            //Cursor c = db.rawQuery("SELECT * FROM tblPessoas", null);
+            Cursor c= db.query(true,"Users_Ranking",columnsRankinSelect,WHERE,null,null,null,"PontucaoTotal DESC",null);
+
+
+            // Check if our result was valid.
+
+            try
+            {
+                if (c != null && c.getCount()>0) {
+                    c.moveToFirst();
+                    // Loop through all Results
+                    do {
+                        mRankingList.add(new Ranking(c.getInt(0), c.getInt(1), c.getInt(2), c.getInt(3), c.getInt(4), c.getInt(5), c.getString(6),this.getContext()));
+                    }while(c.moveToNext());
+
+                    c.close();
+                    db.close();
+                }
+
+            }
+            catch(Exception e) {
+                Log.e("Error", "Error", e);
+                throw e;
+            }
+        }
+
+        private String getNivelDescricaoTitulo(int nivelId)
+        {
+            String nivelTmp="";
+            Cursor d;
+            SQLiteDatabase db =  dbHelper.getReadableDatabase();
+            String query;
+            query="SELECT * FROM Niveis WHERE Id=" + nivelId;
+
+            d=db.rawQuery(query ,null);
+            if (d.getCount()>0 ) {
+                d.moveToFirst();
+
+                do{
+                    nivelTmp=d.getString(1);
+                }while (d.moveToNext());
+
+            }
+
+            d.close();
+            db.close();
+
+            return  nivelTmp;
+        }
+
+
+
+//        private void carregarAdapter(int nivel)
+//        {
+//            Cursor c;
+//            SQLiteDatabase db = dbHelper.getReadableDatabase();
+//            String query;
+//            query="SELECT * FROM Users_Ranking WHERE Niveis_Id=" + nivel;
+//
+//            c=db.rawQuery(query ,null);
+//            if (c.getCount()>0 ) {
+//                c.moveToFirst();
+//
+//                do{
+//
+//                    mRankingList.add(new Ranking(c.getInt(0), c.getInt(1), c.getInt(2), c.getInt(3), c.getInt(4), c.getInt(5), c.getString(6),this.getContext()));
+//                }while (c.moveToNext());
+//            }
+//
+//            c.close();
+//            db.close();
+//
+//        }
 
     }
 

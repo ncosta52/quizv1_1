@@ -256,6 +256,9 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
                 break;
             case R.id.bt_estatisticas: //error
                 startActivity(new Intent(this, EstatisticasActivity.class));
+//                Intent i = new Intent(this, EstatisticasActivity2.class);
+//                i.putExtra("NivelId", 1);
+//                startActivity(i);
                 break;
             case R.id.bt_testeWidget:
                 testeWidget();

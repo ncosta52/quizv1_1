@@ -27,11 +27,12 @@ public class ListAdapterEstatistica extends ArrayAdapter<Ranking>
     private MyDbHelper_game dbHelper;
     private int selectedIndex = -1;
 
-    public ListAdapterEstatistica(Context context, int nivel) {
-        super(context,R.layout.row_estatistica,nivel);
+
+    public ListAdapterEstatistica(Context context, ArrayList<Ranking> list) {
+        super(context,R.layout.row_estatistica,list);
 
         dbHelper=new MyDbHelper_game(context);
-        this.rankingList = carregarAdapter(nivel);
+        this.rankingList = list;
         this.context = context;
 
 
@@ -43,53 +44,58 @@ public class ListAdapterEstatistica extends ArrayAdapter<Ranking>
         View v = convertView;
 
         if(v == null) {
+//            v=LayoutInflater.from(parent.getContext()).inflate(R.layout.row_estatistica,parent,false);
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = vi.inflate(R.layout.row_estatistica, null);
         }
 
-        TextView tvUser = (TextView) v.findViewById(R.id.tv_userEsta);
+        TextView tvUserNome = (TextView) v.findViewById(R.id.tv_userNomeEsta);
+        TextView tvData = (TextView) v.findViewById(R.id.tv_Data);
         TextView tvPontu = (TextView) v.findViewById(R.id.tv_pontuacaoEsta);
 
 
-        tvUser.setText(rankingList.get(position).getUtilizadorId());
-        tvPontu.setText(rankingList.get(position).getPontuacao());
+        tvUserNome.setText("" + rankingList.get(position).getUtilizadorNome());
+        tvData.setText("" + rankingList.get(position).getData());
+        tvPontu.setText("" + rankingList.get(position).getPontuacao());
+
+//        tvUser.setText("a" );
+//        tvPontu.setText("b" );
 
         return v;
 
     }
 
+//    public void setSelectedIndex(int index){
+//        selectedIndex = index;
+//    }
+//
+//    public int getSelectedIndex() {
+//        return selectedIndex;
+//    }
 
-    public void setSelectedIndex(int index){
-        selectedIndex = index;
-    }
-
-    public int getSelectedIndex() {
-        return selectedIndex;
-    }
-
-    private ArrayList<Ranking> carregarAdapter(int nivel)
-    {
-        Cursor c;
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        ArrayList<Ranking> rankingListTMP=new ArrayList<>();
-
-        String query;
-        query="SELECT * FROM Users_Ranking WHERE Niveis_Id=" + nivel;
-
-        c=db.rawQuery(query ,null);
-        if (c.getCount()>0 ) {
-            c.moveToFirst();
-
-           do{
-               rankingListTMP.add(new Ranking(c.getInt(0), c.getInt(1), c.getInt(2), c.getInt(3), c.getInt(4), c.getInt(5)));
-           }while (c.moveToNext());
-        }
-
-        c.close();
-
-        return rankingListTMP;
-    }
+//    private ArrayList<Ranking> carregarAdapter(int nivel)
+//    {
+//        Cursor c;
+//        SQLiteDatabase db = dbHelper.getReadableDatabase();
+//
+//        ArrayList<Ranking> rankingListTMP=new ArrayList<>();
+//
+//        String query;
+//        query="SELECT * FROM Users_Ranking WHERE Niveis_Id=" + nivel;
+//
+//        c=db.rawQuery(query ,null);
+//        if (c.getCount()>0 ) {
+//            c.moveToFirst();
+//
+//           do{
+//               rankingListTMP.add(new Ranking(c.getInt(0), c.getInt(1), c.getInt(2), c.getInt(3), c.getInt(4), c.getInt(5),c.getString(6),this.context));
+//           }while (c.moveToNext());
+//        }
+//
+//        c.close();
+//
+//        return rankingListTMP;
+//    }
 }
 
 
