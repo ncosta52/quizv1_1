@@ -104,7 +104,7 @@ public class EstatisticasActivity extends FragmentActivity {
          * fragment.
          */
         private ListAdapterEstatistica mAdapter_estatistica;
-        private ArrayList<Nivel> mNivel =new ArrayList<>();
+        //private ArrayList<Nivel> mNivel =new ArrayList<>();
         private MyDbHelper_game dbHelper;
         private ArrayList<Ranking> mRankingList =new ArrayList<>();
 
@@ -272,11 +272,11 @@ public class EstatisticasActivity extends FragmentActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "SECTION 1";
+                    return "Principiante";
                 case 1:
-                    return "SECTION 2";
+                    return "Intermédio";
                 case 2:
-                    return "SECTION 3";
+                    return "Master";
             }
             return null;
         }
