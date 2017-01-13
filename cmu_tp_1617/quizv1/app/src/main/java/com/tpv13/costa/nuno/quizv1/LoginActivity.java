@@ -61,8 +61,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onStart(){
         super.onStart();
 
-//        editT_user.setText("");
-//        editT_pass.setText("");
+        editT_user.setText("");
+        editT_pass.setText("");
 
     }
 
