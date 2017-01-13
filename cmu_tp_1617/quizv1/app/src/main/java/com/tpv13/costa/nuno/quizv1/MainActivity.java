@@ -191,7 +191,7 @@ public class MainActivity extends Activity implements View.OnClickListener{//},C
             }
 
             c.close();
-            db.close();
+           c
 
         }
         catch(Exception e) {

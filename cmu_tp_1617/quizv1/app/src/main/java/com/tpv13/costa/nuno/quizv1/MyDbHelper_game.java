@@ -70,14 +70,21 @@ public class MyDbHelper_game extends SQLiteOpenHelper
                     "Photo VARCHAR(20))");
             dadosIniciais_Utilizadores(db);
 
-            // cria a tabela Users_Ranking
-            db.execSQL("CREATE TABLE Users_Ranking("+
+            // cria a tabela Users_Ranking_Nivel
+            db.execSQL("CREATE TABLE Users_Ranking_Nivel("+
                     "Id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     "Utilizadores_Id INTEGER NOT NULL, " +
                     "Niveis_Id INTEGER NOT NULL, " +
-                    "PontucaoTotal INTEGER NOT NULL, " +
+                    "PontucaoTotal INTEGER NOT NULL)");
+
+            // cria a tabela Users_Ranking
+            db.execSQL("CREATE TABLE Users_Ranking_Jogo("+
+                    "Id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "Utilizadores_Id INTEGER NOT NULL, " +
+                    "Niveis_Id INTEGER NOT NULL, " +
+                    "Pontucao INTEGER NOT NULL, " +
                     "RespostasDadasTotal INTEGER NOT NULL, " +
-                    "RespostasCertasTotal INTEGER NOT NULL)");
+                    "Tempo INTEGER NOT NULL)");
 
 
 

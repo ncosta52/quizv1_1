@@ -6,17 +6,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,9 +38,10 @@ public class JogarActivity extends Activity implements View.OnClickListener{
     private Button btnA, btnB, btnC, btnD;//, btn_valSeg;
     private TextView tvPergunta, _tv_tempo;
     private ArrayList <Jogo_RespostasCertas> rspCertas;
-    private ArrayList<Integer> rspCertasCategorias=new ArrayList<>();
+    //private ArrayList<Integer> rspCertasCategorias=new ArrayList<>();
     private int pontuacaoTotal;
     private int rspSelecionada;
+    private int nivelID;
 
     private Animation myAnim;
     private static final String FORMAT = "%02d:%02d:%02d";
@@ -111,10 +109,6 @@ public class JogarActivity extends Activity implements View.OnClickListener{
 
         sortearPergunta(perguntasId);
 
-
-
-
-
     }
 
     @Override
@@ -159,7 +153,7 @@ public class JogarActivity extends Activity implements View.OnClickListener{
                 //CHAMAR activity de vencedor
                 //android.os.Process.killProcess(android.os.Process.myPid());
                 callActividadeResultado("Respondeu todas as perguntas.\n\n" +
-                        getResources().getString(R.string.vencedor_Str)); //"----  É UM VENCEDOR!!!  ----"
+                        getResources().getString(R.string.vencedor_Str));
             }
 
             int index = randomGenerator.nextInt(lst.size());
@@ -191,6 +185,8 @@ public class JogarActivity extends Activity implements View.OnClickListener{
                         res = apresPergunta;
 
                     } while (c.moveToNext());
+
+                    setNivelID(apresPergunta.getNivelID());
                 }
 
                 c.close();
@@ -302,7 +298,7 @@ public class JogarActivity extends Activity implements View.OnClickListener{
                     this.perguntasId.remove(in);
 
                     this.rspCertas.add(new Jogo_RespostasCertas(this.apresPergunta.getCategoriaId(),this.apresPergunta.getPontuacao(),this));
-                    this.rspCertasCategorias.add(this.apresPergunta.getCategoriaId());
+                    //this.rspCertasCategorias.add(this.apresPergunta.getCategoriaId());
                     pontuacaoTotal=pontuacaoTotal+this.apresPergunta.getPontuacao();
 
                     //Toast.makeText(this, "Resposta Certa", Toast.LENGTH_SHORT).show();
@@ -330,10 +326,10 @@ public class JogarActivity extends Activity implements View.OnClickListener{
     private void callActividadeResultado(String _frase){
         try{
             Intent i = new Intent(this, ResultadoActivity.class);
-//                i.putExtra("Nivel",  mNivel.get(mAdapter_niveis.getSelectedIndex()).getId());
+                i.putExtra("NivelID",  this.getNivelID());
 //                i.putExtra("Categorias",  mAdapter_catgs.getCheckedpositions());
             i.putExtra("ResultadosLst", rspCertas);
-            i.putExtra("RspCertasCategorias", rspCertasCategorias);
+            //i.putExtra("RspCertasCategorias", rspCertasCategorias);
             i.putExtra("Pontuacao",this.pontuacaoTotal);
             i.putExtra("KillProcess", android.os.Process.myPid() );
             i.putExtra("Frase",_frase );
@@ -568,5 +564,13 @@ public class JogarActivity extends Activity implements View.OnClickListener{
 
 
         return milkshake;
+    }
+
+    public int getNivelID() {
+        return nivelID;
+    }
+
+    public void setNivelID(int nivelID) {
+        this.nivelID = nivelID;
     }
 }
